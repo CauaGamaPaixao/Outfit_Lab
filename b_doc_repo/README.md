@@ -2,10 +2,10 @@
 
 | Campo | Valor |
 |---|---|
-| Versão | 1.1 |
+| Versão | 1.2 |
 | Data | 13/11/2026 |
 | Autor | Cauã Gama Paixão |
-| Gerado por | PROMPT-001 v2.0 · atualizado por PROMPT-002 v1.1 |
+| Gerado por | PROMPT-001 v2.0 · atualizado por PROMPT-002 v1.1 e PROMPT-001 v2.1 (Parte B) |
 | Status | Em revisão (atualizar a cada novo artefato) |
 
 Este diretório guarda **todo o conteúdo documental** do projeto: prompts, documentos de gerenciamento (PMBOK adaptado) e design. O código fica em [`../a_tech_repo/`](../a_tech_repo/).
@@ -24,7 +24,7 @@ Este diretório guarda **todo o conteúdo documental** do projeto: prompts, docu
 
 | ID | Arquivo | Objetivo | Versão | Status |
 |---|---|---|---|---|
-| PROMPT-001 | [PROMPT_001_kickoff_documentacao_design.md](a_prompts/PROMPT_001_kickoff_documentacao_design.md) | Documentação PMBOK, design system, protótipos 01–03, AGENTS.md, guia técnico | 2.1 | 📝 Parte A executada · ⏳ B e C |
+| PROMPT-001 | [PROMPT_001_kickoff_documentacao_design.md](a_prompts/PROMPT_001_kickoff_documentacao_design.md) | Documentação PMBOK, design system, protótipos 01–03, AGENTS.md, guia técnico | 2.1 | 📝 Partes A e B executadas · ⏳ C |
 | PROMPT-002 | [PROMPT_002_convencao_de_pastas.md](a_prompts/PROMPT_002_convencao_de_pastas.md) | Convenção de prefixo alfabético nas pastas (D-25) + script de validação | 1.1 | ✅ Executado |
 | PROMPT-003 | — | Requisitos detalhados e regras de negócio | — | ⏳ |
 | PROMPT-004 | — | Protótipos das telas 04–09 | — | ⏳ |
@@ -62,7 +62,7 @@ Este diretório guarda **todo o conteúdo documental** do projeto: prompts, docu
 | [Registro de Riscos](b_docs/c_planejamento/04_Registro_de_Riscos.md) | 1.1 | 📝 |
 | [Plano de Qualidade](b_docs/c_planejamento/05_Plano_de_Qualidade.md) | 1.1 | 📝 |
 | [Plano de Comunicação, Configuração e Beta](b_docs/c_planejamento/06_Plano_de_Comunicacao_Configuracao_e_Beta.md) | 1.1 | 📝 |
-| [Registro de Decisões, Premissas e Lições](b_docs/c_planejamento/07_Registro_de_Decisoes_Premissas_e_Licoes.md) | 1.1 | 📝 |
+| [Registro de Decisões, Premissas e Lições](b_docs/c_planejamento/07_Registro_de_Decisoes_Premissas_e_Licoes.md) | 1.2 | 📝 |
 | 08_Guia_de_Kickoff_Tecnico.md | — | ⏳ PROMPT-001 Parte C |
 
 ### d — Execução — `b_docs/d_execucao/`
@@ -84,10 +84,10 @@ Este diretório guarda **todo o conteúdo documental** do projeto: prompts, docu
 | Artefato | Caminho | Status |
 |---|---|---|
 | Moodboard v0 | `c_design/a_referencias/moodboard_v0.png` | ⏳ Falta adicionar ao repositório |
-| Análise do moodboard | `c_design/00_Analise_do_Moodboard.md` | ⏳ PROMPT-001 Parte B |
-| Design tokens (doc, CSS, TS) | `c_design/b_tokens/` | ⏳ PROMPT-001 Parte B |
-| Specs TELA-01 a 03 | `c_design/c_specs/` | ⏳ PROMPT-001 Parte B |
-| Protótipos TELA-01 a 03 | `c_design/d_prototipos/` | ⏳ PROMPT-001 Parte B |
+| Análise do moodboard | [`c_design/00_Analise_do_Moodboard.md`](c_design/00_Analise_do_Moodboard.md) | 📝 v1.0 ([VERIFICAR] com a imagem do moodboard) |
+| Design tokens (doc, CSS, TS) | [`design_tokens.md`](c_design/b_tokens/design_tokens.md) · [`tokens.css`](c_design/b_tokens/tokens.css) · [`tokens.ts`](c_design/b_tokens/tokens.ts) | 📝 v1.0 |
+| Specs TELA-01 a 03 | [TELA-01 Login](c_design/c_specs/TELA-01_login.md) · [TELA-02 Cadastro](c_design/c_specs/TELA-02_cadastro.md) · [TELA-03 Guarda-roupa](c_design/c_specs/TELA-03_guarda_roupa.md) | 📝 v1.0 |
+| Protótipos TELA-01 a 03 | [`c_design/d_prototipos/`](c_design/d_prototipos/README.md) (01_login, 02_cadastro, 03_guarda_roupa + checklist B5) | 📝 v1.0 |
 | Specs e protótipos TELA-04 a 09 | `c_design/c_specs/`, `c_design/d_prototipos/` | ⏳ PROMPT-004 |
 
 ## 🧭 Por onde começar

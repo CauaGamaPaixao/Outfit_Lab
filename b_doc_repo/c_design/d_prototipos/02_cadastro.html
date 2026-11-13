@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Outfit Lab — TELA-02 Cadastro (protótipo)</title>
+<!-- Gerado por: PROMPT-001 v2.1 (Parte B4) · Spec: ../c_specs/TELA-02_cadastro.md · v1.0 · 13/11/2026 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===== Tokens (copiados de ../b_tokens/tokens.css) ===== */
+:root{
+  --color-bg:#FAFAFA;--color-surface:#FFFFFF;--color-image:#F2F2F2;
+  --color-text:#0A0A0A;--color-text-strong:#1F1F1F;--color-text-muted:#6B6B6B;
+  --color-border:#E5E5E5;--color-border-strong:#8A8A8A;
+  --color-inverse-bg:#0A0A0A;--color-inverse-surface:#1F1F1F;--color-inverse-text:#FFFFFF;--color-inverse-muted:#A3A3A3;
+  --color-accent:#FACC15;--color-accent-hover:#EAB308;--color-on-accent:#0A0A0A;
+  --color-danger:#B91C1C;--color-danger-bg:#FEF2F2;--color-success:#15803D;--color-success-bg:#F0FDF4;
+  --font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;--space-6:24px;--space-8:32px;--space-10:40px;--space-12:48px;--space-16:64px;
+  --radius-input:8px;--radius-card:12px;--radius-pill:999px;
+  --shadow-sm:0 1px 2px rgba(10,10,10,.06);--shadow-md:0 4px 16px rgba(10,10,10,.08);--shadow-lg:0 12px 32px rgba(10,10,10,.14);
+  --focus-ring:0 0 0 2px #0A0A0A,0 0 0 5px #FACC15;
+  --size-input:48px;--duration-base:200ms;
+}
+@media (prefers-reduced-motion:reduce){:root{--duration-base:0ms}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:var(--font-family);font-size:16px;line-height:24px;color:var(--color-text);background:var(--color-bg);-webkit-font-smoothing:antialiased}
+a{color:var(--color-text);text-underline-offset:3px}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:none;box-shadow:var(--focus-ring);border-radius:var(--radius-input)}
+
+/* <AuthLayout mirrored> */
+.auth{min-height:100vh;display:flex;flex-direction:column}
+.mobile-head{order:0}.form-side{order:1}.editorial{order:2}
+@media (min-width:1024px){
+  .auth{flex-direction:row}.auth .mobile-head{display:none}
+  .form-side{order:0;flex:1 1 50%}.editorial{order:1;flex:1 1 50%}
+}
+@media (min-width:1440px){.form-side{flex-basis:45%}.editorial{flex-basis:55%}}
+
+.mobile-head{background:var(--color-inverse-bg);color:var(--color-inverse-text);padding:var(--space-6) var(--space-4);display:flex;align-items:flex-start;gap:var(--space-3)}
+.logo{font-weight:800;font-size:28px;line-height:.95;letter-spacing:-.03em;margin:0}
+@media (min-width:1024px){.editorial .logo{font-size:40px}}
+.beta{display:inline-flex;align-items:center;height:22px;padding:0 10px;border-radius:var(--radius-pill);background:var(--color-accent);color:var(--color-on-accent);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+
+/* <EditorialPanel variant="signup"> */
+.editorial{background:var(--color-inverse-bg);color:var(--color-inverse-text);padding:var(--space-10) var(--space-4)}
+.editorial .brand{display:none}
+.editorial .score-card{display:none}
+@media (min-width:1024px){
+  .editorial{padding:var(--space-10);min-height:100vh;position:sticky;top:0;display:flex;flex-direction:column;justify-content:space-between}
+  .editorial .brand{display:flex;align-items:flex-start;gap:var(--space-3)}
+  .editorial .score-card{display:block}
+}
+.editorial h2{font-size:24px;line-height:32px;font-weight:600;margin:0 0 var(--space-6)}
+@media (min-width:1024px){.editorial h2{font-size:32px;line-height:40px}}
+/* <HowItWorks> */
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:var(--space-5)}
+.steps li{display:grid;grid-template-columns:40px 1fr;gap:var(--space-4);align-items:start}
+.steps .n{width:40px;height:40px;border-radius:50%;border:1.5px solid #3a3a3a;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--color-accent)}
+.steps h3{margin:0;font-size:18px;line-height:24px;font-weight:600}
+.steps p{margin:2px 0 0;color:var(--color-inverse-muted);font-size:14px;line-height:20px}
+/* <ScorePreviewCard> */
+.score-card{background:var(--color-inverse-surface);border-radius:var(--radius-card);padding:var(--space-6);margin-top:var(--space-10);max-width:420px}
+.score-top{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:var(--space-3)}
+.score-top .lbl{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-inverse-muted)}
+.score-top .val{font-size:48px;line-height:48px;font-weight:800;letter-spacing:-.03em}
+.score-top .val small{font-size:16px;font-weight:500;color:var(--color-inverse-muted)}
+.bar{height:8px;border-radius:var(--radius-pill);background:#333;overflow:hidden}
+.bar span{display:block;height:100%;width:82%;background:var(--color-accent);border-radius:inherit}
+.crit{list-style:none;margin:var(--space-5) 0 0;padding:0;display:grid;gap:var(--space-3);font-size:14px;line-height:20px}
+.crit li{display:flex;gap:var(--space-2)}
+.crit b{color:var(--color-inverse-text);font-weight:600}
+.crit span{color:var(--color-inverse-muted)}
+.crit li::before{content:"";flex:none;width:6px;height:6px;margin-top:7px;border-radius:50%;background:var(--color-accent)}
+.disclaimer{font-size:12px;color:var(--color-inverse-muted);margin:var(--space-4) 0 0}
+
+/* Form side */
+.form-side{display:flex;flex-direction:column;align-items:center;padding:var(--space-8) var(--space-4) var(--space-12)}
+@media (min-width:1024px){.form-side{justify-content:center;padding:var(--space-12) var(--space-8)}}
+.form-wrap{width:100%;max-width:480px}
+.eyebrow{font-size:12px;line-height:16px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-muted);margin:0 0 var(--space-2)}
+h1{font-size:32px;line-height:40px;font-weight:600;letter-spacing:-.02em;margin:0}
+@media (min-width:1024px){h1{font-size:40px;line-height:48px;font-weight:700}}
+.sub{color:var(--color-text-muted);margin:var(--space-2) 0 var(--space-6)}
+
+.grid2{display:grid;gap:0 var(--space-4)}
+@media (min-width:768px){.grid2{grid-template-columns:1fr 1fr}}
+.field{margin-bottom:var(--space-5)}
+.field label{display:block;font-size:14px;line-height:20px;font-weight:500;margin-bottom:var(--space-2)}
+.control{position:relative}
+.input{width:100%;height:var(--size-input);padding:0 var(--space-4);background:var(--color-surface);border:1px solid var(--color-border-strong);border-radius:var(--radius-input);font-size:16px;transition:border-color var(--duration-base)}
+.input:hover{border-color:var(--color-text-strong)}
+.input:focus-visible{border-color:var(--color-text)}
+.input:disabled{background:var(--color-image);cursor:not-allowed}
+.input[aria-invalid="true"]{border:2px solid var(--color-danger);padding-left:15px}
+.has-toggle .input{padding-right:56px}
+.toggle-pw{position:absolute;right:4px;top:4px;width:40px;height:40px;border:0;background:transparent;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--color-text-muted)}
+.toggle-pw:hover{color:var(--color-text);background:var(--color-image)}
+.hint{margin-top:6px;font-size:14px;line-height:20px;color:var(--color-text-muted)}
+.error-msg{display:none;align-items:flex-start;gap:6px;margin-top:6px;color:var(--color-danger);font-size:14px;line-height:20px}
+.error-msg.show{display:flex}
+.error-msg svg{flex:none;margin-top:2px}
+.error-msg a{color:var(--color-danger);font-weight:600}
+/* <PasswordStrength> */
+.strength{display:flex;align-items:center;gap:var(--space-3);margin-top:var(--space-2)}
+.segs{flex:1;display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
+.segs i{height:4px;border-radius:2px;background:var(--color-border)}
+.strength-txt{font-size:14px;line-height:20px;min-width:64px;text-align:right;font-weight:500}
+.s1 .segs i:nth-child(-n+1){background:var(--color-danger)} .s1 .strength-txt{color:var(--color-danger)}
+.s2 .segs i:nth-child(-n+2){background:var(--color-text-muted)} .s2 .strength-txt{color:var(--color-text-muted)}
+.s3 .segs i:nth-child(-n+3){background:var(--color-text)} .s3 .strength-txt{color:var(--color-text)}
+.s4 .segs i{background:var(--color-success)} .s4 .strength-txt{color:var(--color-success)}
+
+.check{display:flex;align-items:flex-start;gap:var(--space-3);min-height:44px;cursor:pointer;font-size:14px;line-height:20px;padding-top:10px}
+.check input{flex:none;width:20px;height:20px;margin:0;accent-color:var(--color-text);cursor:pointer}
+.check input[aria-invalid="true"]{outline:2px solid var(--color-danger);outline-offset:2px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);height:48px;padding:0 var(--space-6);border-radius:var(--radius-input);border:1px solid transparent;font-weight:600;font-size:16px;cursor:pointer;transition:background var(--duration-base);text-decoration:none}
+.btn-primary{background:var(--color-accent);color:var(--color-on-accent)}
+.btn-primary:hover{background:var(--color-accent-hover)}
+.btn[disabled]{opacity:.6;cursor:not-allowed}
+.btn-block{width:100%}
+.spinner{width:18px;height:18px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spinner{animation-duration:2.4s}}
+.alt{text-align:center;font-size:14px;color:var(--color-text-muted);margin:var(--space-6) 0 0}
+.alt a{color:var(--color-text);font-weight:600}
+
+.alert{display:none;gap:var(--space-3);padding:var(--space-4);border-radius:var(--radius-input);margin-bottom:var(--space-5);font-size:14px;line-height:20px;background:var(--color-danger-bg);color:var(--color-danger);border:1px solid #F5C2C2}
+.alert.show{display:flex}
+.alert strong{display:block}
+
+/* <DesignNote> — só no protótipo */
+.design-note{margin-top:var(--space-8);border:1.5px dashed var(--color-border-strong);border-radius:var(--radius-card);padding:var(--space-4);font-size:14px;line-height:20px;color:var(--color-text-strong);background:var(--color-surface)}
+.design-note b{display:block;margin-bottom:4px}
+.open-tag{display:inline-flex;align-items:center;border:1.5px dashed var(--color-border-strong);border-radius:var(--radius-pill);padding:0 8px;font-size:11px;line-height:18px;font-weight:600;letter-spacing:.04em;color:var(--color-text-muted);white-space:nowrap;margin-top:8px}
+
+/* <SuccessPanel> */
+.success{display:none;text-align:left}
+.success.show{display:block}
+.success .ok{width:56px;height:56px;border-radius:50%;background:var(--color-success-bg);color:var(--color-success);display:flex;align-items:center;justify-content:center;margin-bottom:var(--space-6)}
+.success h1:focus{outline:none}
+.success p{color:var(--color-text-strong);margin:var(--space-3) 0 var(--space-5)}
+.beta-note{display:flex;gap:var(--space-3);background:var(--color-image);border-radius:var(--radius-input);padding:var(--space-4);font-size:14px;line-height:20px;margin-bottom:var(--space-6);color:var(--color-text-strong)}
+.beta-note .beta{flex:none}
+
+.states{position:fixed;right:12px;bottom:12px;z-index:50;font-size:13px}
+.states>button{height:36px;padding:0 14px;border-radius:var(--radius-pill);border:1px solid var(--color-border-strong);background:var(--color-surface);box-shadow:var(--shadow-md);font-weight:600;cursor:pointer}
+.states-list{display:none;position:absolute;right:0;bottom:44px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-card);box-shadow:var(--shadow-lg);padding:8px;min-width:230px}
+.states.open .states-list{display:block}
+.states-list p{margin:4px 8px 8px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-muted)}
+.states-list button{display:block;width:100%;text-align:left;padding:8px 10px;border:0;background:none;border-radius:6px;cursor:pointer;font-size:13px}
+.states-list button:hover{background:var(--color-image)}
+.states-list button[aria-current="true"]{background:var(--color-inverse-bg);color:var(--color-inverse-text)}
+</style>
+</head>
+<body>
+<div class="auth">
+  <!-- Cabeçalho compacto (< 1024 px) -->
+  <header class="mobile-head"><p class="logo">Outfit<br>Lab</p><span class="beta">Beta</span></header>
+
+  <main class="form-side">
+    <div class="form-wrap">
+      <!-- <SignupForm> -->
+      <div id="form-block">
+        <p class="eyebrow">Beta fechado</p>
+        <h1>Criar conta</h1>
+        <p class="sub">Leva menos de um minuto.</p>
+
+        <div class="alert" id="alert" role="alert" tabindex="-1">
+          <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 5v6M10 14v1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <div><strong>Este e-mail ainda não está no beta.</strong>Peça um convite ao autor.</div>
+        </div>
+
+        <form id="form" novalidate>
+          <div class="grid2">
+            <div class="field"><label for="first">Nome</label><input class="input" id="first" autocomplete="given-name" maxlength="60" aria-describedby="first-err"><div class="error-msg" id="first-err"></div></div>
+            <div class="field"><label for="last">Sobrenome</label><input class="input" id="last" autocomplete="family-name" maxlength="60" aria-describedby="last-err"><div class="error-msg" id="last-err"></div></div>
+          </div>
+          <div class="field"><label for="email">E-mail</label><input class="input" id="email" type="email" inputmode="email" autocomplete="email" maxlength="254" aria-describedby="email-err"><div class="error-msg" id="email-err"></div></div>
+
+          <!-- <PasswordField showStrength> -->
+          <div class="field">
+            <label for="pw">Senha</label>
+            <div class="control has-toggle">
+              <input class="input" id="pw" type="password" autocomplete="new-password" maxlength="72" aria-describedby="pw-hint pw-strength pw-err">
+              <button type="button" class="toggle-pw" data-target="pw" aria-label="Mostrar senha" aria-pressed="false"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path class="slash" d="M4 4l16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none"/></svg></button>
+            </div>
+            <div class="strength" id="strength"><div class="segs" aria-hidden="true"><i></i><i></i><i></i><i></i></div><span class="strength-txt" id="pw-strength" aria-live="polite"></span></div>
+            <div class="hint" id="pw-hint">Mínimo de 8 caracteres, com letras e números.</div>
+            <div class="error-msg" id="pw-err"></div>
+          </div>
+
+          <div class="field">
+            <label for="pw2">Confirmar senha</label>
+            <div class="control has-toggle">
+              <input class="input" id="pw2" type="password" autocomplete="new-password" maxlength="72" aria-describedby="pw2-err">
+              <button type="button" class="toggle-pw" data-target="pw2" aria-label="Mostrar confirmação de senha" aria-pressed="false"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path class="slash" d="M4 4l16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none"/></svg></button>
+            </div>
+            <div class="error-msg" id="pw2-err"></div>
+          </div>
+
+          <div class="field">
+            <label class="check"><input type="checkbox" id="terms" aria-describedby="terms-err"><span>Li e aceito os <a href="#termos" target="_blank" rel="noopener">termos de uso</a> e a <a href="#privacidade" target="_blank" rel="noopener">política de privacidade</a>.</span></label>
+            <div class="error-msg" id="terms-err"></div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" id="submit"><span id="submit-label">Criar conta</span></button>
+        </form>
+        <p class="alt">Já tem conta? <a href="01_login.html">Entrar</a></p>
+
+        <!-- <DesignNote> -->
+        <aside class="design-note" aria-label="Nota de design">
+          <b>Por que não pedimos altura, tom de pele ou data de nascimento?</b>
+          Coletamos só o necessário para sua conta (LGPD). Nenhuma regra da análise usa esses dados hoje. Se alguma passar a usar, ela será opcional e explicada.
+          <div><span class="open-tag">EM ABERTO · EA-03</span></div>
+        </aside>
+      </div>
+      <!-- </SignupForm> -->
+
+      <!-- <SuccessPanel> -->
+      <section class="success" id="success" aria-labelledby="success-title">
+        <div class="ok" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h1 id="success-title" tabindex="-1">Conta criada!</h1>
+        <p>Bem-vindo(a), <span id="success-name">Ana</span>. Seu guarda-roupa está pronto para receber as primeiras peças.</p>
+        <div class="beta-note"><span class="beta">Beta</span><span>Durante o beta, os dados podem ser apagados ao final do teste.</span></div>
+        <a class="btn btn-primary btn-block" href="03_guarda_roupa.html?estado=vazio">Ir para o guarda-roupa</a>
+      </section>
+    </div>
+  </main>
+
+  <!-- <EditorialPanel variant="signup"> -->
+  <aside class="editorial" aria-labelledby="how-title">
+    <div class="brand"><p class="logo">Outfit<br>Lab</p><span class="beta">Beta</span></div>
+    <div>
+      <h2 id="how-title">Como funciona</h2>
+      <!-- <HowItWorks> -->
+      <ol class="steps">
+        <li><span class="n" aria-hidden="true">1</span><div><h3>Cadastre suas peças</h3><p>Foto, categoria, cores e modelagem.</p></div></li>
+        <li><span class="n" aria-hidden="true">2</span><div><h3>Monte looks</h3><p>Combine peças do seu próprio guarda-roupa.</p></div></li>
+        <li><span class="n" aria-hidden="true">3</span><div><h3>Entenda a análise</h3><p>Uma pontuação de 0 a 100 com justificativas, não um julgamento.</p></div></li>
+      </ol>
+      <!-- <ScorePreviewCard> -->
+      <div class="score-card" aria-label="Exemplo de análise">
+        <div class="score-top"><span class="lbl">Exemplo de análise</span><span class="val">82<small>/100</small></span></div>
+        <div class="bar" aria-hidden="true"><span></span></div>
+        <ul class="crit">
+          <li><div><b>Cores:</b> <span>neutros com 1 ponto de destaque</span></div></li>
+          <li><div><b>Camadas:</b> <span>proporções equilibradas</span></div></li>
+        </ul>
+        <p class="disclaimer">Exemplo ilustrativo. A pontuação segue as regras do Outfit Lab, não uma medida de beleza.</p>
+      </div>
+    </div>
+    <div></div>
+  </aside>
+</div>
+
+<div class="states" id="states">
+  <button type="button" aria-expanded="false" id="states-btn">◐ Estados</button>
+  <div class="states-list">
+    <p>TELA-02 · Cadastro</p>
+    <button type="button" data-state="default" aria-current="true">Padrão</button>
+    <button type="button" data-state="validation">Validação</button>
+    <button type="button" data-state="mismatch">Senhas diferentes</button>
+    <button type="button" data-state="exists">E-mail já cadastrado</button>
+    <button type="button" data-state="notbeta">Fora do beta</button>
+    <button type="button" data-state="loading">Carregando</button>
+    <button type="button" data-state="success">Sucesso</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $ = s => document.querySelector(s);
+  const f = { first:$('#first'), last:$('#last'), email:$('#email'), pw:$('#pw'), pw2:$('#pw2'), terms:$('#terms') };
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const ICON = '<svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 5v6M10 14v1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+  let submitted = false;
+
+  function setError(el, html){
+    const box = document.getElementById(el.id + '-err');
+    box.innerHTML = html ? ICON + '<span>' + html + '</span>' : '';
+    box.classList.toggle('show', !!html);
+    el.setAttribute('aria-invalid', html ? 'true' : 'false');
+    if(el === f.pw) $('#pw-hint').style.display = html ? 'none' : '';
+    return !html;
+  }
+  const rules = {
+    first(){ const v=f.first.value.trim(); return setError(f.first, !v ? 'Informe seu nome.' : (v.length<2||v.length>60) ? 'O nome precisa ter entre 2 e 60 caracteres.' : ''); },
+    last(){ const v=f.last.value.trim(); return setError(f.last, !v ? 'Informe seu sobrenome.' : (v.length<2||v.length>60) ? 'O sobrenome precisa ter entre 2 e 60 caracteres.' : ''); },
+    email(){ const v=f.email.value.trim(); return setError(f.email, !v ? 'Informe seu e-mail.' : !EMAIL_RE.test(v) ? 'Digite um e-mail válido, como nome@exemplo.com.' : ''); },
+    pw(){ const v=f.pw.value; return setError(f.pw, !v ? 'Crie uma senha.' : v.length>72 ? 'A senha pode ter no máximo 72 caracteres.' : !meetsMin(v) ? 'A senha precisa ter pelo menos 8 caracteres, com letras e números.' : ''); },
+    pw2(){ const v=f.pw2.value; return setError(f.pw2, !v ? 'Confirme sua senha.' : v!==f.pw.value ? 'As senhas não coincidem.' : ''); },
+    terms(){ return setError(f.terms, f.terms.checked ? '' : 'Para criar a conta, aceite os termos de uso e a política de privacidade.'); }
+  };
+  function meetsMin(v){ return v.length>=8 && /[A-Za-zÀ-ÿ]/.test(v) && /\d/.test(v); }
+  function strength(v){
+    if(!v) return 0;
+    if(!meetsMin(v)) return 1;
+    const sym = /[^A-Za-z0-9]/.test(v), mixed = /[a-z]/.test(v) && /[A-Z]/.test(v);
+    if(v.length>=12 && mixed && sym) return 4;
+    if(v.length>=12 || sym) return 3;
+    return 2;
+  }
+  function paintStrength(){
+    const s = strength(f.pw.value), el = $('#strength');
+    el.className = 'strength' + (s ? ' s'+s : '');
+    $('#pw-strength').textContent = ['', 'Fraca', 'Razoável', 'Boa', 'Forte'][s];
+  }
+  f.pw.addEventListener('input', () => { paintStrength(); if(submitted && f.pw2.value) rules.pw2(); });
+  Object.keys(rules).forEach(k => f[k].addEventListener(k==='terms'?'change':'blur', () => submitted && rules[k]()));
+
+  document.querySelectorAll('.toggle-pw').forEach(btn => btn.addEventListener('click', () => {
+    const inp = document.getElementById(btn.dataset.target), show = inp.type === 'password';
+    inp.type = show ? 'text' : 'password';
+    btn.setAttribute('aria-pressed', show);
+    btn.setAttribute('aria-label', (show ? 'Ocultar ' : 'Mostrar ') + (btn.dataset.target==='pw' ? 'senha' : 'confirmação de senha'));
+    btn.querySelector('.slash').style.display = show ? 'block' : 'none';
+  }));
+
+  function setLoading(on){
+    Object.values(f).forEach(el => el.disabled = on);
+    const b = $('#submit'); b.disabled = on; b.setAttribute('aria-busy', on);
+    $('#submit-label').textContent = on ? 'Criando conta…' : 'Criar conta';
+    const sp = b.querySelector('.spinner');
+    if(on && !sp){ const s=document.createElement('span'); s.className='spinner'; s.setAttribute('aria-hidden','true'); b.prepend(s); }
+    if(!on && sp) sp.remove();
+  }
+  function showAlert(on){ $('#alert').classList.toggle('show', on); if(on) $('#alert').focus(); }
+  function showExists(){ setError(f.email, 'Este e-mail já tem uma conta. <a href="01_login.html">Entrar</a> ou recuperar a senha.'); }
+  function showSuccess(on){
+    $('#form-block').style.display = on ? 'none' : '';
+    $('#success').classList.toggle('show', on);
+    if(on){ $('#success-name').textContent = f.first.value.trim() || 'Ana'; $('#success-title').focus(); }
+  }
+
+  $('#form').addEventListener('submit', e => {
+    e.preventDefault(); submitted = true; showAlert(false);
+    const order = ['first','last','email','pw','pw2','terms'];
+    const firstBad = order.find(k => !rules[k]());
+    order.forEach(k => rules[k]());
+    if(firstBad){ f[firstBad].focus(); return; }
+    setLoading(true);
+    // Simulação: "ja@exemplo.com" → já cadastrado; domínio "@fora.com" → fora do beta; outros → sucesso.
+    setTimeout(() => {
+      setLoading(false);
+      const em = f.email.value.trim().toLowerCase();
+      if(em === 'ja@exemplo.com'){ showExists(); f.email.focus(); }
+      else if(em.endsWith('@fora.com')) showAlert(true);
+      else showSuccess(true);
+    }, 1300);
+  });
+
+  // Painel de estados
+  const panel = $('#states');
+  $('#states-btn').addEventListener('click', function(){ const o = panel.classList.toggle('open'); this.setAttribute('aria-expanded', o); });
+  function fill(){ f.first.value='Ana'; f.last.value='Souza'; f.email.value='ana@exemplo.com'; f.pw.value='Guarda2026'; f.pw2.value='Guarda2026'; f.terms.checked=true; paintStrength(); }
+  function reset(){ submitted=false; setLoading(false); showAlert(false); showSuccess(false); Object.values(f).forEach(el => { if(el.type==='checkbox') el.checked=false; else el.value=''; setError(el,''); }); paintStrength(); }
+  const states = {
+    default: reset,
+    validation(){ reset(); f.first.value='A'; f.email.value='ana@'; f.pw.value='abc'; submitted=true; paintStrength(); Object.keys(rules).forEach(k=>rules[k]()); },
+    mismatch(){ reset(); fill(); f.pw2.value='Guarda2025'; submitted=true; rules.pw2(); },
+    exists(){ reset(); fill(); f.email.value='ja@exemplo.com'; submitted=true; showExists(); },
+    notbeta(){ reset(); fill(); f.email.value='bruno@fora.com'; showAlert(true); },
+    loading(){ reset(); fill(); setLoading(true); },
+    success(){ reset(); fill(); showSuccess(true); }
+  };
+  document.querySelectorAll('[data-state]').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('[data-state]').forEach(x => x.removeAttribute('aria-current'));
+    b.setAttribute('aria-current','true'); states[b.dataset.state]();
+  }));
+})();
+</script>
+</body>
+</html>

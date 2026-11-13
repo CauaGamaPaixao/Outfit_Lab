@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | Log de decisões (ADR simplificado), pontos em aberto, premissas e lições aprendidas |
-| Versão | 1.1 |
+| Versão | 1.2 |
 | Data | 13/11/2026 |
 | Autor | Cauã Gama Paixão |
 | Gerado por | PROMPT-001 v2.0 |
@@ -15,6 +15,7 @@
 |---|---|---|---|
 | 1.0 | 13/11/2026 | Cauã Gama Paixão | Versão inicial: D-01 a D-24, EA-01 a EA-28. |
 | 1.1 | 13/11/2026 | Cauã Gama Paixão | Inclui D-25 (convenção de pastas, PROMPT-002); D-16 marcada como complementada por D-25; caminhos atualizados para a convenção de pastas D-25 e prompts previstos renumerados (+1) — PROMPT-002. |
+| 1.2 | 13/11/2026 | Cauã Gama Paixão | Inclui D-26 a D-28, propostas na Parte B do PROMPT-001 (design system e telas 01–03); EA-02 atendido pela spec da TELA-02. |
 
 ---
 
@@ -71,14 +72,22 @@ Em vez de um arquivo por ADR (padrão comum em times), todas as decisões ficam 
 | D-23 | 13/11/2026 | Necessidades de usuários reais. | MoSCoW dos itens do beta: **Must** termos/LGPD, canal de feedback, backup, limites de upload, logs + health, processo de exclusão, aviso de beta; **Should** recuperação de senha, allowlist; **Could** monitoramento de erros do front, compressão de imagem, exclusão de conta pelo próprio usuário. | Tudo Must; tudo fora. | Declaração de Escopo, seção 6. | Proposta |
 | D-24 | 13/11/2026 | Recuperação de senha exige serviço de e-mail. | **Should** na SPR-06, com plano B de reset manual durante o beta. | Must na SPR-02. | Libera a SPR-02/05 (caminho crítico). | Proposta |
 
-> Próximo ID livre: **D-26**.
+### 2.5 Decisões propostas na Parte B (aguardam aprovação do autor)
+
+| ID | Data | Contexto | Decisão proposta | Alternativas | Consequências | Status |
+|---|---|---|---|---|---|---|
+| D-26 | 13/11/2026 | `#E5E5E5` como borda de input tem 1,26:1 e o amarelo como anel de foco tem 1,47:1 sobre o off-white. | **Acessibilidade de controles:** borda de input `#8A8A8A` (3,45:1, token `--color-border-strong`) e anel de foco em duas camadas (preto 2 px + halo amarelo). | Manter a borda clara do moodboard; foco só amarelo. | Cumpre WCAG 1.4.11 e 2.4.7; visual um pouco menos "leve". `c_design/b_tokens/design_tokens.md`. | Proposta |
+| D-27 | 13/11/2026 | Login social está fora do MVP (Won't). | **Remover** os botões Google/Apple, em vez de mostrá-los desabilitados com "em breve". | Botões desabilitados. | Interface mais limpa e honesta; volta como nova decisão se entrar no escopo. | Proposta |
+| D-28 | 13/11/2026 | O cadastro precisa de uma regra de senha única para front e back. | **Senha com 8 a 72 caracteres, com pelo menos 1 letra e 1 número**; indicador de força informativo (não bloqueia além do mínimo). 72 é o limite do BCrypt (SEG-01). | Regras com maiúscula e símbolo obrigatórios; mínimo 6. | Simples para os amigos e suficiente com hash forte + limite de tentativas (EA-27). Spec TELA-02. | Proposta |
+
+> Próximo ID livre: **D-29**.
 
 ## 3. Pontos em aberto
 
 | ID | Ponto | Origem | Recomendação | Data-limite | Onde será decidido |
 |---|---|---|---|---|---|
 | EA-01 | Nome definitivo e branding (incluindo o uso de "™") | PRD 18.2-1 | Manter "Outfit Lab" na v1.0. Evitar "™" na interface até verificar se o nome já tem dono [VERIFICAR busca no INPI]. | 31/01/2027 | Pós-v1.0 |
-| EA-02 | Campos do cadastro de usuário | PRD 18.2-2 | Nome, sobrenome, e-mail, senha, confirmação e aceite de termos. | 16/11/2026 | PROMPT-001 Parte B |
+| EA-02 | Campos do cadastro de usuário | PRD 18.2-2 | Nome, sobrenome, e-mail, senha, confirmação e aceite de termos. | 16/11/2026 (atendido pela spec da TELA-02 — aguarda aprovação) | PROMPT-001 Parte B |
 | EA-03 | Dados corporais (altura etc.) | PRD 18.2-3 | Fora do cadastro. Revisar só se alguma regra do avaliador provar que precisa deles. | 09/12/2026 | PROMPT-010 |
 | EA-04 | Taxonomia final das categorias | PRD 18.2-4 | Partir das 4 do PRD (partes de cima, partes de baixo, calçados, acessórios) + avaliar "peça única" (vestido/macacão) e "camada externa" como função, não categoria. | 18/11/2026 | PROMPT-003 |
 | EA-05 | Atributos por categoria | PRD 18.2-5 | Matriz categoria × atributo (obrigatório/opcional/não se aplica). | 18/11/2026 | PROMPT-003 |

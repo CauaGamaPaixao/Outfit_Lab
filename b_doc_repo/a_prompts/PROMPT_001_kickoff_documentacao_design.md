@@ -10,7 +10,7 @@
 | Entradas obrigatórias | `b_doc_repo/b_docs/a_contexto/Outfit_Lab_PRD_Contexto_Completo_v1.0.md` · `b_doc_repo/c_design/a_referencias/moodboard_v0.png` |
 | Saídas | `b_doc_repo/b_docs/a_contexto/*` (PRD v1.1) · `b_doc_repo/b_docs/b_iniciacao/*` · `b_doc_repo/b_docs/c_planejamento/*` · `b_doc_repo/c_design/*` · `AGENTS.md` |
 | Convenções | [`a_convencoes/CONVENCAO_DE_PASTAS.md`](a_convencoes/CONVENCAO_DE_PASTAS.md) (D-25) |
-| Status | Em execução (Parte A concluída — aguardando revisão) |
+| Status | Em execução (Partes A e B concluídas — aguardando revisão; Parte C pendente) |
 
 ### Histórico de versões
 

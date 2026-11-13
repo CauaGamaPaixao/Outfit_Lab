@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Outfit Lab — TELA-01 Login (protótipo)</title>
+<!-- Gerado por: PROMPT-001 v2.1 (Parte B4) · Spec: ../c_specs/TELA-01_login.md · v1.0 · 13/11/2026 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===== Tokens (copiados de ../b_tokens/tokens.css) ===== */
+:root{
+  --color-bg:#FAFAFA;--color-surface:#FFFFFF;--color-image:#F2F2F2;
+  --color-text:#0A0A0A;--color-text-strong:#1F1F1F;--color-text-muted:#6B6B6B;
+  --color-border:#E5E5E5;--color-border-strong:#8A8A8A;
+  --color-inverse-bg:#0A0A0A;--color-inverse-surface:#1F1F1F;--color-inverse-text:#FFFFFF;--color-inverse-muted:#A3A3A3;
+  --color-accent:#FACC15;--color-accent-hover:#EAB308;--color-on-accent:#0A0A0A;
+  --color-danger:#B91C1C;--color-danger-bg:#FEF2F2;--color-success:#15803D;--color-success-bg:#F0FDF4;
+  --font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;--space-6:24px;--space-8:32px;--space-10:40px;--space-12:48px;--space-16:64px;
+  --radius-input:8px;--radius-card:12px;--radius-pill:999px;
+  --shadow-sm:0 1px 2px rgba(10,10,10,.06);--shadow-md:0 4px 16px rgba(10,10,10,.08);--shadow-lg:0 12px 32px rgba(10,10,10,.14);
+  --focus-ring:0 0 0 2px #0A0A0A,0 0 0 5px #FACC15;
+  --size-input:48px;--duration-base:200ms;
+}
+@media (prefers-reduced-motion:reduce){:root{--duration-base:0ms}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:var(--font-family);font-size:16px;line-height:24px;color:var(--color-text);background:var(--color-bg);-webkit-font-smoothing:antialiased}
+a{color:var(--color-text);text-underline-offset:3px}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:none;box-shadow:var(--focus-ring);border-radius:var(--radius-input)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+
+/* <AuthLayout> */
+.auth{min-height:100vh;display:flex;flex-direction:column}
+@media (min-width:1024px){.auth{flex-direction:row}.auth>*{flex:1 1 50%}}
+@media (min-width:1440px){.auth .editorial{flex-basis:55%}.auth .form-side{flex-basis:45%}}
+
+/* <EditorialPanel> */
+.editorial{background:var(--color-inverse-bg);color:var(--color-inverse-text);padding:var(--space-6) var(--space-4);display:flex;flex-direction:column;gap:var(--space-4)}
+.editorial .collage,.editorial .quote{display:none}
+@media (min-width:1024px){
+  .editorial{padding:var(--space-10);justify-content:space-between;min-height:100vh;position:sticky;top:0}
+  .editorial .collage,.editorial .quote{display:block}
+}
+.brand{display:flex;align-items:flex-start;gap:var(--space-3)}
+/* <Logo stacked> */
+.logo{font-weight:800;font-size:28px;line-height:.95;letter-spacing:-.03em;margin:0}
+@media (min-width:1024px){.logo{font-size:40px}}
+.beta{display:inline-flex;align-items:center;height:22px;padding:0 10px;border-radius:var(--radius-pill);background:var(--color-accent);color:var(--color-on-accent);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.tagline{color:var(--color-inverse-muted);font-size:14px;line-height:20px;margin:var(--space-3) 0 0;letter-spacing:.02em}
+@media (min-width:1024px){.tagline{font-size:16px;line-height:24px;margin-top:var(--space-4)}}
+.collage{position:relative;height:340px;margin:var(--space-8) 0}
+.collage .tile{position:absolute;background:var(--color-inverse-surface);border-radius:var(--radius-card);display:flex;align-items:center;justify-content:center}
+.collage .tile svg{width:62%;height:62%}
+.t1{left:0;top:20px;width:38%;height:200px}
+.t2{left:41%;top:0;width:28%;height:150px}
+.t3{left:41%;top:162px;width:28%;height:170px}
+.t4{left:72%;top:40px;width:28%;height:260px;background:#2a2a2a!important}
+.quote{font-size:24px;line-height:32px;font-weight:600;letter-spacing:-.01em;max-width:28ch;margin:0}
+.quote::before{content:"“";color:var(--color-accent);display:block;font-size:48px;line-height:32px}
+
+/* Form side */
+.form-side{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:var(--space-8) var(--space-4) var(--space-16)}
+.form-wrap{width:100%;max-width:440px}
+@media (min-width:1024px){.form-wrap{max-width:400px}}
+.eyebrow{font-size:12px;line-height:16px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-muted);margin:0 0 var(--space-2)}
+h1{font-size:32px;line-height:40px;font-weight:600;letter-spacing:-.02em;margin:0 0 var(--space-6)}
+@media (min-width:1024px){h1{font-size:40px;line-height:48px;font-weight:700}}
+
+/* <TextField> */
+.field{margin-bottom:var(--space-5)}
+.field label{display:block;font-size:14px;line-height:20px;font-weight:500;margin-bottom:var(--space-2)}
+.control{position:relative}
+.input{width:100%;height:var(--size-input);padding:0 var(--space-4);background:var(--color-surface);border:1px solid var(--color-border-strong);border-radius:var(--radius-input);font-size:16px;transition:border-color var(--duration-base)}
+.input:hover{border-color:var(--color-text-strong)}
+.input:focus-visible{border-color:var(--color-text)}
+.input:disabled{background:var(--color-image);cursor:not-allowed}
+.input[aria-invalid="true"]{border:2px solid var(--color-danger);padding-left:15px}
+.has-toggle .input{padding-right:56px}
+.toggle-pw{position:absolute;right:4px;top:4px;width:40px;height:40px;border:0;background:transparent;border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--color-text-muted)}
+.toggle-pw:hover{color:var(--color-text);background:var(--color-image)}
+.error-msg{display:none;align-items:flex-start;gap:6px;margin-top:6px;color:var(--color-danger);font-size:14px;line-height:20px}
+.error-msg.show{display:flex}
+.error-msg svg{flex:none;margin-top:2px}
+
+.row{display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);margin:-4px 0 var(--space-6);flex-wrap:wrap}
+/* <Checkbox> */
+.check{display:inline-flex;align-items:center;gap:var(--space-2);min-height:44px;cursor:pointer;font-size:14px}
+.check input{width:20px;height:20px;margin:0;accent-color:var(--color-text);cursor:pointer}
+.link-btn{margin-left:auto;background:none;border:0;padding:10px 0;font-size:14px;font-weight:500;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+
+/* <Button> */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);height:48px;padding:0 var(--space-6);border-radius:var(--radius-input);border:1px solid transparent;font-weight:600;font-size:16px;cursor:pointer;transition:background var(--duration-base)}
+.btn-primary{background:var(--color-accent);color:var(--color-on-accent)}
+.btn-primary:hover{background:var(--color-accent-hover)}
+.btn-secondary{background:var(--color-surface);border-color:var(--color-text)}
+.btn-secondary:hover{background:var(--color-image)}
+.btn[disabled]{opacity:.6;cursor:not-allowed}
+.btn-block{width:100%}
+.spinner{width:18px;height:18px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spinner{animation-duration:2.4s}}
+
+.alt{text-align:center;font-size:14px;color:var(--color-text-muted);margin:var(--space-6) 0 0}
+.alt a{color:var(--color-text);font-weight:600}
+.legal{display:flex;gap:var(--space-4);justify-content:center;margin-top:var(--space-12);font-size:14px}
+.legal a{color:var(--color-text-muted)}
+
+/* <Alert> */
+.alert{display:none;gap:var(--space-3);padding:var(--space-4);border-radius:var(--radius-input);margin-bottom:var(--space-5);font-size:14px;line-height:20px}
+.alert.show{display:flex}
+.alert-danger{background:var(--color-danger-bg);color:var(--color-danger);border:1px solid #F5C2C2}
+.alert strong{display:block;color:var(--color-danger)}
+.alert:focus-visible{box-shadow:var(--focus-ring)}
+
+/* <Modal> */
+.modal-backdrop{position:fixed;inset:0;background:rgba(10,10,10,.5);display:none;align-items:center;justify-content:center;padding:var(--space-4);z-index:30}
+.modal-backdrop.show{display:flex}
+.modal{background:var(--color-surface);border-radius:var(--radius-card);box-shadow:var(--shadow-lg);max-width:420px;width:100%;padding:var(--space-6)}
+.modal h2{font-size:24px;line-height:32px;font-weight:600;margin:0 0 var(--space-3)}
+.modal p{margin:0 0 var(--space-6);color:var(--color-text-strong)}
+
+/* <Toast> */
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--color-inverse-bg);color:var(--color-inverse-text);padding:12px 20px;border-radius:var(--radius-input);box-shadow:var(--shadow-lg);display:none;align-items:center;gap:10px;font-size:14px;z-index:40}
+.toast.show{display:flex}
+.toast .dot{width:8px;height:8px;border-radius:50%;background:var(--color-accent)}
+
+/* [EM ABERTO] selo pontilhado */
+.open-tag{display:inline-flex;align-items:center;gap:4px;border:1.5px dashed var(--color-border-strong);border-radius:var(--radius-pill);padding:0 8px;font-size:11px;line-height:18px;font-weight:600;letter-spacing:.04em;color:var(--color-text-muted);vertical-align:middle;white-space:nowrap}
+.editorial .open-tag{border-color:#6b6b6b;color:var(--color-inverse-muted)}
+
+/* ===== Painel "Estados" (só no protótipo) ===== */
+.states{position:fixed;right:12px;bottom:12px;z-index:50;font-size:13px;font-family:var(--font-family)}
+.states>button{height:36px;padding:0 14px;border-radius:var(--radius-pill);border:1px solid var(--color-border-strong);background:var(--color-surface);box-shadow:var(--shadow-md);font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px}
+.states-list{display:none;position:absolute;right:0;bottom:44px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-card);box-shadow:var(--shadow-lg);padding:8px;min-width:220px}
+.states.open .states-list{display:block}
+.states-list p{margin:4px 8px 8px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-muted)}
+.states-list button{display:block;width:100%;text-align:left;padding:8px 10px;border:0;background:none;border-radius:6px;cursor:pointer;font-size:13px}
+.states-list button:hover{background:var(--color-image)}
+.states-list button[aria-current="true"]{background:var(--color-inverse-bg);color:var(--color-inverse-text)}
+</style>
+</head>
+<body>
+
+<!-- Ilustrações SVG genéricas (sem marcas, sem pessoas) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-tee" viewBox="0 0 64 64"><path d="M22 8l-12 6-6 14 9 4 3-6v32h32V26l3 6 9-4-6-14-12-6c-1 5-5 8-10 8s-9-3-10-8z" fill="#E5E5E5"/><path d="M22 8c1 5 5 8 10 8s9-3 10-8" fill="none" stroke="#A3A3A3" stroke-width="2"/></symbol>
+  <symbol id="i-jacket" viewBox="0 0 64 64"><path d="M20 6l-10 6-6 18v28h14V30l2-6v34h24V24l2 6v28h14V30l-6-18-10-6-12 10z" fill="#6B6B6B"/><path d="M32 16v42" stroke="#1F1F1F" stroke-width="2"/><path d="M20 6l12 10 12-10" fill="none" stroke="#A3A3A3" stroke-width="2"/></symbol>
+  <symbol id="i-pants" viewBox="0 0 64 64"><path d="M16 6h32l4 52H38L32 22l-6 36H12z" fill="#A3A3A3"/><path d="M16 12h32" stroke="#6B6B6B" stroke-width="2"/></symbol>
+  <symbol id="i-sneaker" viewBox="0 0 64 64"><path d="M6 40c0-8 4-16 10-18l8 6c6 4 14 6 22 6 8 0 12 4 12 8v4H6z" fill="#FACC15"/><path d="M6 44h52v6H6z" fill="#FAFAFA"/><path d="M20 28l4 4M24 25l4 4M28 23l4 4" stroke="#0A0A0A" stroke-width="2" stroke-linecap="round"/></symbol>
+</svg>
+
+<div class="auth">
+  <!-- <EditorialPanel variant="login"> -->
+  <aside class="editorial" aria-label="Outfit Lab">
+    <div>
+      <div class="brand">
+        <!-- <Logo stacked inverse showBeta> -->
+        <p class="logo">Outfit<br>Lab</p>
+        <span class="beta">Beta</span>
+      </div>
+      <p class="tagline">Organize. Monte. Analise. Evolua.</p>
+    </div>
+    <div class="collage" aria-hidden="true">
+      <div class="tile t1"><svg><use href="#i-jacket"/></svg></div>
+      <div class="tile t2"><svg><use href="#i-tee"/></svg></div>
+      <div class="tile t3"><svg><use href="#i-pants"/></svg></div>
+      <div class="tile t4"><svg><use href="#i-sneaker"/></svg></div>
+    </div>
+    <p class="quote">Moda não é só o que você veste, é como você se expressa.</p>
+  </aside>
+  <!-- </EditorialPanel> -->
+
+  <main class="form-side">
+    <div class="form-wrap">
+      <!-- <LoginForm> -->
+      <p class="eyebrow">Bem-vindo de volta</p>
+      <h1>Entrar</h1>
+
+      <!-- <Alert tone="danger"> -->
+      <div class="alert alert-danger" id="alert" role="alert" tabindex="-1">
+        <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 5v6M10 14v1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <div id="alert-text"><strong>E-mail ou senha inválidos.</strong>Confira os dados e tente novamente.</div>
+      </div>
+
+      <form id="form" novalidate>
+        <!-- <TextField name="email"> -->
+        <div class="field">
+          <label for="email">E-mail</label>
+          <div class="control">
+            <input class="input" id="email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" aria-describedby="email-err">
+          </div>
+          <div class="error-msg" id="email-err"><svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 5v6M10 14v1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span></span></div>
+        </div>
+
+        <!-- <PasswordField name="password"> -->
+        <div class="field">
+          <label for="password">Senha</label>
+          <div class="control has-toggle">
+            <input class="input" id="password" name="password" type="password" autocomplete="current-password" maxlength="72" aria-describedby="password-err">
+            <button type="button" class="toggle-pw" id="toggle-pw" aria-label="Mostrar senha" aria-pressed="false">
+              <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" id="eye"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"/><path id="eye-slash" d="M4 4l16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="display:none"/></svg>
+            </button>
+          </div>
+          <div class="error-msg" id="password-err"><svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 5v6M10 14v1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span></span></div>
+        </div>
+
+        <div class="row">
+          <!-- <Checkbox> -->
+          <label class="check"><input type="checkbox" id="remember" name="remember"> Lembrar de mim <span class="open-tag" title="Duração depende de EA-13 (JWT × sessão)">EM ABERTO · EA-13</span></label>
+          <button type="button" class="link-btn" id="forgot">Esqueci minha senha</button>
+        </div>
+
+        <!-- <Button variant="primary" fullWidth> -->
+        <button type="submit" class="btn btn-primary btn-block" id="submit"><span id="submit-label">Entrar</span></button>
+      </form>
+      <!-- </LoginForm> -->
+
+      <p class="alt">Ainda não tem conta? <a href="02_cadastro.html">Criar conta</a></p>
+      <nav class="legal" aria-label="Documentos legais"><a href="#termos">Termos de uso</a><a href="#privacidade">Privacidade</a></nav>
+    </div>
+  </main>
+</div>
+<!-- </AuthLayout> -->
+
+<!-- <Modal> — plano B da recuperação de senha (Should, D-24) -->
+<div class="modal-backdrop" id="modal" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <h2 id="modal-title">Esqueceu a senha?</h2>
+    <p>Durante o beta, a redefinição é feita pelo autor. Envie uma mensagem pelo canal de feedback com o e-mail da sua conta.</p>
+    <button type="button" class="btn btn-primary btn-block" id="modal-ok">Entendi</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><span class="dot" aria-hidden="true"></span><span id="toast-text"></span></div>
+
+<!-- Painel "Estados" (somente protótipo) -->
+<div class="states" id="states">
+  <button type="button" aria-expanded="false" aria-controls="states-list" id="states-btn">◐ Estados</button>
+  <div class="states-list" id="states-list">
+    <p>TELA-01 · Login</p>
+    <button type="button" data-state="default" aria-current="true">Padrão</button>
+    <button type="button" data-state="validation">Validação</button>
+    <button type="button" data-state="invalid">Credenciais inválidas</button>
+    <button type="button" data-state="loading">Carregando</button>
+    <button type="button" data-state="success">Sucesso (toast)</button>
+    <button type="button" data-state="forgot">Esqueci minha senha</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $ = s => document.querySelector(s);
+  const form = $('#form'), email = $('#email'), pw = $('#password'), alertBox = $('#alert');
+  const submit = $('#submit'), label = $('#submit-label');
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  let submitted = false;
+
+  function setError(input, msg){
+    const box = document.getElementById(input.id + '-err');
+    box.querySelector('span').textContent = msg || '';
+    box.classList.toggle('show', !!msg);
+    input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+  }
+  function validateEmail(){
+    const v = email.value.trim();
+    if(!v) return setError(email,'Informe seu e-mail.'), false;
+    if(!EMAIL_RE.test(v)) return setError(email,'Digite um e-mail válido, como nome@exemplo.com.'), false;
+    setError(email,''); return true;
+  }
+  function validatePw(){
+    if(!pw.value) return setError(pw,'Informe sua senha.'), false;
+    setError(pw,''); return true;
+  }
+  email.addEventListener('blur', () => submitted && validateEmail());
+  pw.addEventListener('blur', () => submitted && validatePw());
+
+  function setLoading(on){
+    [email,pw,$('#remember'),$('#forgot')].forEach(el => el.disabled = on);
+    submit.disabled = on; submit.setAttribute('aria-busy', on);
+    label.textContent = on ? 'Entrando…' : 'Entrar';
+    const sp = submit.querySelector('.spinner');
+    if(on && !sp){ const s=document.createElement('span'); s.className='spinner'; s.setAttribute('aria-hidden','true'); submit.prepend(s); }
+    if(!on && sp) sp.remove();
+  }
+  function showAlert(on){ alertBox.classList.toggle('show', on); if(on) alertBox.focus(); }
+  function toast(msg){ $('#toast-text').textContent = msg; $('#toast').classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(()=>$('#toast').classList.remove('show'), 3000); }
+
+  form.addEventListener('submit', e => {
+    e.preventDefault(); submitted = true; showAlert(false);
+    const ok = [validateEmail(), validatePw()];
+    if(ok.includes(false)){ (ok[0] ? pw : email).focus(); return; }
+    setLoading(true);
+    // Simulação: senha "senha123" entra; qualquer outra dá credenciais inválidas.
+    setTimeout(() => {
+      setLoading(false);
+      if(pw.value === 'senha123'){ toast('Login realizado. Redirecionando…'); }
+      else { pw.value=''; showAlert(true); }
+    }, 1200);
+  });
+
+  // Mostrar/ocultar senha
+  $('#toggle-pw').addEventListener('click', function(){
+    const show = pw.type === 'password';
+    pw.type = show ? 'text' : 'password';
+    this.setAttribute('aria-pressed', show);
+    this.setAttribute('aria-label', show ? 'Ocultar senha' : 'Mostrar senha');
+    $('#eye-slash').style.display = show ? 'block' : 'none';
+  });
+
+  // Modal "Esqueci minha senha"
+  const modal = $('#modal'); let lastFocus;
+  function openModal(){ lastFocus = document.activeElement; modal.classList.add('show'); modal.setAttribute('aria-hidden','false'); $('#modal-ok').focus(); }
+  function closeModal(){ modal.classList.remove('show'); modal.setAttribute('aria-hidden','true'); (lastFocus||$('#forgot')).focus(); }
+  $('#forgot').addEventListener('click', openModal);
+  $('#modal-ok').addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape' && modal.classList.contains('show')) closeModal();
+    if(e.key === 'Tab' && modal.classList.contains('show')){ e.preventDefault(); $('#modal-ok').focus(); }
+  });
+
+  // Painel de estados
+  const panel = $('#states'), pbtn = $('#states-btn');
+  pbtn.addEventListener('click', () => { const o = panel.classList.toggle('open'); pbtn.setAttribute('aria-expanded', o); });
+  function reset(){ submitted=false; setLoading(false); showAlert(false); setError(email,''); setError(pw,''); email.value=''; pw.value=''; closeModalSilently(); }
+  function closeModalSilently(){ modal.classList.remove('show'); modal.setAttribute('aria-hidden','true'); }
+  const states = {
+    default: reset,
+    validation(){ reset(); email.value='ana@'; submitted=true; validateEmail(); validatePw(); },
+    invalid(){ reset(); email.value='ana@exemplo.com'; showAlert(true); },
+    loading(){ reset(); email.value='ana@exemplo.com'; pw.value='********'; setLoading(true); },
+    success(){ reset(); email.value='ana@exemplo.com'; toast('Login realizado. Redirecionando…'); },
+    forgot(){ reset(); openModal(); }
+  };
+  document.querySelectorAll('[data-state]').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('[data-state]').forEach(x => x.removeAttribute('aria-current'));
+    b.setAttribute('aria-current','true'); states[b.dataset.state]();
+  }));
+})();
+</script>
+</body>
+</html>

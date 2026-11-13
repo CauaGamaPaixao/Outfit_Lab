@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Outfit Lab — TELA-03 Meu guarda-roupa (protótipo)</title>
+<!-- Gerado por: PROMPT-001 v2.1 (Parte B4) · Spec: ../c_specs/TELA-03_guarda_roupa.md · v1.0 · 13/11/2026 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===== Tokens (copiados de ../b_tokens/tokens.css) ===== */
+:root{
+  --color-bg:#FAFAFA;--color-surface:#FFFFFF;--color-image:#F2F2F2;
+  --color-text:#0A0A0A;--color-text-strong:#1F1F1F;--color-text-muted:#6B6B6B;
+  --color-border:#E5E5E5;--color-border-strong:#8A8A8A;
+  --color-inverse-bg:#0A0A0A;--color-inverse-surface:#1F1F1F;--color-inverse-text:#FFFFFF;--color-inverse-muted:#A3A3A3;
+  --color-accent:#FACC15;--color-accent-hover:#EAB308;--color-on-accent:#0A0A0A;
+  --color-danger:#B91C1C;--color-danger-bg:#FEF2F2;--color-success:#15803D;--color-success-bg:#F0FDF4;
+  --font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;--space-6:24px;--space-8:32px;--space-10:40px;--space-12:48px;--space-16:64px;
+  --radius-input:8px;--radius-card:12px;--radius-pill:999px;
+  --shadow-sm:0 1px 2px rgba(10,10,10,.06);--shadow-md:0 4px 16px rgba(10,10,10,.08);--shadow-lg:0 12px 32px rgba(10,10,10,.14);
+  --focus-ring:0 0 0 2px #0A0A0A,0 0 0 5px #FACC15;
+  --size-input:48px;--size-sidebar:248px;--size-bottom-nav:64px;--size-content-max:1200px;--duration-base:200ms;
+}
+@media (prefers-reduced-motion:reduce){:root{--duration-base:0ms}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:var(--font-family);font-size:16px;line-height:24px;color:var(--color-text);background:var(--color-bg);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:none;box-shadow:var(--focus-ring);border-radius:var(--radius-input)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+.logo{font-weight:800;font-size:24px;line-height:.95;letter-spacing:-.03em;margin:0}
+.beta{display:inline-flex;align-items:center;height:22px;padding:0 10px;border-radius:var(--radius-pill);background:var(--color-accent);color:var(--color-on-accent);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.open-tag{display:inline-flex;align-items:center;border:1.5px dashed var(--color-border-strong);border-radius:var(--radius-pill);padding:0 8px;font-size:11px;line-height:18px;font-weight:600;letter-spacing:.04em;color:var(--color-text-muted);white-space:nowrap}
+
+/* <AppShell> */
+.shell{min-height:100vh}
+@media (min-width:1024px){.shell{display:grid;grid-template-columns:var(--size-sidebar) 1fr}}
+
+/* <Sidebar> */
+.sidebar{display:none}
+@media (min-width:1024px){
+  .sidebar{display:flex;flex-direction:column;position:sticky;top:0;height:100vh;background:var(--color-inverse-bg);color:var(--color-inverse-text);padding:var(--space-8) var(--space-4) var(--space-6)}
+}
+.sidebar .brand{display:flex;align-items:flex-start;gap:var(--space-3);padding:0 var(--space-3);margin-bottom:var(--space-10)}
+.nav{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.nav a{display:flex;align-items:center;gap:var(--space-3);height:44px;padding:0 var(--space-3);border-radius:var(--radius-input);text-decoration:none;color:var(--color-inverse-muted);font-weight:500;font-size:15px}
+.nav a:hover{background:var(--color-inverse-surface);color:var(--color-inverse-text)}
+.nav a[aria-current="page"]{color:var(--color-inverse-text);font-weight:600;background:var(--color-inverse-surface)}
+.nav a[aria-current="page"]::after{content:"";margin-left:auto;width:8px;height:8px;border-radius:50%;background:var(--color-accent)}
+.nav svg{flex:none}
+.side-foot{margin-top:auto;border-top:1px solid #262626;padding-top:var(--space-4);display:grid;gap:var(--space-3)}
+.user{display:flex;align-items:center;gap:var(--space-3);padding:0 var(--space-3)}
+.avatar{width:36px;height:36px;border-radius:50%;background:var(--color-inverse-surface);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:var(--color-accent);flex:none}
+.user b{display:block;font-size:14px;line-height:20px}
+.user span{display:block;font-size:12px;line-height:16px;color:var(--color-inverse-muted)}
+.side-links{display:flex;gap:var(--space-4);padding:0 var(--space-3);font-size:13px}
+.side-links a,.side-links button{color:var(--color-inverse-muted);background:none;border:0;padding:6px 0;cursor:pointer;text-decoration:underline;text-underline-offset:3px;font-size:13px}
+.side-links a:hover,.side-links button:hover{color:var(--color-inverse-text)}
+
+/* Cabeçalho mobile */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:var(--space-4);background:var(--color-inverse-bg);color:var(--color-inverse-text)}
+.topbar .brand{display:flex;align-items:flex-start;gap:var(--space-3)}
+.topbar a{font-size:13px;color:var(--color-inverse-muted)}
+@media (min-width:1024px){.topbar{display:none}}
+
+/* <BottomNav> */
+.bottom-nav{position:fixed;left:0;right:0;bottom:0;height:var(--size-bottom-nav);background:var(--color-inverse-bg);display:grid;grid-template-columns:repeat(5,1fr);align-items:center;z-index:15;padding-bottom:env(safe-area-inset-bottom)}
+@media (min-width:1024px){.bottom-nav{display:none}}
+.bottom-nav a{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;line-height:14px;text-decoration:none;color:var(--color-inverse-muted);padding:6px 0;min-height:48px;justify-content:center}
+.bottom-nav a[aria-current="page"]{color:var(--color-inverse-text);font-weight:600}
+.bottom-nav a[aria-current="page"] svg{color:var(--color-accent)}
+.fab{justify-self:center;width:56px;height:56px;border-radius:50%;background:var(--color-accent);color:var(--color-on-accent);border:4px solid var(--color-inverse-bg);display:flex;align-items:center;justify-content:center;margin-top:-28px;box-shadow:var(--shadow-lg);cursor:pointer}
+.fab:hover{background:var(--color-accent-hover)}
+
+/* Conteúdo */
+.content{padding:var(--space-6) var(--space-4) calc(var(--size-bottom-nav) + 120px)}
+@media (min-width:1024px){.content{padding:var(--space-12) var(--space-8) 140px}}
+.inner{max-width:var(--size-content-max);margin:0 auto}
+
+/* <PageHeader> */
+.page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--space-4);margin-bottom:var(--space-8)}
+.eyebrow{font-size:12px;line-height:16px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-muted);margin:0 0 var(--space-2)}
+h1{font-size:32px;line-height:40px;font-weight:700;letter-spacing:-.02em;margin:0}
+@media (min-width:1024px){h1{font-size:40px;line-height:48px}}
+.meta{color:var(--color-text-muted);font-size:14px;line-height:20px;margin:var(--space-2) 0 0}
+.add-desktop{display:none}
+@media (min-width:1024px){.add-desktop{display:inline-flex}}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);height:48px;padding:0 var(--space-6);border-radius:var(--radius-input);border:1px solid transparent;font-weight:600;font-size:16px;cursor:pointer;white-space:nowrap;transition:background var(--duration-base);text-decoration:none}
+.btn-primary{background:var(--color-accent);color:var(--color-on-accent)}
+.btn-primary:hover{background:var(--color-accent-hover)}
+.btn-secondary{background:var(--color-surface);border-color:var(--color-text)}
+.btn-secondary:hover{background:var(--color-image)}
+.btn-danger{background:var(--color-danger);color:#fff}
+.btn-danger:hover{background:#991B1B}
+.btn-ghost-inv{background:transparent;color:var(--color-inverse-text);border-color:#3a3a3a;height:40px;padding:0 var(--space-4);font-size:14px}
+.btn-ghost-inv:hover{background:var(--color-inverse-surface)}
+
+/* Filtros */
+.filters{display:grid;gap:var(--space-4);margin-bottom:var(--space-6)}
+@media (min-width:1024px){.filters{grid-template-columns:minmax(260px,360px) 1fr;align-items:center}.filters .chips-wrap{grid-column:1/-1;order:-1}}
+/* <SearchField> */
+.search{position:relative}
+.search svg.lupa{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--color-text-muted);pointer-events:none}
+.search input{width:100%;height:48px;padding:0 44px 0 44px;border:1px solid var(--color-border-strong);border-radius:var(--radius-input);background:var(--color-surface);font-size:16px}
+.search input:hover{border-color:var(--color-text-strong)}
+.search input::placeholder{color:var(--color-text-muted)}
+.search .clear{position:absolute;right:4px;top:4px;width:40px;height:40px;border:0;background:none;border-radius:6px;cursor:pointer;color:var(--color-text-muted);display:none;align-items:center;justify-content:center}
+.search .clear.show{display:flex}
+.search .clear:hover{background:var(--color-image);color:var(--color-text)}
+/* <FilterChips> */
+.chips-wrap{display:flex;align-items:center;gap:var(--space-3);min-width:0}
+.chips{display:flex;gap:var(--space-2);overflow-x:auto;padding:4px;margin:-4px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;height:40px;padding:0 var(--space-4);border-radius:var(--radius-pill);border:1px solid var(--color-border);background:var(--color-surface);font-size:14px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.chip:hover{border-color:var(--color-text-strong)}
+.chip .c{color:var(--color-text-muted);font-weight:400}
+.chip[aria-pressed="true"]{background:var(--color-inverse-bg);color:var(--color-inverse-text);border-color:var(--color-inverse-bg)}
+.chip[aria-pressed="true"] .c{color:var(--color-inverse-muted)}
+.chips-wrap .open-tag{display:none}
+@media (min-width:768px){.chips-wrap .open-tag{display:inline-flex}}
+/* <Select> */
+.selects{display:flex;gap:var(--space-3);align-items:center;flex-wrap:wrap}
+@media (min-width:1024px){.selects{justify-content:flex-end}}
+.sel{position:relative;flex:1 1 140px;max-width:220px}
+.sel label{position:absolute;left:14px;top:6px;font-size:11px;line-height:14px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--color-text-muted);pointer-events:none}
+.sel select{appearance:none;-webkit-appearance:none;width:100%;height:48px;padding:16px 36px 0 14px;border:1px solid var(--color-border-strong);border-radius:var(--radius-input);background:var(--color-surface);font-size:15px;cursor:pointer}
+.sel select:hover{border-color:var(--color-text-strong)}
+.sel::after{content:"";position:absolute;right:14px;top:50%;width:8px;height:8px;border-right:2px solid var(--color-text);border-bottom:2px solid var(--color-text);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+.clear-filters{background:none;border:0;padding:10px 4px;font-size:14px;font-weight:500;text-decoration:underline;text-underline-offset:3px;cursor:pointer;display:none}
+.clear-filters.show{display:inline-block}
+
+/* <PieceGrid> */
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;list-style:none;margin:0;padding:0}
+@media (min-width:768px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-6)}}
+@media (min-width:1440px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
+/* <PieceCard> */
+.card{position:relative;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-card);overflow:visible;box-shadow:var(--shadow-sm);transition:box-shadow var(--duration-base),transform var(--duration-base);cursor:pointer}
+.card:hover{box-shadow:var(--shadow-md)}
+.card.selected{border-color:var(--color-text);box-shadow:0 0 0 1px var(--color-text)}
+.media{position:relative;aspect-ratio:4/5;background:var(--color-image);border-radius:var(--radius-card) var(--radius-card) 0 0;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.media svg.art{width:68%;height:68%}
+.media .ph{display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--color-text-muted);font-size:12px}
+.cat-badge{position:absolute;left:10px;top:10px;background:var(--color-surface);border-radius:var(--radius-pill);padding:2px 10px;font-size:11px;line-height:18px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;box-shadow:var(--shadow-sm)}
+.kebab{position:absolute;right:4px;top:4px;width:44px;height:44px;border:0;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-input)}
+.kebab span{width:32px;height:32px;border-radius:50%;background:var(--color-surface);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm)}
+.kebab:hover span{background:var(--color-image)}
+.menu{position:absolute;right:8px;top:48px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-input);box-shadow:var(--shadow-md);padding:4px;min-width:140px;z-index:5;display:none}
+.menu.show{display:block}
+.menu button{display:flex;width:100%;align-items:center;gap:8px;height:40px;padding:0 12px;border:0;background:none;border-radius:6px;cursor:pointer;font-size:14px;text-align:left}
+.menu button:hover,.menu button:focus-visible{background:var(--color-image)}
+.menu .danger{color:var(--color-danger)}
+.look-btn{position:absolute;left:10px;right:10px;bottom:10px;height:40px;border-radius:var(--radius-input);border:1px solid var(--color-text);background:var(--color-surface);font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
+.look-btn:hover{background:var(--color-image)}
+.look-btn .lb-short{display:none}
+@media (max-width:767px){.look-btn .lb-long{display:none}.look-btn .lb-short{display:inline}}
+.look-btn[aria-pressed="true"]{background:var(--color-accent);border-color:var(--color-accent);color:var(--color-on-accent)}
+.look-btn[aria-pressed="true"]:hover{background:var(--color-accent-hover)}
+.body{padding:var(--space-3) var(--space-3) var(--space-4)}
+@media (min-width:768px){.body{padding:var(--space-4)}}
+.body h2{font-size:15px;line-height:20px;font-weight:600;margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+@media (min-width:768px){.body h2{font-size:18px;line-height:24px}}
+.brand-txt{font-size:13px;line-height:18px;color:var(--color-text-muted);margin:2px 0 var(--space-3)}
+.attrs{display:flex;align-items:center;justify-content:space-between;gap:var(--space-2);flex-wrap:wrap}
+/* <ColorDots> */
+.dots{display:flex;align-items:center;gap:4px;list-style:none;margin:0;padding:0}
+.dots li{width:14px;height:14px;border-radius:50%;border:1px solid rgba(10,10,10,.2)}
+.dots .more{width:auto;height:auto;border:0;font-size:12px;color:var(--color-text-muted)}
+.fit{border:1px solid var(--color-border-strong);border-radius:var(--radius-pill);padding:0 8px;font-size:12px;line-height:20px;color:var(--color-text-strong)}
+
+/* <SkeletonCard> */
+.sk .media{background:linear-gradient(90deg,#ececec 25%,#f6f6f6 37%,#ececec 63%);background-size:400% 100%;animation:shimmer 1.4s ease infinite}
+.sk .line{height:12px;border-radius:6px;background:#ececec;margin-bottom:8px}
+@keyframes shimmer{0%{background-position:100% 50%}100%{background-position:0 50%}}
+@media (prefers-reduced-motion:reduce){.sk .media{animation:none}}
+
+/* <EmptyState> */
+.empty{text-align:center;padding:var(--space-16) var(--space-4);border:1px dashed var(--color-border-strong);border-radius:var(--radius-card);background:var(--color-surface)}
+.empty h2{font-size:24px;line-height:32px;font-weight:600;margin:var(--space-6) 0 var(--space-2)}
+.empty p{color:var(--color-text-muted);margin:0 auto var(--space-6);max-width:42ch}
+.alert{display:flex;gap:var(--space-3);align-items:center;justify-content:space-between;flex-wrap:wrap;padding:var(--space-4);border-radius:var(--radius-input);background:var(--color-danger-bg);color:var(--color-danger);border:1px solid #F5C2C2;font-weight:500}
+
+/* <LookTray> */
+.tray{position:fixed;left:var(--space-4);right:var(--space-4);bottom:calc(var(--size-bottom-nav) + 12px);z-index:20;background:var(--color-inverse-bg);color:var(--color-inverse-text);border-radius:var(--radius-card);box-shadow:var(--shadow-lg);padding:var(--space-3);display:none;align-items:center;gap:var(--space-3)}
+.tray.show{display:flex}
+@media (min-width:1024px){.tray{left:calc(var(--size-sidebar) + var(--space-8));right:var(--space-8);bottom:var(--space-6);max-width:760px;margin:0 auto;padding:var(--space-3) var(--space-4)}}
+.thumbs{display:flex;list-style:none;margin:0;padding:0}
+.thumbs li{width:40px;height:40px;border-radius:8px;background:var(--color-image);border:2px solid var(--color-inverse-bg);margin-left:-10px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.thumbs li:first-child{margin-left:0}
+.thumbs li svg{width:80%;height:80%}
+.thumbs .more{background:var(--color-inverse-surface);color:var(--color-inverse-text);font-size:12px;font-weight:600}
+.tray-txt{font-weight:600;font-size:15px;flex:1;min-width:0}
+.tray .actions{display:flex;gap:var(--space-2)}
+.tray .btn-primary{height:40px;padding:0 var(--space-4);font-size:14px}
+@media (max-width:420px){.thumbs{display:none}.tray .btn-ghost-inv{padding:0 10px}}
+
+/* <ConfirmDialog> */
+.backdrop{position:fixed;inset:0;background:rgba(10,10,10,.5);display:none;align-items:center;justify-content:center;padding:var(--space-4);z-index:30}
+.backdrop.show{display:flex}
+.dialog{background:var(--color-surface);border-radius:var(--radius-card);box-shadow:var(--shadow-lg);max-width:440px;width:100%;padding:var(--space-6)}
+.dialog h2{font-size:24px;line-height:32px;font-weight:600;margin:0 0 var(--space-3)}
+.dialog p{margin:0 0 var(--space-6);color:var(--color-text-strong)}
+.dialog .actions{display:flex;gap:var(--space-3);justify-content:flex-end;flex-wrap:wrap}
+/* <Toast> */
+.toast{position:fixed;left:50%;top:20px;transform:translateX(-50%);background:var(--color-inverse-bg);color:var(--color-inverse-text);padding:12px 20px;border-radius:var(--radius-input);box-shadow:var(--shadow-lg);display:none;align-items:center;gap:10px;font-size:14px;z-index:40}
+.toast.show{display:flex}
+.toast i{width:8px;height:8px;border-radius:50%;background:var(--color-accent)}
+
+.states{position:fixed;right:12px;top:12px;z-index:50;font-size:13px}
+@media (min-width:1024px){.states{top:auto;bottom:12px}}
+.states>button{height:36px;padding:0 14px;border-radius:var(--radius-pill);border:1px solid var(--color-border-strong);background:var(--color-surface);box-shadow:var(--shadow-md);font-weight:600;cursor:pointer}
+.states-list{display:none;position:absolute;right:0;top:44px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-card);box-shadow:var(--shadow-lg);padding:8px;min-width:230px}
+@media (min-width:1024px){.states-list{top:auto;bottom:44px}}
+.states.open .states-list{display:block}
+.states-list p{margin:4px 8px 8px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--color-text-muted)}
+.states-list button{display:block;width:100%;text-align:left;padding:8px 10px;border:0;background:none;border-radius:6px;cursor:pointer;font-size:13px}
+.states-list button:hover{background:var(--color-image)}
+.states-list button[aria-current="true"]{background:var(--color-inverse-bg);color:var(--color-inverse-text)}
+</style>
+</head>
+<body>
+<div class="shell">
+  <!-- <Sidebar active="guarda-roupa"> -->
+  <aside class="sidebar" aria-label="Menu">
+    <div class="brand"><p class="logo">Outfit<br>Lab</p><span class="beta">Beta</span></div>
+    <nav aria-label="Principal">
+      <ul class="nav">
+        <li><a href="#inicio"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Início</a></li>
+        <li><a href="#guarda-roupa" aria-current="page"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5a2 2 0 1 1 2 2c-1 0-2 .8-2 2l9 6a1 1 0 0 1-.6 1.8H3.6A1 1 0 0 1 3 15l9-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Guarda-roupa</a></li>
+        <li><a href="#montar-look"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="13" y="3" width="8" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="3" y="13" width="8" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M17 14v6M14 17h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Montar look</a></li>
+        <li><a href="#looks"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Looks salvos</a></li>
+        <li><a href="#perfil"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Perfil</a></li>
+      </ul>
+    </nav>
+    <div class="side-foot">
+      <div class="user"><span class="avatar" aria-hidden="true">AS</span><div><b>Ana Souza</b><span>ana@exemplo.com</span></div></div>
+      <div class="side-links"><a href="#feedback">Dar feedback</a><button type="button">Sair</button></div>
+    </div>
+  </aside>
+  <!-- </Sidebar> -->
+
+  <div>
+    <header class="topbar"><div class="brand"><p class="logo">Outfit<br>Lab</p><span class="beta">Beta</span></div><a href="#feedback">Dar feedback</a></header>
+
+    <main class="content" id="main">
+      <div class="inner">
+        <!-- <PageHeader> -->
+        <div class="page-head">
+          <div>
+            <p class="eyebrow">Coleção pessoal</p>
+            <h1>Guarda-roupa</h1>
+            <p class="meta" id="count" aria-live="polite">12 peças</p>
+          </div>
+          <button type="button" class="btn btn-primary add-desktop" data-add>
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>Adicionar peça
+          </button>
+        </div>
+
+        <!-- Filtros -->
+        <div class="filters" id="filters">
+          <div class="chips-wrap">
+            <div class="chips" id="chips" role="group" aria-label="Categoria"></div>
+            <span class="open-tag" title="Taxonomia final no PROMPT-003">EM ABERTO · EA-04</span>
+          </div>
+          <!-- <SearchField> -->
+          <div class="search">
+            <label for="q" class="sr-only">Buscar peças</label>
+            <svg class="lupa" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <input id="q" type="search" placeholder="Buscar por nome ou marca" autocomplete="off">
+            <button type="button" class="clear" id="q-clear" aria-label="Limpar busca"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+          </div>
+          <div class="selects">
+            <div class="sel"><label for="fit">Modelagem</label><select id="fit"></select></div>
+            <div class="sel"><label for="color">Cor</label><select id="color"></select></div>
+            <button type="button" class="clear-filters" id="clear-filters">Limpar filtros</button>
+          </div>
+        </div>
+
+        <div id="view"></div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- <BottomNav active="guarda-roupa"> -->
+<nav class="bottom-nav" aria-label="Principal (mobile)">
+  <a href="#inicio"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Início</a>
+  <a href="#guarda-roupa" aria-current="page"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5a2 2 0 1 1 2 2c-1 0-2 .8-2 2l9 6a1 1 0 0 1-.6 1.8H3.6A1 1 0 0 1 3 15l9-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Guarda-roupa</a>
+  <button type="button" class="fab" data-add aria-label="Adicionar peça"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></button>
+  <a href="#looks"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>Looks</a>
+  <a href="#perfil"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Perfil</a>
+</nav>
+
+<!-- <LookTray> -->
+<div class="tray" id="tray" role="region" aria-label="Peças no look">
+  <ul class="thumbs" id="thumbs" aria-hidden="true"></ul>
+  <span class="tray-txt" id="tray-txt" aria-live="polite"></span>
+  <div class="actions">
+    <button type="button" class="btn btn-ghost-inv" id="tray-clear">Limpar</button>
+    <button type="button" class="btn btn-primary" id="tray-build">Montar look →</button>
+  </div>
+</div>
+
+<!-- <ConfirmDialog> -->
+<div class="backdrop" id="dlg">
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlg-title" aria-describedby="dlg-text">
+    <h2 id="dlg-title">Excluir peça?</h2>
+    <p id="dlg-text"></p>
+    <div class="actions"><button type="button" class="btn btn-secondary" id="dlg-cancel">Cancelar</button><button type="button" class="btn btn-danger" id="dlg-ok">Excluir</button></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"><i aria-hidden="true"></i><span id="toast-txt"></span></div>
+
+<div class="states" id="states">
+  <button type="button" aria-expanded="false" id="states-btn">◐ Estados</button>
+  <div class="states-list">
+    <p>TELA-03 · Guarda-roupa</p>
+    <button type="button" data-state="full" aria-current="true">Com peças</button>
+    <button type="button" data-state="loading">Carregando (skeleton)</button>
+    <button type="button" data-state="empty">Guarda-roupa vazio</button>
+    <button type="button" data-state="noresult">Busca sem resultado</button>
+    <button type="button" data-state="error">Erro ao carregar</button>
+    <button type="button" data-state="selected">Com peças no look</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $ = s => document.querySelector(s);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const OUT = 'stroke="rgba(10,10,10,.35)" stroke-width="1.5" stroke-linejoin="round"';
+
+  /* Ilustrações SVG genéricas (sem marcas nem pessoas). c = cor principal, d = cor de detalhe */
+  const ART = {
+    tee:(c)=>`<path d="M36 14 18 22 10 42l13 5 4-8v47h46V39l4 8 13-5-8-20-18-8c-2 7-7 11-14 11s-12-4-14-11z" fill="${c}" ${OUT}/><path d="M36 14c2 7 7 11 14 11s12-4 14-11" fill="none" ${OUT}/>`,
+    shirt:(c,d)=>`<path d="M36 14 18 22 10 42l13 5 4-8v47h46V39l4 8 13-5-8-20-18-8-14 12z" fill="${c}" ${OUT}/><path d="M36 14l14 12 14-12-6 14-8-2-8 2z" fill="${d||'#fff'}" ${OUT}/><path d="M50 26v60" ${OUT}/><circle cx="50" cy="40" r="1.6" fill="#0A0A0A"/><circle cx="50" cy="54" r="1.6" fill="#0A0A0A"/><circle cx="50" cy="68" r="1.6" fill="#0A0A0A"/>`,
+    hoodie:(c)=>`<path d="M34 16c0-8 7-12 16-12s16 4 16 12l14 8 8 28-12 4-4-10v42H28V46l-4 10-12-4 8-28z" fill="${c}" ${OUT}/><path d="M38 18c2 8 6 12 12 12s10-4 12-12" fill="none" ${OUT}/><path d="M36 68h28v14H36z" fill="none" ${OUT}/><path d="M46 30v12M54 30v12" ${OUT}/>`,
+    jacket:(c,d)=>`<path d="M34 12 18 20 10 46v30h14V44l4-8v40h44V36l4 8v32h14V46l-8-26-16-8-16 14z" fill="${c}" ${OUT}/><path d="M50 26v50" stroke="${d||'#0A0A0A'}" stroke-width="2.5"/><path d="M34 12l16 14 16-14" fill="none" ${OUT}/><path d="M28 70h44" ${OUT}/>`,
+    pants:(c)=>`<path d="M28 8h44l6 84H58L50 34l-8 58H22z" fill="${c}" ${OUT}/><path d="M28 16h44" ${OUT}/><path d="M50 16v18" ${OUT}/>`,
+    shorts:(c)=>`<path d="M26 18h48l6 46H56l-6-26-6 26H20z" fill="${c}" ${OUT}/><path d="M26 26h48" ${OUT}/><rect x="24" y="38" width="12" height="12" rx="2" fill="none" ${OUT}/><rect x="64" y="38" width="12" height="12" rx="2" fill="none" ${OUT}/>`,
+    sneaker:(c,d)=>`<path d="M8 62c0-12 6-24 16-26l12 9c9 6 22 9 34 9 12 0 20 5 20 12v6H8z" fill="${c}" ${OUT}/><path d="M8 66h82v9H8z" fill="${d||'#FAFAFA'}" ${OUT}/><path d="M28 44l5 5M34 40l5 5M40 37l5 5" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round"/>`,
+    boot:(c)=>`<path d="M30 10h26v40c0 6 6 10 14 12 10 2 18 6 18 14v4H24V66z" fill="${c}" ${OUT}/><path d="M24 80h64v8H24z" fill="#1F1F1F"/><path d="M40 12v40" stroke="rgba(255,255,255,.3)" stroke-width="3"/>`,
+    cap:(c)=>`<path d="M18 58c0-20 14-34 32-34s32 14 32 34z" fill="${c}" ${OUT}/><path d="M60 58h32c0 6-6 9-14 9H56z" fill="${c}" ${OUT}/><circle cx="50" cy="24" r="3" fill="${c}" ${OUT}/>`,
+    bag:(c,d)=>`<path d="M30 20c0-10 40-10 40 0" fill="none" stroke="${c}" stroke-width="4"/><rect x="18" y="38" width="64" height="44" rx="8" fill="${d||c}" ${OUT}/><path d="M18 52h64" ${OUT}/>`
+  };
+  const svg = (p, cls='art') => `<svg class="${cls}" viewBox="0 0 100 100" aria-hidden="true">${ART[p.art](p.colors[0].hex, p.colors[1] && p.colors[1].hex)}</svg>`;
+
+  const CATS = [
+    {v:'all',l:'Todas'},{v:'top',l:'Partes de cima'},{v:'bottom',l:'Partes de baixo'},{v:'shoes',l:'Calçados'},{v:'acc',l:'Acessórios'}
+  ];
+  const CAT_LABEL = {top:'Cima',bottom:'Baixo',shoes:'Calçado',acc:'Acessório'};
+  const FITS = ['Slim','Regular','Oversized','Wide','Cropped'];
+  const C = {
+    branco:{name:'Branco',hex:'#FFFFFF'}, preto:{name:'Preto',hex:'#0A0A0A'}, cinza:{name:'Cinza',hex:'#9CA3AF'},
+    azulclaro:{name:'Azul-claro',hex:'#9EC5E8'}, jeans:{name:'Azul jeans',hex:'#3B5B8C'}, bege:{name:'Bege',hex:'#D6C7A8'},
+    oliva:{name:'Verde-oliva',hex:'#6B7140'}, amarelo:{name:'Amarelo',hex:'#FACC15'}, marrom:{name:'Marrom',hex:'#6B4226'}, vinho:{name:'Vinho',hex:'#7F1D1D'}
+  };
+  /* 12 peças mockadas (marcas fictícias, texto digitado pelo usuário) */
+  const SEED = [
+    {id:1, name:'Camiseta básica', brand:'Básicos Co.', cat:'top', fit:'Regular', colors:[C.branco], art:'tee'},
+    {id:2, name:'Camisa oxford', brand:'Atelier Norte', cat:'top', fit:'Slim', colors:[C.azulclaro,C.branco], art:'shirt'},
+    {id:3, name:'Moletom com capuz', brand:'Urbano', cat:'top', fit:'Oversized', colors:[C.cinza], art:'hoodie'},
+    {id:4, name:'Jaqueta jeans', brand:'Denim Lab', cat:'top', fit:'Cropped', colors:[C.jeans], art:'jacket'},
+    {id:5, name:'Jaqueta corta-vento', brand:'Urbano', cat:'top', fit:'Oversized', colors:[C.preto,C.amarelo], art:'jacket'},
+    {id:6, name:'Calça de alfaiataria', brand:'Atelier Norte', cat:'bottom', fit:'Wide', colors:[C.bege], art:'pants'},
+    {id:7, name:'Calça jeans reta', brand:'Denim Lab', cat:'bottom', fit:'Regular', colors:[C.jeans], art:'pants'},
+    {id:8, name:'Bermuda cargo', brand:'', cat:'bottom', fit:'Regular', colors:[C.oliva], art:'shorts'},
+    {id:9, name:'Tênis de corrida', brand:'Passo Leve', cat:'shoes', fit:null, colors:[C.amarelo,C.branco], art:'sneaker'},
+    {id:10, name:'Bota chelsea', brand:'Couro & Cia', cat:'shoes', fit:null, colors:[C.marrom], art:'boot'},
+    {id:11, name:'Boné de aba curva', brand:'Urbano', cat:'acc', fit:null, colors:[C.preto,C.branco,C.vinho,C.cinza], art:'cap'},
+    {id:12, name:'Bolsa transversal', brand:'Sem marca', cat:'acc', fit:null, colors:[C.preto,C.bege], art:'bag', noImage:true}
+  ];
+
+  let pieces = SEED.slice();
+  const state = { q:'', cat:'all', fit:'', color:'', selected:new Set(), mode:'full' };
+  const norm = s => (s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+
+  /* Selects */
+  function buildSelects(){
+    $('#fit').innerHTML = '<option value="">Todas</option>' + FITS.map(f=>`<option>${f}</option>`).join('');
+    const used = [...new Map(pieces.flatMap(p=>p.colors).map(c=>[c.name,c])).values()].sort((a,b)=>a.name.localeCompare(b.name));
+    $('#color').innerHTML = '<option value="">Todas</option>' + used.map(c=>`<option value="${esc(c.name)}">● ${esc(c.name)}</option>`).join('');
+    $('#fit').value = state.fit; $('#color').value = state.color;
+  }
+
+  const matchSearch = p => !state.q || norm(p.name + ' ' + p.brand).includes(norm(state.q));
+  const matchOthers = p => (!state.fit || p.fit === state.fit) && (!state.color || p.colors.some(c=>c.name===state.color));
+  const visible = () => pieces.filter(p => matchSearch(p) && matchOthers(p) && (state.cat==='all' || p.cat===state.cat));
+
+  function renderChips(){
+    const base = pieces.filter(p => matchSearch(p) && matchOthers(p));
+    $('#chips').innerHTML = CATS.map(c => {
+      const n = c.v==='all' ? base.length : base.filter(p=>p.cat===c.v).length;
+      return `<button type="button" class="chip" data-cat="${c.v}" aria-pressed="${state.cat===c.v}">${c.l} <span class="c">${n}</span></button>`;
+    }).join('');
+  }
+
+  function card(p){
+    const sel = state.selected.has(p.id);
+    const dots = p.colors.slice(0,3).map(c=>`<li style="background:${c.hex}" title="${esc(c.name)}"><span class="sr-only">${esc(c.name)}</span></li>`).join('') + (p.colors.length>3?`<li class="more">+${p.colors.length-3}</li>`:'');
+    const media = p.noImage
+      ? `<div class="ph"><svg width="56" height="56" viewBox="0 0 100 100" aria-hidden="true" style="opacity:.55">${ART[p.art]('#A3A3A3','#C9C9C9')}</svg>Sem foto</div>`
+      : svg(p);
+    return `<li><article class="card${sel?' selected':''}" data-id="${p.id}" aria-labelledby="n${p.id}">
+      <div class="media">${media}
+        <span class="cat-badge">${CAT_LABEL[p.cat]}</span>
+        <button type="button" class="kebab" aria-label="Opções de ${esc(p.name)}" aria-haspopup="menu" aria-expanded="false"><span><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="2" fill="currentColor"/><circle cx="12" cy="12" r="2" fill="currentColor"/><circle cx="19" cy="12" r="2" fill="currentColor"/></svg></span></button>
+        <div class="menu" role="menu"><button type="button" role="menuitem" data-act="edit">Editar</button><button type="button" role="menuitem" class="danger" data-act="del">Excluir</button></div>
+        <button type="button" class="look-btn" aria-pressed="${sel}" aria-label="${sel?'Remover':'Adicionar'} ${esc(p.name)} ${sel?'do':'ao'} look">${sel?'✓ No look':'<span class="lb-long">+ Adicionar ao look</span><span class="lb-short">+ Look</span>'}</button>
+      </div>
+      <div class="body">
+        <h2 id="n${p.id}">${esc(p.name)}</h2>
+        <p class="brand-txt">${p.brand?esc(p.brand):'&nbsp;'}</p>
+        <div class="attrs"><ul class="dots" aria-label="Cores">${dots}</ul>${p.fit?`<span class="fit">${p.fit}</span>`:''}</div>
+      </div>
+    </article></li>`;
+  }
+
+  function setFiltersVisible(on){ $('#filters').style.display = on ? '' : 'none'; }
+  function plural(n){ return n===1 ? '1 peça' : n + ' peças'; }
+
+  function render(){
+    const view = $('#view');
+    view.removeAttribute('aria-busy');
+    if(state.mode==='loading'){
+      setFiltersVisible(true); $('#count').textContent = 'Carregando peças…';
+      view.setAttribute('aria-busy','true');
+      view.innerHTML = '<ul class="grid">' + Array.from({length:8},()=>'<li><div class="card sk" aria-hidden="true"><div class="media"></div><div class="body"><div class="line" style="width:80%"></div><div class="line" style="width:50%"></div></div></div></li>').join('') + '</ul><span class="sr-only">Carregando peças…</span>';
+      renderTray(); return;
+    }
+    if(state.mode==='error'){
+      setFiltersVisible(false); $('#count').textContent = '';
+      view.innerHTML = '<div class="alert" role="alert"><span>Não foi possível carregar suas peças.</span><button type="button" class="btn btn-secondary" id="retry">Tentar novamente</button></div>';
+      $('#retry').onclick = () => go('loading', () => go('full'));
+      renderTray(); return;
+    }
+    if(pieces.length===0){
+      setFiltersVisible(false); $('#count').textContent = '0 peças';
+      view.innerHTML = `<div class="empty">
+        <svg width="96" height="96" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 22a7 7 0 1 1 7 7c-4 0-7 3-7 7l38 24a3 3 0 0 1-1.6 5.6H13.6A3 3 0 0 1 12 60l38-24" fill="none" stroke="#0A0A0A" stroke-width="3" stroke-linecap="round"/><circle cx="78" cy="22" r="6" fill="#FACC15"/></svg>
+        <h2>Seu guarda-roupa está vazio</h2><p>Cadastre sua primeira peça para começar a montar looks.</p>
+        <button type="button" class="btn btn-primary" data-add>+ Adicionar primeira peça</button></div>`;
+      renderTray(); return;
+    }
+    setFiltersVisible(true);
+    renderChips();
+    $('#q-clear').classList.toggle('show', !!state.q);
+    $('#clear-filters').classList.toggle('show', !!(state.q || state.cat!=='all' || state.fit || state.color));
+    const list = visible();
+    const filtered = list.length !== pieces.length;
+    $('#count').textContent = filtered ? `${list.length} de ${plural(pieces.length)}` : plural(pieces.length);
+    if(list.length===0){
+      view.innerHTML = `<div class="empty">
+        <svg width="72" height="72" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="#0A0A0A" stroke-width="1.6"/><path d="M20 20l-4-4" stroke="#0A0A0A" stroke-width="1.6" stroke-linecap="round"/><path d="M8.5 11h5" stroke="#FACC15" stroke-width="2" stroke-linecap="round"/></svg>
+        <h2>Nenhuma peça encontrada</h2><p>${state.q ? `Nada corresponde a “${esc(state.q)}” com os filtros atuais.` : 'Nenhuma peça corresponde aos filtros atuais.'}</p>
+        <button type="button" class="btn btn-secondary" id="clear-all">Limpar busca e filtros</button></div>`;
+      $('#clear-all').onclick = clearAll;
+    } else {
+      view.innerHTML = '<ul class="grid">' + list.map(card).join('') + '</ul>';
+    }
+    renderTray();
+  }
+
+  function renderTray(){
+    const n = state.selected.size, tray = $('#tray');
+    tray.classList.toggle('show', n>0 && state.mode==='full' && pieces.length>0);
+    if(!n) return;
+    const sel = pieces.filter(p=>state.selected.has(p.id));
+    $('#thumbs').innerHTML = sel.slice(0,4).map(p=>`<li>${svg(p,'')}</li>`).join('') + (n>4?`<li class="more">+${n-4}</li>`:'');
+    $('#tray-txt').textContent = n===1 ? '1 peça no look' : n + ' peças no look';
+  }
+
+  function clearAll(){ state.q=''; state.cat='all'; state.fit=''; state.color=''; $('#q').value=''; buildSelects(); render(); $('#q').focus(); }
+
+  /* Eventos */
+  let deb;
+  $('#q').addEventListener('input', e => { clearTimeout(deb); deb = setTimeout(()=>{ state.q = e.target.value.trim(); render(); }, 120); });
+  $('#q-clear').addEventListener('click', () => { $('#q').value=''; state.q=''; render(); $('#q').focus(); });
+  $('#fit').addEventListener('change', e => { state.fit = e.target.value; render(); });
+  $('#color').addEventListener('change', e => { state.color = e.target.value; render(); });
+  $('#clear-filters').addEventListener('click', clearAll);
+  $('#chips').addEventListener('click', e => { const b = e.target.closest('.chip'); if(!b) return; state.cat = b.dataset.cat; render(); $(`.chip[data-cat="${state.cat}"]`).focus(); });
+
+  function closeMenus(except){ document.querySelectorAll('.menu.show').forEach(m => { if(m!==except){ m.classList.remove('show'); m.previousElementSibling.setAttribute('aria-expanded','false'); } }); }
+  $('#view').addEventListener('click', e => {
+    const art = e.target.closest('.card[data-id]'); if(!art) return;
+    const id = +art.dataset.id, p = pieces.find(x=>x.id===id);
+    if(e.target.closest('.look-btn')){
+      state.selected.has(id) ? state.selected.delete(id) : state.selected.add(id);
+      render(); const btn = $(`.card[data-id="${id}"] .look-btn`); btn && btn.focus(); return;
+    }
+    if(e.target.closest('.kebab')){
+      const k = e.target.closest('.kebab'), m = k.nextElementSibling, open = !m.classList.contains('show');
+      closeMenus(m); m.classList.toggle('show', open); k.setAttribute('aria-expanded', open);
+      if(open) m.querySelector('button').focus(); return;
+    }
+    const act = e.target.closest('[data-act]');
+    if(act){ closeMenus(); act.dataset.act==='del' ? askDelete(p) : toast(`Abrindo edição de “${p.name}” (TELA-05).`); return; }
+    if(e.target.closest('.menu')) return;
+    toast(`Abrindo edição de “${p.name}” (TELA-05).`);
+  });
+  document.addEventListener('click', e => { if(!e.target.closest('.kebab') && !e.target.closest('.menu')) closeMenus(); });
+  document.addEventListener('keydown', e => {
+    if(e.key==='Escape'){
+      const open = document.querySelector('.menu.show');
+      if(open){ closeMenus(); open.previousElementSibling.focus(); }
+      if($('#dlg').classList.contains('show')) closeDlg();
+    }
+    if(e.key==='Tab' && $('#dlg').classList.contains('show')){
+      const f = [$('#dlg-cancel'), $('#dlg-ok')], i = f.indexOf(document.activeElement);
+      e.preventDefault(); f[(i + (e.shiftKey ? -1 : 1) + 2) % 2].focus();
+    }
+  });
+  document.addEventListener('click', e => { if(e.target.closest('[data-add]')) toast('Abrindo cadastro de peça (TELA-05).'); });
+
+  $('#tray-clear').addEventListener('click', () => { state.selected.clear(); render(); });
+  $('#tray-build').addEventListener('click', () => toast(`Abrindo montador com ${state.selected.size} peça(s) (TELA-06).`));
+
+  /* Excluir */
+  let pending, lastFocus;
+  function askDelete(p){ pending = p; lastFocus = document.activeElement; $('#dlg-text').innerHTML = `<b>${esc(p.name)}</b> será removida do seu guarda-roupa. Looks salvos que usam esta peça vão perder este item. Essa ação não pode ser desfeita.`; $('#dlg').classList.add('show'); $('#dlg-cancel').focus(); }
+  function closeDlg(){ $('#dlg').classList.remove('show'); const k = pending && $(`.card[data-id="${pending.id}"] .kebab`); (k || lastFocus || document.body).focus(); }
+  $('#dlg-cancel').addEventListener('click', closeDlg);
+  $('#dlg').addEventListener('click', e => { if(e.target.id==='dlg') closeDlg(); });
+  $('#dlg-ok').addEventListener('click', () => { pieces = pieces.filter(x=>x.id!==pending.id); state.selected.delete(pending.id); $('#dlg').classList.remove('show'); buildSelects(); render(); toast('Peça excluída.'); $('#q').focus(); });
+
+  function toast(msg){ $('#toast-txt').textContent = msg; $('#toast').classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(()=>$('#toast').classList.remove('show'), 2600); }
+
+  /* Painel de estados */
+  let loadTimer;
+  function go(mode, then){
+    clearTimeout(loadTimer);
+    state.mode = mode === 'loading' ? 'loading' : (mode === 'error' ? 'error' : 'full');
+    if(mode==='full' || mode==='loading' || mode==='error'){ if(!pieces.length) pieces = SEED.slice(); }
+    render();
+    if(then) loadTimer = setTimeout(then, 1400);
+  }
+  const states = {
+    full(){ pieces = SEED.slice(); state.selected.clear(); state.q=''; state.cat='all'; state.fit=''; state.color=''; $('#q').value=''; buildSelects(); go('full'); },
+    loading(){ go('loading'); },
+    empty(){ pieces = []; state.selected.clear(); state.mode='full'; render(); },
+    noresult(){ states.full(); state.q = 'vestido'; $('#q').value = 'vestido'; render(); },
+    error(){ go('error'); },
+    selected(){ states.full(); [2,6,9].forEach(i=>state.selected.add(i)); render(); }
+  };
+  const panel = $('#states');
+  $('#states-btn').addEventListener('click', function(){ const o = panel.classList.toggle('open'); this.setAttribute('aria-expanded', o); });
+  document.querySelectorAll('[data-state]').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('[data-state]').forEach(x=>x.removeAttribute('aria-current'));
+    b.setAttribute('aria-current','true'); states[b.dataset.state]();
+  }));
+
+  /* Início: simula carregamento; ?estado=vazio vem do sucesso do cadastro */
+  buildSelects();
+  const initial = new URLSearchParams(location.search).get('estado');
+  if(initial==='vazio'){ const b = $('[data-state="empty"]'); b.click(); }
+  else go('loading', () => go('full'));
+})();
+</script>
+</body>
+</html>
