@@ -60,7 +60,7 @@ Quando o autor enviar **links de frames do Figma**:
 
 ## Como rodar, testar e fazer lint
 
-> Comandos válidos depois do PROMPT-008 (setup do monorepo).
+> Comandos válidos depois do PROMPT-009 (setup do monorepo).
 
 ```bash
 docker compose -f a_tech_repo/d_infra/docker-compose.yml up -d      # MySQL local

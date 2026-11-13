@@ -1,0 +1,44 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.mark {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.md .mark {
+  font-size: 24px;
+}
+
+.lg .mark {
+  font-size: var(--text-display-size);
+}
+
+.onLight .mark {
+  color: var(--color-text);
+}
+
+.onDark .mark {
+  color: var(--color-inverse-text);
+}
+
+.beta {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 6px;
+  border-radius: 4px;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  font-size: 10px;
+  line-height: 14px;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}

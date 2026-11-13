@@ -1,0 +1,72 @@
+/* Mobile-first: cabeçalho claro (Figma 8:115) → formulário → painel escuro. */
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+}
+
+.mobileHeader {
+  padding: 28px var(--space-6);
+}
+
+.formSide {
+  padding: var(--space-3) var(--space-6) var(--space-8);
+}
+
+.formInner {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.editorial {
+  background: var(--color-inverse-bg);
+  color: var(--color-inverse-text);
+  padding: var(--space-8) var(--space-6);
+}
+
+.editorial > * {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* Desktop (Figma 8:106): duas colunas 50/50 em altura total. */
+@media (min-width: 1024px) {
+  .layout {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .mobileHeader {
+    display: none;
+  }
+
+  .formSide,
+  .editorial {
+    flex: 1 1 50%;
+  }
+
+  .formSide {
+    padding: var(--space-16) clamp(var(--space-8), 9.7vw, 140px);
+  }
+
+  .formInner {
+    max-width: 440px;
+    margin: 0;
+  }
+
+  .editorial {
+    padding: var(--space-16);
+    min-height: 100vh;
+  }
+
+  .editorial > * {
+    max-width: 592px;
+    margin: 0;
+  }
+
+  .layout:not(.mirrored) .editorial {
+    order: -1;
+  }
+}

@@ -1,0 +1,33 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* No mobile o logo já está no cabeçalho claro (Figma 8:115). */
+.brand {
+  display: none;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--text-h2-size);
+  line-height: 1.45;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-inverse-text);
+}
+
+@media (min-width: 1024px) {
+  .panel {
+    gap: 36px;
+  }
+
+  .brand {
+    display: block;
+    margin-bottom: var(--space-2);
+  }
+
+  .title {
+    font-size: var(--text-h1-size);
+  }
+}

@@ -1,6 +1,6 @@
 # b_backend — API Spring Boot do Outfit Lab
 
-> Gerado por: PROMPT-001 v2.2 (Parte C2) · v1.0 · 13/11/2026 · O projeto Maven é criado pelo **PROMPT-008**.
+> Gerado por: PROMPT-001 v2.2 (Parte C2) · v1.0 · 13/11/2026 · O projeto Maven é criado pelo **PROMPT-009**.
 
 **Stack:** Java 25 · Spring Boot 4.x · Maven · Spring Security (sessão em cookie + CSRF, Spring Session JDBC) · Spring Data JPA · Flyway · Bean Validation · springdoc-openapi · Actuator · JUnit + Mockito + Testcontainers (D-29, D-31).
 

@@ -1,0 +1,98 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: var(--text-overline-size);
+  line-height: var(--text-overline-line);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-overline);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--text-h1-size);
+  line-height: 1.45;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.subtitle {
+  margin: 0;
+  font-size: var(--text-body-size);
+  line-height: 1.45;
+  color: var(--color-text-muted);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+/* Spec: nome e sobrenome empilhados < 768 px, lado a lado a partir daí. */
+.nameRow {
+  display: grid;
+  gap: 18px var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .nameRow {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.alt,
+.privacy {
+  margin: 0;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.alt {
+  font-size: var(--text-caption-size);
+  line-height: 1.45;
+}
+
+.alt a {
+  color: var(--color-text);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+}
+
+.alt a:hover {
+  text-decoration: underline;
+}
+
+.privacy {
+  margin-top: -12px;
+  font-size: var(--text-overline-size);
+  line-height: var(--text-overline-line);
+}
+
+@media (min-width: 1024px) {
+  .title {
+    font-size: var(--text-display-size);
+  }
+}

@@ -35,6 +35,7 @@
 | 1.1 | 13/11/2026 | 20 | Instrução de continuidade atualizada (React, vibe coding, AGENTS.md). | D-01, D-02 |
 | 1.1 | 13/11/2026 | Várias | Revisão editorial: caminhos de pastas atualizados para a convenção D-25 e números dos prompts previstos renumerados (+1), sem mudança de conteúdo (PROMPT-002). | D-25 |
 | 1.1 | 13/11/2026 | Várias | Revisão editorial: números dos prompts previstos renumerados (+1) com a criação do PROMPT-003 (telas no Figma), sem mudança de conteúdo. | D-33 |
+| 1.1 | 13/11/2026 | Várias | Revisão editorial: prompts previstos renumerados (+1) com a criação do PROMPT-004 (frontend), sem mudança de conteúdo. | D-34 |
 | 1.0 | 13/11/2026 | — | PRD inicial consolidado. | — |
 
 > As decisões D-01 a D-09 estão detalhadas em `b_doc_repo/b_docs/c_planejamento/07_Registro_de_Decisoes_Premissas_e_Licoes.md`.
@@ -219,7 +220,7 @@ Os IDs abaixo são preliminares e poderão ser ajustados na especificação form
 | RF-11 | Salvar look | Salvar combinação e recuperá-la posteriormente. | Obrigatória |
 | RF-12 | Feedback de interface | Exibir estados de sucesso, erro, carregamento, validação e vazio. | Obrigatória |
 
-> Os itens de operação do beta (seção 6.3), como recuperação de senha, ganharão IDs RF próprios no PROMPT-004 (requisitos detalhados).
+> Os itens de operação do beta (seção 6.3), como recuperação de senha, ganharão IDs RF próprios no PROMPT-005 (requisitos detalhados).
 
 ---
 
@@ -243,7 +244,7 @@ Os IDs abaixo são preliminares e poderão ser ajustados na especificação form
 | RNF-14 | Limites de upload *(novo)* | Apenas JPEG, PNG e WebP, com tamanho máximo por arquivo definido (sugestão: 5 MB — [EM ABERTO]) e validação no cliente e no servidor. |
 | RNF-15 | Proteção de dados pessoais *(novo)* | Coleta mínima de dados pessoais, termos e política de privacidade aceitos no cadastro, e atendimento a pedidos de exclusão de conta durante o beta (LGPD). |
 
-Valores mensuráveis de desempenho e compatibilidade de navegadores ainda precisam ser definidos (PROMPT-004).
+Valores mensuráveis de desempenho e compatibilidade de navegadores ainda precisam ser definidos (PROMPT-005).
 
 ---
 
@@ -405,7 +406,7 @@ A referência visual inicial utilizou Inter. A escolha final e a escala tipográ
 
 Looks salvos e perfil foram considerados no conceito visual, mas conteúdo e prioridade precisam ser confirmados nos requisitos.
 
-> Nota v1.1 (D-08): os protótipos das telas 1, 2 e 4 (TELA-01 a TELA-03) são gerados pelo PROMPT-001 (Parte B). As demais telas, pelo PROMPT-005. Todos ficam versionados em `b_doc_repo/c_design/d_prototipos/`.
+> Nota v1.1 (D-08): os protótipos das telas 1, 2 e 4 (TELA-01 a TELA-03) são gerados pelo PROMPT-001 (Parte B). As demais telas, pelo PROMPT-006. Todos ficam versionados em `b_doc_repo/c_design/d_prototipos/`.
 
 ---
 
@@ -506,7 +507,7 @@ Relacionamentos sugeridos:
 - Uma peça pode participar de vários looks.
 - A relação entre look e peça pode guardar camada, posição ou papel na composição.
 
-Este modelo é apenas uma base de discussão, não um DER aprovado. Cardinalidades, atributos, normalização, imagens e persistência de análises serão definidos no documento de modelagem (PROMPT-006).
+Este modelo é apenas uma base de discussão, não um DER aprovado. Cardinalidades, atributos, normalização, imagens e persistência de análises serão definidos no documento de modelagem (PROMPT-007).
 
 ---
 
@@ -611,7 +612,7 @@ Recomendações e datas-limite para cada ponto estão em `c_planejamento/07_Regi
 
 O detalhamento (Gantt, caminho crítico e capacidade) está em `c_planejamento/03_Cronograma_e_Marcos.md`.
 
-**Próximo passo recomendado:** concluir as Partes B e C do PROMPT-001 e, em seguida, o PROMPT-004 (requisitos detalhados e regras de negócio).
+**Próximo passo recomendado:** concluir as Partes B e C do PROMPT-001 e, em seguida, o PROMPT-005 (requisitos detalhados e regras de negócio).
 
 ---
 

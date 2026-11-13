@@ -376,7 +376,7 @@ Com o checklist completo, abra uma issue e envie ao agente de código, por exemp
 
 > Implemente a TELA-01 Login em React a partir dos frames `<link desktop>` e `<link mobile>` do Figma, seguindo `b_doc_repo/c_design/c_specs/TELA-01_login.md` e as regras de Figma → React do `AGENTS.md`.
 
-As telas 04–09 seguem o mesmo formato num novo prompt (PROMPT-005), a partir das specs geradas no PROMPT-004 (requisitos).
+As telas 04–09 seguem o mesmo formato num novo prompt (PROMPT-006), a partir das specs geradas no PROMPT-005 (requisitos).
 
 ---
 

@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | ID | PROMPT-001 |
-| Versão | 2.2 |
+| Versão | 2.3 |
 | Data | 13/11/2026 |
 | Autor | Cauã Gama Paixão (desenvolvimento assistido por LLM) |
 | Fase do projeto | Iniciação + Planejamento (PMBOK) |
@@ -20,6 +20,7 @@
 | 2.0 | 13/11/2026 | Projeto 100% em **vibe coding**; frontend passa de Angular para **React**; prazo **31/12/2026**; inclusão de **deploy e beta fechado com amigos**; os **protótipos passam a ser gerados por este prompt** (Parte B). |
 | 2.1 | 13/11/2026 | Aplica a convenção de pastas D-25 (PROMPT-002): caminhos atualizados para a estrutura com prefixo alfabético, D-25 incluída nas decisões, no `AGENTS.md` (regras invioláveis) e no Registro de Decisões; próximos prompts renumerados (+1, PROMPT-003 a PROMPT-011). |
 | 2.2 | 13/11/2026 | Execução da Parte C. Próximos prompts renumerados (+1) porque o PROMPT-003 passou a ser o das telas no Figma (D-33); C2 passa a incluir o fluxo Figma ↔ React via MCP. |
+| 2.3 | 13/11/2026 | Próximos prompts renumerados (+1) com a criação do PROMPT-004 (frontend: setup + TELA-02). |
 
 > **Como usar:** cole este prompt inteiro numa LLM com o PRD e o moodboard anexados. Execute **uma parte por vez** (A → B → C), revise cada saída e só depois siga para a próxima. Salve cada artefato no caminho indicado e faça o commit com a mensagem sugerida.
 
@@ -359,16 +360,16 @@ Mantenha o arquivo enxuto: ele será lido o tempo todo.
    6. Commit com Conventional Commits, referenciando a issue e o prompt.
    7. Registrar o aprendizado.
 8. **Backlog inicial:** as primeiras **15 issues**, com título, descrição, critérios de aceite, labels, sprint, pacote da EAP e o **PROMPT-NNN** previsto. Cubra as SPR-00 a SPR-02.
-9. **Próximos prompts** (título, objetivo, sprint). O PROMPT-002 (convenção de pastas, D-25) e o PROMPT-003 (telas no Figma, D-33) já foram usados, por isso a lista começa no 004:
-   - PROMPT-004: requisitos funcionais/não funcionais detalhados e regras de negócio;
-   - PROMPT-005: protótipos das telas restantes (dashboard, cadastro de peça, montador, resultado da análise, looks salvos, perfil);
-   - PROMPT-006: modelagem de dados (DER + migrations);
-   - PROMPT-007: arquitetura e contratos da API (OpenAPI);
-   - PROMPT-008: setup do monorepo (React + Spring Boot + Docker + CI);
-   - PROMPT-009: autenticação;
-   - PROMPT-010: CRUD de peças + upload;
-   - PROMPT-011: regras do avaliador v1;
-   - PROMPT-012: deploy e beta.
+9. **Próximos prompts** (título, objetivo, sprint). O PROMPT-002 (convenção de pastas, D-25) o PROMPT-003 (telas no Figma, D-33) e o PROMPT-004 (frontend: setup + TELA-02) já foram usados, por isso a lista começa no 005:
+   - PROMPT-005: requisitos funcionais/não funcionais detalhados e regras de negócio;
+   - PROMPT-006: protótipos das telas restantes (dashboard, cadastro de peça, montador, resultado da análise, looks salvos, perfil);
+   - PROMPT-007: modelagem de dados (DER + migrations);
+   - PROMPT-008: arquitetura e contratos da API (OpenAPI);
+   - PROMPT-009: setup do monorepo (React + Spring Boot + Docker + CI);
+   - PROMPT-010: autenticação;
+   - PROMPT-011: CRUD de peças + upload;
+   - PROMPT-012: regras do avaliador v1;
+   - PROMPT-013: deploy e beta.
 
 **Commits sugeridos da Parte C:** `chore: adiciona AGENTS.md com contexto para LLMs` · `docs(planejamento): adiciona guia de kickoff técnico e backlog inicial` · `chore(repo): cria estrutura inicial do a_tech_repo`.
 

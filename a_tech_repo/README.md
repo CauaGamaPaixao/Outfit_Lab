@@ -12,10 +12,10 @@ Todo o código do projeto fica aqui. A documentação fica em [`../b_doc_repo/`]
 
 | Pasta | Conteúdo | Gerado por |
 |---|---|---|
-| [`a_frontend/`](a_frontend/) | Projeto React (Vite). Dentro dele, `src/`, `public/` etc. **sem prefixo** (exceção da D-25) | PROMPT-008 (setup) |
-| [`b_backend/`](b_backend/) | Projeto Java + Spring Boot. Dentro dele, `src/main/java/` etc. **sem prefixo** | PROMPT-008 (setup) |
-| [`c_database/`](c_database/) | Scripts, seeds e documentação do banco MySQL | PROMPT-006 |
-| [`d_infra/`](d_infra/) | `docker-compose`, configs de deploy e scripts utilitários | PROMPT-008 / PROMPT-012 |
+| [`a_frontend/`](a_frontend/) | Projeto React (Vite) com a **TELA-02 Cadastro** implementada — ver o [README](a_frontend/README.md). Dentro dele, `src/`, `public/` etc. **sem prefixo** (exceção da D-25) | PROMPT-004 |
+| [`b_backend/`](b_backend/) | Projeto Java + Spring Boot. Dentro dele, `src/main/java/` etc. **sem prefixo** | PROMPT-009 (setup) |
+| [`c_database/`](c_database/) | Scripts, seeds e documentação do banco MySQL | PROMPT-007 |
+| [`d_infra/`](d_infra/) | `docker-compose`, configs de deploy e scripts utilitários | PROMPT-009 / PROMPT-013 |
 | [`d_infra/a_scripts/`](d_infra/a_scripts/) | [`validar_pastas.sh`](d_infra/a_scripts/validar_pastas.sh) — valida a convenção de pastas | PROMPT-002 |
 
 ## Convenção de pastas (D-25)

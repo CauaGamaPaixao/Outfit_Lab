@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | ID | TELA-03 |
-| Versão | 1.1 |
+| Versão | 1.2 |
 | Data | 13/11/2026 |
 | Autor | Cauã Gama Paixão |
 | Gerado por | PROMPT-001 v2.1 (Parte B3) |
@@ -17,6 +17,7 @@
 |---|---|---|---|
 | 1.0 | 13/11/2026 | Cauã Gama Paixão | Versão inicial. |
 | 1.1 | 13/11/2026 | Cauã Gama Paixão | Prompts previstos renumerados (+1) porque o PROMPT-003 passou a ser o das telas no Figma (D-33). |
+| 1.2 | 13/11/2026 | Cauã Gama Paixão | Prompts previstos renumerados (+1) com a criação do PROMPT-004 (frontend: setup + TELA-02). |
 
 ---
 
@@ -31,7 +32,7 @@ Mostrar as peças do usuário como um **catálogo pessoal** (PRD 10.3), permitir
 | Rota | `/guarda-roupa` (protegida) |
 | Navegação desktop (sidebar escura) | Início (`/`) · **Guarda-roupa** (ativo, ponto amarelo) · Montar look (`/looks/novo`) · Looks salvos (`/looks`) · Perfil (`/perfil`) · rodapé com avatar de iniciais, nome, e-mail, link "Dar feedback" (Escopo 6.3) e "Sair" |
 | Navegação mobile (barra inferior) | Início · Guarda-roupa · **"+" amarelo central** (adicionar peça) · Looks · Perfil |
-| Ações | "Adicionar peça" → `/pecas/nova` (TELA-05, PROMPT-005) · Editar → `/pecas/:id/editar` · Excluir → modal de confirmação · "Montar look" → `/looks/novo?pecas=1,2,3` |
+| Ações | "Adicionar peça" → `/pecas/nova` (TELA-05, PROMPT-006) · Editar → `/pecas/:id/editar` · Excluir → modal de confirmação · "Montar look" → `/looks/novo?pecas=1,2,3` |
 
 ## 3. Componentes
 
@@ -48,7 +49,7 @@ Mostrar as peças do usuário como um **catálogo pessoal** (PRD 10.3), permitir
 | Controle | Comportamento |
 |---|---|
 | Busca | Campo com ícone de lupa, placeholder "Buscar por nome ou marca", filtra ao digitar (debounce 200 ms na app), sem diferenciar maiúsculas e acentos. Botão "×" limpa. |
-| Chips de categoria | "Todas (n)", "Partes de cima (n)", "Partes de baixo (n)", "Calçados (n)", "Acessórios (n)". Seleção única; contagem considera a busca. Selo **[EM ABERTO] EA-04** (taxonomia final no PROMPT-004). |
+| Chips de categoria | "Todas (n)", "Partes de cima (n)", "Partes de baixo (n)", "Calçados (n)", "Acessórios (n)". Seleção única; contagem considera a busca. Selo **[EM ABERTO] EA-04** (taxonomia final no PROMPT-005). |
 | Select "Modelagem" | Todas · Slim · Regular · Oversized · Wide · Cropped (PRD 10.4). **Should.** |
 | Select "Cor" | Todas + cores presentes nas peças, com bolinha de cor. Considera cor dominante e secundárias. **Should.** Catálogo de cores **[EM ABERTO] EA-06**. |
 | "Limpar filtros" | Aparece quando algum filtro está ativo. |
@@ -87,7 +88,7 @@ Card inteiro tem hover com `--shadow-md`; o clique no card (fora dos botões) ab
 
 ### 3.6 Excluir peça
 
-Modal: título "Excluir peça?", texto "**{nome}** será removida do seu guarda-roupa. Looks salvos que usam esta peça vão perder este item. Essa ação não pode ser desfeita.", botões "Cancelar" (secundário) e "Excluir" (fundo `danger`, texto branco — contraste 6,47:1). Sucesso: toast "Peça excluída.". O comportamento com looks salvos será confirmado no PROMPT-004 (RN de integridade).
+Modal: título "Excluir peça?", texto "**{nome}** será removida do seu guarda-roupa. Looks salvos que usam esta peça vão perder este item. Essa ação não pode ser desfeita.", botões "Cancelar" (secundário) e "Excluir" (fundo `danger`, texto branco — contraste 6,47:1). Sucesso: toast "Peça excluída.". O comportamento com looks salvos será confirmado no PROMPT-005 (RN de integridade).
 
 ## 4. Estados
 
@@ -139,7 +140,7 @@ Modal: título "Excluir peça?", texto "**{nome}** será removida do seu guarda-
 | `ConfirmDialog` | `title`, `children`, `confirmLabel`, `tone`, `onConfirm` | ✅ |
 | `Toast` | `message`, `tone` | ✅ |
 
-Tipo `Piece` (provisório, final no PROMPT-006): `{ id, name, brand?, category, fit?, colors: {name, hex, dominant}[], imageUrl? }`.
+Tipo `Piece` (provisório, final no PROMPT-007): `{ id, name, brand?, category, fit?, colors: {name, hex, dominant}[], imageUrl? }`.
 
 ---
 

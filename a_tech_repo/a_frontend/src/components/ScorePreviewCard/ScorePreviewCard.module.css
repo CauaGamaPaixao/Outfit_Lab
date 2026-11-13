@@ -1,0 +1,101 @@
+.card {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border-radius: var(--radius-card);
+  background: var(--color-inverse-surface);
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: var(--text-overline-size);
+  line-height: var(--text-overline-line);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-overline);
+  text-transform: uppercase;
+  color: var(--color-inverse-muted);
+}
+
+.score {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.value {
+  font-size: var(--text-display-size);
+  line-height: 1;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-inverse-text);
+}
+
+.max {
+  font-size: 20px;
+  color: var(--color-inverse-muted);
+}
+
+.bar {
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--color-inverse-bg);
+  overflow: hidden;
+}
+
+.bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--color-accent);
+}
+
+.criteria {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: var(--text-caption-size);
+  line-height: 1.45;
+  color: var(--color-inverse-muted);
+}
+
+.criteria li {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.criteria li::before {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 6px;
+  margin-top: 8px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+.criteria strong {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-inverse-text);
+}
+
+.disclaimer {
+  font-size: var(--text-overline-size);
+  line-height: var(--text-overline-line);
+  color: var(--color-inverse-muted);
+}
+
+@media (min-width: 1024px) {
+  .card {
+    padding: 28px;
+    gap: var(--space-5);
+  }
+
+  .value {
+    font-size: 64px;
+  }
+}

@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | Registro de Riscos |
-| Versão | 1.2 |
+| Versão | 1.3 |
 | Data | 13/11/2026 |
 | Autor | Cauã Gama Paixão |
 | Gerado por | PROMPT-001 v2.0 |
@@ -17,6 +17,7 @@
 | 1.0 | 13/11/2026 | Cauã Gama Paixão | Versão inicial: 8 riscos do PRD + 12 novos. |
 | 1.1 | 13/11/2026 | Cauã Gama Paixão | Caminhos atualizados para a convenção de pastas D-25 e prompts previstos renumerados (+1) — PROMPT-002. |
 | 1.2 | 13/11/2026 | Cauã Gama Paixão | Prompts previstos renumerados (+1) porque o PROMPT-003 passou a ser o das telas no Figma (D-33). |
+| 1.3 | 13/11/2026 | Cauã Gama Paixão | Prompts previstos renumerados (+1) com a criação do PROMPT-004 (frontend: setup + TELA-02). |
 
 ---
 
@@ -34,13 +35,13 @@
 | ID | Descrição (causa → evento → efeito) | Categoria | P | I | Exp. | Estratégia | Resposta | Gatilho | Resp. |
 |---|---|---|---|---|---|---|---|---|---|
 | RISK-01 | Desejo de adicionar recursos → escopo cresce além do MVP → MVP incompleto em 31/12 | Escopo | 4 | 4 | **16** | Evitar | MoSCoW na Declaração de Escopo; toda inclusão vira D-xx com impacto em horas; lista de exclusões explícitas. | Issue nova sem pacote da EAP | PM |
-| RISK-02 | Modelo de dados com poucos atributos → regras sem dados → análise pouco confiável | Produto | 3 | 4 | 12 | Mitigar | PROMPT-004 define atributos mínimos por categoria antes do DER; regras declaram dados de que precisam. | Regra do avaliador sem atributo correspondente | PO |
+| RISK-02 | Modelo de dados com poucos atributos → regras sem dados → análise pouco confiável | Produto | 3 | 4 | 12 | Mitigar | PROMPT-005 define atributos mínimos por categoria antes do DER; regras declaram dados de que precisam. | Regra do avaliador sem atributo correspondente | PO |
 | RISK-03 | Moda é subjetiva → pontuação parece arbitrária → amigos desconfiam do app | Produto | 4 | 3 | 12 | Mitigar | Regras documentadas, nota sempre com justificativa, texto "orientativo" na tela de resultado. | Feedback "a nota não faz sentido" | PO |
 | RISK-04 | Formulário longo → cadastro de peça trabalhoso → amigos cadastram poucas peças | Produto | 3 | 4 | 12 | Mitigar | Campos por categoria, só o essencial obrigatório, peça sem foto permitida. | Média < 5 peças por amigo na onda 1 | PO |
 | RISK-05 | Upload exige armazenamento e validação → complexidade maior que o previsto → atraso na SPR-02 | Técnico | 3 | 3 | 9 | Mitigar | Armazenamento simples (decidido no Guia Técnico); upload isolado num pacote (5.5) com prompt próprio. | 5.5 passar de 7 h | Dev |
 | RISK-06 | LLM sugere padrões "enterprise" → arquitetura complexa → difícil de entender e manter | Técnico | 4 | 3 | 12 | Evitar | AGENTS.md proíbe microserviços/camadas desnecessárias; dependências novas exigem justificativa. | PR com dependência ou camada não prevista | Dev |
 | RISK-07 | Uso de IA no produto → imprevisibilidade e custo → núcleo instável | Técnico | 1 | 3 | 3 | Evitar | IA no produto fora do MVP (D-09). | — | PO |
-| RISK-08 | Coleta de dados além do necessário → risco de privacidade → exposição legal e de confiança | Legal | 2 | 4 | 8 | Evitar | Cadastro mínimo; dados corporais fora do formulário (decisão [EM ABERTO] revisada no PROMPT-011). | Pedido de novo campo pessoal | PO |
+| RISK-08 | Coleta de dados além do necessário → risco de privacidade → exposição legal e de confiança | Legal | 2 | 4 | 8 | Evitar | Cadastro mínimo; dados corporais fora do formulário (decisão [EM ABERTO] revisada no PROMPT-012). | Pedido de novo campo pessoal | PO |
 | RISK-09 | Escopo de 174 h para ~171 h de capacidade → atrasos acumulam → v1.0 incompleta em 31/12 | Cronograma | 4 | 5 | **20** | Mitigar | Plano de cortes pré-aprovado (Cronograma, seção 6); revisão de horas por sprint; release no dia 30/12. | Saldo da sprint < −2 h | PM |
 | RISK-10 | LLM gera código que o autor não domina → débito técnico invisível → bugs impossíveis de corrigir e perda do valor de aprendizagem/portfólio | Vibe coding | 4 | 4 | **16** | Mitigar | Regra de ouro (explicar em uma frase); pedir explicação à LLM; revisão por segunda LLM; entregas pequenas (1 issue = 1 PR). | Autor não sabe explicar um trecho no PR | Dev |
 | RISK-11 | Prompt novo altera código existente → regressão silenciosa → funcionalidade antiga quebra | Vibe coding | 4 | 4 | **16** | Mitigar | Testes automatizados + CI bloqueando merge; prompts com escopo de arquivos explícito; diff revisado. | Teste antigo falhando ou bug em área não tocada | QA |

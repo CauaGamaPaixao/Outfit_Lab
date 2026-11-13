@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | ID | TELA-02 |
-| Versão | 1.1 |
+| Versão | 1.2 |
 | Data | 13/11/2026 |
 | Autor | Cauã Gama Paixão |
 | Gerado por | PROMPT-001 v2.1 (Parte B3) |
@@ -17,6 +17,7 @@
 |---|---|---|---|
 | 1.0 | 13/11/2026 | Cauã Gama Paixão | Versão inicial. |
 | 1.1 | 13/11/2026 | Cauã Gama Paixão | Prompts previstos renumerados (+1) porque o PROMPT-003 passou a ser o das telas no Figma (D-33). |
+| 1.2 | 13/11/2026 | Cauã Gama Paixão | Implementada em React (PROMPT-004): textos desta spec mantidos; visual do Figma 8:106/8:115 (cabeçalho mobile claro e card de exemplo também no mobile). Prompts previstos renumerados (+1) com a criação do PROMPT-004 (frontend: setup + TELA-02). |
 
 ---
 
@@ -78,7 +79,7 @@ O texto do nível é anunciado por `aria-live="polite"` (o amarelo não é usado
 | E-mail fora da lista do beta (403, Escopo 6.6) | Alerta no topo | "**Este e-mail ainda não está no beta.** Peça um convite ao autor." |
 | Falha de rede / 5xx | Alerta no topo | "Não foi possível criar a conta agora. Tente novamente em instantes." |
 
-> Nota de segurança: informar "e-mail já cadastrado" permite descobrir quem tem conta (enumeração). Num beta fechado com allowlist o risco é baixo e a mensagem ajuda o usuário. **[EM ABERTO]** revisar no PROMPT-009 (autenticação) se o cadastro abrir para o público.
+> Nota de segurança: informar "e-mail já cadastrado" permite descobrir quem tem conta (enumeração). Num beta fechado com allowlist o risco é baixo e a mensagem ajuda o usuário. **[EM ABERTO]** revisar no PROMPT-010 (autenticação) se o cadastro abrir para o público.
 
 ## 5. Nota de design visível no protótipo
 

@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | Decisões de stack, estrutura do `a_tech_repo/`, plano de deploy, CI/CD, observabilidade, GitHub como portfólio, fluxo de vibe coding (incluindo Figma ↔ React via MCP), backlog inicial e próximos prompts |
-| Versão | 1.0 |
+| Versão | 1.1 |
 | Data | 13/11/2026 |
 | Autor | Cauã Gama Paixão |
 | Gerado por | PROMPT-001 v2.2 (Parte C2) |
@@ -15,6 +15,7 @@
 | Versão | Data | Autor | Alteração |
 |---|---|---|---|
 | 1.0 | 13/11/2026 | Cauã Gama Paixão | Versão inicial. |
+| 1.1 | 13/11/2026 | Cauã Gama Paixão | Prompts previstos renumerados (+1) com a criação do PROMPT-004 (frontend: setup + TELA-02). |
 
 > **Sobre informações voláteis:** versões, planos gratuitos e limites foram pesquisados em 13/11/2026 em fontes secundárias, que muitas vezes se contradizem. Tudo que depende de preço ou limite está marcado **[VERIFICAR]**: confirme na página oficial do provedor antes de criar a conta (SPR-03). Fontes na seção 11.
 
@@ -66,7 +67,7 @@
 | Build | **Maven** | Mais exemplos e mais familiar no curso; o `pom.xml` é declarativo e fácil de revisar. Gradle seria mais rápido, mas não compensa aqui. |
 | Persistência | Spring Data JPA + **Flyway** (`src/main/resources/db/migration/V1__...sql`) | Migrations versionadas; o schema nasce do mesmo jeito no local, no CI e na produção. `ddl-auto=validate`. |
 | Validação | Bean Validation (`@Valid`) com as mesmas regras e mensagens das specs | Front e back validam igual. |
-| Documentação | springdoc-openapi (Swagger UI só no perfil `local`) — compatibilidade com Boot 4 **[VERIFICAR]** na versão | Contrato visível; base do PROMPT-007. |
+| Documentação | springdoc-openapi (Swagger UI só no perfil `local`) — compatibilidade com Boot 4 **[VERIFICAR]** na versão | Contrato visível; base do PROMPT-008. |
 | Saúde | Spring Boot Actuator, expondo só `health` | RNF-13. |
 | Pacotes | Por **funcionalidade**: `com.outfitlab.{auth, usuario, peca, imagem, look, avaliador, shared}`. O `avaliador` é **domínio puro** (sem Spring/JPA) | Testabilidade (RNF-10, EAP 7.2). |
 
@@ -102,12 +103,12 @@
 
 ## 2. Estrutura inicial do `a_tech_repo/`
 
-Somente a árvore e os READMEs. **O código é gerado pelos próximos prompts** (PROMPT-008 em diante). Pastas de organização seguem a D-25; o interior dos projetos segue as convenções da stack.
+Somente a árvore e os READMEs. **O código é gerado pelos próximos prompts** (PROMPT-009 em diante). Pastas de organização seguem a D-25; o interior dos projetos segue as convenções da stack.
 
 ```
 a_tech_repo/
 ├── README.md
-├── a_frontend/                  # projeto Vite (PROMPT-008)
+├── a_frontend/                  # projeto Vite (PROMPT-009)
 │   ├── README.md
 │   └── (gerado) package.json, vite.config.ts, index.html, public/,
 │       src/
@@ -117,16 +118,16 @@ a_tech_repo/
 │       ├── features/            # auth/, pecas/, looks/ — hooks + chamadas à API
 │       ├── lib/                 # apiClient (fetch + CSRF), utils
 │       └── styles/              # tokens.css (cópia de c_design/b_tokens), global.css
-├── b_backend/                   # projeto Maven (PROMPT-008)
+├── b_backend/                   # projeto Maven (PROMPT-009)
 │   ├── README.md
 │   └── (gerado) pom.xml, src/main/java/com/outfitlab/{auth,usuario,peca,imagem,look,avaliador,shared}/,
 │       src/main/resources/{application.yml, application-local.yml, application-prod.yml, db/migration/},
 │       src/test/java/…
-├── c_database/                  # documentação e scripts do banco (PROMPT-006)
+├── c_database/                  # documentação e scripts do banco (PROMPT-007)
 │   └── README.md                # DER, dicionário de dados, seeds, backup/restore
 └── d_infra/
     ├── README.md
-    ├── a_scripts/               # validar_pastas.sh (+ backup.sh, restore.sh no PROMPT-012)
+    ├── a_scripts/               # validar_pastas.sh (+ backup.sh, restore.sh no PROMPT-013)
     └── (gerado) docker-compose.yml, Dockerfile, .env.example
 ```
 
@@ -272,21 +273,21 @@ flowchart LR
 
 | # | Título | Descrição | Critérios de aceite | Labels | Sprint | EAP | Prompt |
 |---|---|---|---|---|---|---|---|
-| 1 | Configurar GitHub como portfólio | Projects, labels, milestones M1–M7, templates de issue (bug, feature, feedback do beta), proteção da `main` | Board criado; 3 templates; `main` exige PR + CI | `infra`, `must` | SPR-00 | 1.2 | PROMPT-008 |
+| 1 | Configurar GitHub como portfólio | Projects, labels, milestones M1–M7, templates de issue (bug, feature, feedback do beta), proteção da `main` | Board criado; 3 templates; `main` exige PR + CI | `infra`, `must` | SPR-00 | 1.2 | PROMPT-009 |
 | 2 | Publicar protótipos 01–03 no GitHub Pages | Workflow `pages.yml` + índice | Link público abre as 3 telas | `design`, `infra`, `must` | SPR-00 | 11.2 | PROMPT-001 (C) |
 | 3 | Gerar telas 01–03 no Figma | Rodar o PROMPT-003 no Figma Make, colar como camadas no arquivo `Outfit Lab — UI` e ajustar | Variáveis = tokens; componentes nomeados como nas specs; frames 1440/375 com todos os estados | `design`, `should` | SPR-00/01 | 3.4 | PROMPT-003 |
 | 4 | Conectar o Figma MCP ao agente de código | Setup da seção 7.2 e teste com o frame da TELA-01 | Agente lê variáveis e screenshot de um frame por link | `infra`, `design`, `should` | SPR-01 | 3.4 | PROMPT-003 |
-| 5 | Especificar requisitos e regras de negócio | RF/RNF/RN detalhados; taxonomia (EA-04), atributos (EA-05), cores (EA-06), camadas (EA-08), looks (EA-11) | Todo RF com critério de aceite testável; EAs resolvidos | `docs`, `must` | SPR-01 | 2.1 | PROMPT-004 |
-| 6 | Modelar o banco (DER + dicionário) | `erDiagram` + dicionário em `c_database/` | Toda tabela de domínio chega ao usuário por FK | `docs`, `db`, `must` | SPR-01 | 4.1 | PROMPT-006 |
-| 7 | Criar migrations e seeds | `V1__schema.sql`, seeds de categorias e cores | Schema sobe do zero no Docker e no CI | `db`, `must` | SPR-01 | 4.2 | PROMPT-006 |
-| 8 | Definir contratos da API (OpenAPI) | `openapi.yaml`, formato único de erro, pacotes | Todos os endpoints do MVP com request/response/erros | `docs`, `backend`, `must` | SPR-01 | 2.2 | PROMPT-007 |
-| 9 | Setup do backend Spring Boot | Projeto Maven, perfis, conexão MySQL, Flyway, `/actuator/health` | `mvn verify` verde; health `UP` local | `backend`, `must` | SPR-01 | 5.1 | PROMPT-008 |
-| 10 | Setup do frontend React | Vite + TS, tokens, rotas, `AuthLayout`, `AppShell`, proxy `/api` | Build e lint sem erro; layouts em 375/1440 | `frontend`, `must` | SPR-01 | 6.1 | PROMPT-008 |
-| 11 | Docker Compose local | MySQL 8 + `.env.example` | `docker compose up` sobe o banco | `infra`, `must` | SPR-01 | 9.1 | PROMPT-008 |
-| 12 | CI no GitHub Actions | `ci.yml` (seção 4) | PR com teste falhando fica bloqueado | `infra`, `must` | SPR-02 | 9.2 | PROMPT-008 |
-| 13 | Autenticação e cadastro no backend | Sessão em cookie, CSRF, BCrypt, allowlist do beta, remember-me | Testes de cadastro válido/inválido, login, logout e acesso negado | `backend`, `must` | SPR-02 | 5.2 | PROMPT-009 |
-| 14 | Telas de login e cadastro (React) | TELA-01/02 a partir dos frames do Figma + specs | Estados e textos da spec; testes de componente | `frontend`, `must` | SPR-02 | 6.2 | PROMPT-009 |
-| 15 | CRUD de peças + upload | Endpoints com validação por categoria; `ImageStorage` local | Isolamento por usuário testado; upload inválido → 400 | `backend`, `must` | SPR-02 | 5.4, 5.5 | PROMPT-010 |
+| 5 | Especificar requisitos e regras de negócio | RF/RNF/RN detalhados; taxonomia (EA-04), atributos (EA-05), cores (EA-06), camadas (EA-08), looks (EA-11) | Todo RF com critério de aceite testável; EAs resolvidos | `docs`, `must` | SPR-01 | 2.1 | PROMPT-005 |
+| 6 | Modelar o banco (DER + dicionário) | `erDiagram` + dicionário em `c_database/` | Toda tabela de domínio chega ao usuário por FK | `docs`, `db`, `must` | SPR-01 | 4.1 | PROMPT-007 |
+| 7 | Criar migrations e seeds | `V1__schema.sql`, seeds de categorias e cores | Schema sobe do zero no Docker e no CI | `db`, `must` | SPR-01 | 4.2 | PROMPT-007 |
+| 8 | Definir contratos da API (OpenAPI) | `openapi.yaml`, formato único de erro, pacotes | Todos os endpoints do MVP com request/response/erros | `docs`, `backend`, `must` | SPR-01 | 2.2 | PROMPT-008 |
+| 9 | Setup do backend Spring Boot | Projeto Maven, perfis, conexão MySQL, Flyway, `/actuator/health` | `mvn verify` verde; health `UP` local | `backend`, `must` | SPR-01 | 5.1 | PROMPT-009 |
+| 10 | Setup do frontend React | Vite + TS, tokens, rotas, `AuthLayout`, `AppShell`, proxy `/api` | Build e lint sem erro; layouts em 375/1440 | `frontend`, `must` | SPR-01 | 6.1 | PROMPT-009 |
+| 11 | Docker Compose local | MySQL 8 + `.env.example` | `docker compose up` sobe o banco | `infra`, `must` | SPR-01 | 9.1 | PROMPT-009 |
+| 12 | CI no GitHub Actions | `ci.yml` (seção 4) | PR com teste falhando fica bloqueado | `infra`, `must` | SPR-02 | 9.2 | PROMPT-009 |
+| 13 | Autenticação e cadastro no backend | Sessão em cookie, CSRF, BCrypt, allowlist do beta, remember-me | Testes de cadastro válido/inválido, login, logout e acesso negado | `backend`, `must` | SPR-02 | 5.2 | PROMPT-010 |
+| 14 | Telas de login e cadastro (React) | TELA-01/02 a partir dos frames do Figma + specs | Estados e textos da spec; testes de componente | `frontend`, `must` | SPR-02 | 6.2 | PROMPT-010 |
+| 15 | CRUD de peças + upload | Endpoints com validação por categoria; `ImageStorage` local | Isolamento por usuário testado; upload inválido → 400 | `backend`, `must` | SPR-02 | 5.4, 5.5 | PROMPT-011 |
 
 > Impacto do fluxo com Figma (issues 3 e 4): **~3 h**, classificado como **Should**. Cabe na folga da SPR-00/01; se faltar tempo, as telas 01–03 são codificadas direto a partir dos protótipos HTML e o Figma entra a partir das telas 04–09.
 
@@ -295,15 +296,15 @@ flowchart LR
 | Prompt | Título | Objetivo | Sprint |
 |---|---|---|---|
 | PROMPT-003 | Telas no Figma | Gerar no Figma Make as telas 01–03 (base para o fluxo Figma → React) | SPR-00/01 |
-| PROMPT-004 | Requisitos e regras de negócio | RF/RNF/RN detalhados com critérios de aceite; fechar EA-04, 05, 06, 08, 11 | SPR-01 |
-| PROMPT-005 | Telas restantes | Specs + telas 04–09 (dashboard, cadastro de peça, montador, resultado, looks salvos, perfil), **no Figma** (extensão do PROMPT-003) | SPR-03 |
-| PROMPT-006 | Modelagem de dados | DER, dicionário, migrations e seeds | SPR-01 |
-| PROMPT-007 | Arquitetura e contratos da API | Diagrama de componentes, pacotes, `openapi.yaml` | SPR-01 |
-| PROMPT-008 | Setup do monorepo | React + Spring Boot + Docker + CI + GitHub | SPR-01/02 |
-| PROMPT-009 | Autenticação | Back (sessão, CSRF, allowlist) + TELA-01/02 via Figma MCP | SPR-02 |
-| PROMPT-010 | CRUD de peças + upload | Back + TELA-03/05 via Figma MCP | SPR-02/03 |
-| PROMPT-011 | Avaliador v1 | Regras, motor, testes, endpoint | SPR-04 |
-| PROMPT-012 | Deploy e beta | Render + TiDB + R2, backup, health, onboarding | SPR-03/05 |
+| PROMPT-005 | Requisitos e regras de negócio | RF/RNF/RN detalhados com critérios de aceite; fechar EA-04, 05, 06, 08, 11 | SPR-01 |
+| PROMPT-006 | Telas restantes | Specs + telas 04–09 (dashboard, cadastro de peça, montador, resultado, looks salvos, perfil), **no Figma** (extensão do PROMPT-003) | SPR-03 |
+| PROMPT-007 | Modelagem de dados | DER, dicionário, migrations e seeds | SPR-01 |
+| PROMPT-008 | Arquitetura e contratos da API | Diagrama de componentes, pacotes, `openapi.yaml` | SPR-01 |
+| PROMPT-009 | Setup do monorepo | React + Spring Boot + Docker + CI + GitHub | SPR-01/02 |
+| PROMPT-010 | Autenticação | Back (sessão, CSRF, allowlist) + TELA-01/02 via Figma MCP | SPR-02 |
+| PROMPT-011 | CRUD de peças + upload | Back + TELA-03/05 via Figma MCP | SPR-02/03 |
+| PROMPT-012 | Avaliador v1 | Regras, motor, testes, endpoint | SPR-04 |
+| PROMPT-013 | Deploy e beta | Render + TiDB + R2, backup, health, onboarding | SPR-03/05 |
 
 ## 10. Decisões e pontos em aberto desta parte
 
@@ -316,7 +317,7 @@ flowchart LR
 | Decisão proposta | **D-33** Figma como fonte visual editável + fluxo Figma MCP → React (seção 7.2) | Adotar | 16/11/2026 |
 | Resolvido (proposta) | EA-07 (imagens), EA-13 (auth), EA-16 (hospedagem), EA-17 (imagens em produção), EA-22 (custo R$ 0, plano B ≤ R$ 30) | Ver seções 1.4, 1.5 e 3 | 16/11/2026 |
 | [EM ABERTO] | EA-18 domínio próprio | Subdomínio gratuito na v1.0 | 07/12/2026 |
-| [VERIFICAR] | Limites gratuitos de Render, TiDB Cloud Starter e R2; versão do Spring Boot e do Node no setup; compatibilidade springdoc × Boot 4; plano/assento do Figma para o MCP; comando de setup do MCP | Conferir nas páginas oficiais | Antes do PROMPT-008 / SPR-03 |
+| [VERIFICAR] | Limites gratuitos de Render, TiDB Cloud Starter e R2; versão do Spring Boot e do Node no setup; compatibilidade springdoc × Boot 4; plano/assento do Figma para o MCP; comando de setup do MCP | Conferir nas páginas oficiais | Antes do PROMPT-009 / SPR-03 |
 
 ## 11. Fontes consultadas (13/11/2026)
 
