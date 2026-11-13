@@ -1,0 +1,8 @@
+/* Preenchimento sólido; o traço de 1,5 unidade só arredonda as quinas. */
+.icon {
+  display: block;
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}

@@ -137,6 +137,7 @@ O backend deve aplicar as **mesmas regras** do `signupSchema.ts`: nome e sobreno
 | Painel 50/50 em 1440 px | Igual ao Figma | Spec previa 55/45; Figma prevalece |
 | Sem frame mobile | Cabeçalho escuro compacto (logo, selo, tagline), sem painel | Spec, seção 6 |
 | "Esqueci minha senha" sem comportamento | Modal do plano B | Spec, seção 4.3 |
+| Ilustrações coloridas (camiseta, calça, sneaker amarelo) | Ícones sólidos brancos (`Icon`) em tiles arredondados | Decisão do autor (13/11/2026, PROMPT-006); Figma ainda não atualizado |
 | Cor do texto "Lembrar de mim" `#0A0A0A` | `--color-text-muted` (componente `Checkbox` compartilhado) | Mantido o componente do cadastro |
 
 Contrato provisório: `POST /api/auth/login` com `{ email, senha, lembrar }` → `200 { id, nome, sobrenome, email }`; erros `401 CREDENCIAIS_INVALIDAS`, `429 MUITAS_TENTATIVAS`, 5xx/rede. A duração da sessão com `lembrar` depende da **[EM ABERTO] EA-13**. No modo simulado: `erro@exemplo.com` (ou senha `errada`) → 401, `limite@exemplo.com` → 429, `falha@exemplo.com` → 500.

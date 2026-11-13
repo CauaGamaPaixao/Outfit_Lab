@@ -43,7 +43,7 @@
   color: var(--color-inverse-muted);
 }
 
-/* Colagem: Figma 8:131 (card de 592 px com camiseta, calça e sneaker em destaque). */
+/* Colagem: card com três peças em ícones brancos (tiles no estilo de ícone de app). */
 .collage {
   margin: 0;
   padding: var(--space-6);
@@ -51,43 +51,34 @@
   background: var(--color-inverse-surface);
   display: flex;
   flex-direction: column;
-}
-
-.essentials {
-  display: flex;
-  align-items: center;
   gap: var(--space-6);
 }
 
-.shirt {
-  width: 45%;
-  height: auto;
-  aspect-ratio: 1;
+.pieces {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
 }
 
-.pants {
-  width: 38.5%;
-  height: auto;
-  aspect-ratio: 1;
-}
-
-.highlight {
+.tile {
   display: flex;
   align-items: center;
-  gap: var(--space-8);
+  justify-content: center;
+  aspect-ratio: 1;
+  border-radius: 22%;
+  background: var(--color-inverse-bg);
+  color: var(--color-inverse-text);
 }
 
-.sneaker {
-  width: 40%;
+.glyph {
+  width: 64%;
   height: auto;
-  aspect-ratio: 1;
 }
 
 .caption {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
-  max-width: 250px;
 }
 
 .captionText {

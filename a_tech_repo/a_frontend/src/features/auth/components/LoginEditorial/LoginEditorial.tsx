@@ -1,6 +1,4 @@
-import camiseta from '../../../../assets/ilustracao-camiseta.svg';
-import calca from '../../../../assets/ilustracao-calca.svg';
-import sneaker from '../../../../assets/ilustracao-sneaker.svg';
+import { Icon } from '../../../../components/Icon/Icon';
 import { Logo } from '../../../../components/Logo/Logo';
 import styles from './LoginEditorial.module.css';
 
@@ -20,17 +18,21 @@ export function LoginEditorial() {
       </div>
 
       <figure className={styles.collage}>
-        <div className={styles.essentials} aria-hidden="true">
-          <img src={camiseta} alt="" className={styles.shirt} />
-          <img src={calca} alt="" className={styles.pants} />
+        <div className={styles.pieces} aria-hidden="true">
+          <span className={styles.tile}>
+            <Icon name="camiseta" className={styles.glyph} />
+          </span>
+          <span className={styles.tile}>
+            <Icon name="calca" className={styles.glyph} />
+          </span>
+          <span className={styles.tile}>
+            <Icon name="tenis" className={styles.glyph} />
+          </span>
         </div>
-        <div className={styles.highlight}>
-          <img src={sneaker} alt="" aria-hidden="true" className={styles.sneaker} />
-          <figcaption className={styles.caption}>
-            <span className={styles.captionEyebrow}>01 / Seu próximo look</span>
-            <span className={styles.captionText}>O novo começa com o que você já tem.</span>
-          </figcaption>
-        </div>
+        <figcaption className={styles.caption}>
+          <span className={styles.captionEyebrow}>01 / Seu próximo look</span>
+          <span className={styles.captionText}>O novo começa com o que você já tem.</span>
+        </figcaption>
       </figure>
 
       <p className={styles.footer}>Um laboratório para o seu estilo.</p>
