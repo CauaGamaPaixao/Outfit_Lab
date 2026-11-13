@@ -90,7 +90,10 @@ Para usar o backend: copie `.env.example` para `.env.local`, troque para `VITE_A
 | Método e rota | Corpo | Resposta |
 |---|---|---|
 | `GET /api/auth/csrf` | — | `204`, define o cookie `XSRF-TOKEN` |
-| `POST /api/auth/cadastro` | `{ nome, sobrenome, email, senha, aceiteTermos: true }` | `201 { id, nome, sobrenome, email }` |
+| `POST /api/auth/cadastro` | `{ nome, sobrenome, email, senha, aceiteTermos: true }` | `201 { id, nome, sobrenome, email }` (já autenticado) |
+| `POST /api/auth/login` | `{ email, senha, lembrar }` | `200 { id, nome, sobrenome, email }` · `401 CREDENCIAIS_INVALIDAS` · `429 MUITAS_TENTATIVAS` |
+| `GET /api/auth/me` | — | `200 { id, nome, sobrenome, email }` · `401` (sem sessão) |
+| `POST /api/auth/logout` | — | `204` |
 
 **Formato único de erro** (`GlobalExceptionHandler`):
 
@@ -141,3 +144,12 @@ O backend deve aplicar as **mesmas regras** do `signupSchema.ts`: nome e sobreno
 | Cor do texto "Lembrar de mim" `#0A0A0A` | `--color-text-muted` (componente `Checkbox` compartilhado) | Mantido o componente do cadastro |
 
 Contrato provisório: `POST /api/auth/login` com `{ email, senha, lembrar }` → `200 { id, nome, sobrenome, email }`; erros `401 CREDENCIAIS_INVALIDAS`, `429 MUITAS_TENTATIVAS`, 5xx/rede. A duração da sessão com `lembrar` depende da **[EM ABERTO] EA-13**. No modo simulado: `erro@exemplo.com` (ou senha `errada`) → 401, `limite@exemplo.com` → 429, `falha@exemplo.com` → 500.
+
+### Autenticação simulada (sem backend)
+
+Com `VITE_API_MOCK` ausente ou diferente de `false`, o front usa `mockAuthApi.ts` + `storage/authStorage.ts`:
+
+- **Contas** ficam em `localStorage` (`outfitlab.contas`), com senha em PBKDF2 + salt; **sessão** em `sessionStorage` (`outfitlab.sessao`) ou, com "Lembrar de mim", em `localStorage` por 30 dias.
+- `/guarda-roupa` exige sessão (`RequireAuth`); `/login` redireciona quem já está autenticado (`RedirectIfAuthenticated`). O cadastro conclui já autenticado.
+- Para zerar tudo: limpe o armazenamento do site nas ferramentas do navegador.
+- **Não é segurança.** Serve só até o Spring Boot existir (D-31: sessão em cookie HttpOnly). Ver PROMPT-007.

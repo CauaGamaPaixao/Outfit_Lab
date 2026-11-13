@@ -25,8 +25,12 @@ export type LoginRequest = {
 };
 
 export interface AuthApi {
+  /** GET /api/auth/me → 200 UsuarioResponse | 401 (sem sessão: a implementação devolve null) */
+  sessaoAtual(): Promise<UsuarioResponse | null>;
+  /** POST /api/auth/logout → 204 */
+  sair(): Promise<void>;
   /** POST /api/auth/login → 200 UsuarioResponse | 401 CREDENCIAIS_INVALIDAS | 429 MUITAS_TENTATIVAS */
   login(dados: LoginRequest): Promise<UsuarioResponse>;
-  /** POST /api/auth/cadastro → 201 UsuarioResponse | 400 VALIDACAO | 403 EMAIL_FORA_DO_BETA | 409 EMAIL_JA_CADASTRADO */
+  /** POST /api/auth/cadastro → 201 UsuarioResponse (já autenticado) | 400 VALIDACAO | 403 EMAIL_FORA_DO_BETA | 409 EMAIL_JA_CADASTRADO */
   cadastrar(dados: CadastroRequest): Promise<UsuarioResponse>;
 }

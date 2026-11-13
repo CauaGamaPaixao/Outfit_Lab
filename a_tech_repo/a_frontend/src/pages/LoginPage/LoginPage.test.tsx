@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createMemoryRouter, RouterProvider } from 'react-router';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { authApi } from '../../features/auth/api';
 import { routes } from '../../app/routes';
 import { LOGIN_MSG } from '../../features/auth/loginSchema';
@@ -28,6 +28,18 @@ async function preencher(user: User, email: string, senha = 'Guarda2026') {
 const entrar = () => screen.getByRole('button', { name: 'Entrar' });
 
 describe('TELA-01 Login', () => {
+  // Conta real do armazenamento simulado (o login só aceita contas cadastradas).
+  beforeEach(async () => {
+    await authApi.cadastrar({
+      nome: 'Ana',
+      sobrenome: 'Souza',
+      email: 'ana@exemplo.com',
+      senha: 'Guarda2026',
+      aceiteTermos: true,
+    });
+    await authApi.sair();
+  });
+
   it('mostra os textos da spec e do Figma', () => {
     renderLogin();
     expect(screen.getByRole('heading', { level: 1, name: 'Entrar' })).toBeInTheDocument();
@@ -140,6 +152,16 @@ describe('TELA-01 Login', () => {
     expect(alerta).toHaveTextContent('Confira os dados e tente novamente.');
     expect(alerta).toHaveFocus();
     expect(screen.getByLabelText('E-mail')).toHaveValue('erro@exemplo.com');
+    expect(screen.getByLabelText('Senha')).toHaveValue('');
+  });
+
+  it('senha errada para um e-mail cadastrado também dá a mensagem genérica (401)', async () => {
+    const { user } = renderLogin();
+    await preencher(user, 'ana@exemplo.com', 'SenhaErrada1');
+    await user.click(entrar());
+    const alerta = await screen.findByRole('alert');
+    expect(alerta).toHaveTextContent('E-mail ou senha inválidos.');
+    expect(screen.getByLabelText('E-mail')).toHaveValue('ana@exemplo.com');
     expect(screen.getByLabelText('Senha')).toHaveValue('');
   });
 

@@ -1,29 +1,48 @@
 import { ApiError } from '../../../lib/apiError';
-import type { AuthApi } from './types';
+import {
+  armazenamentoDoNavegador,
+  derivarHash,
+  gravarSessao,
+  hashesIguais,
+  lerContas,
+  lerSessao,
+  limparSessao,
+  normalizarEmail,
+  novoSalt,
+  salvarConta,
+  type Armazenamento,
+  type Conta,
+} from '../storage/authStorage';
+import type { AuthApi, UsuarioResponse } from './types';
 
 /**
- * API simulada (VITE_API_MOCK=true): mesma interface e mesmos erros do backend,
- * para a tela funcionar antes do Spring Boot existir.
- * - ja@exemplo.com  → 409 EMAIL_JA_CADASTRADO
- * - *@fora.com      → 403 EMAIL_FORA_DO_BETA
- * - demais          → 201
- * Login: erro@exemplo.com (ou senha "errada") → 401 · limite@exemplo.com → 429 ·
- *        falha@exemplo.com → 500 · demais → 200
+ * API simulada (VITE_API_MOCK=true): mesma interface e mesmos erros do backend, guardando contas e
+ * sessão no navegador (ver authStorage.ts). Contas e logins são reais dentro do navegador; os
+ * endereços abaixo existem só para exercitar os erros da interface:
+ * - ja@exemplo.com       → cadastro 409 EMAIL_JA_CADASTRADO
+ * - *@fora.com           → cadastro 403 EMAIL_FORA_DO_BETA
+ * - limite@exemplo.com   → login 429 MUITAS_TENTATIVAS
+ * - falha@exemplo.com    → login 500 ERRO_INTERNO
+ * Login com e-mail não cadastrado ou senha errada → 401 CREDENCIAIS_INVALIDAS (mensagem genérica).
  */
-export function createMockAuthApi(delayMs = 1200): AuthApi {
+export function createMockAuthApi(
+  delayMs = 1200,
+  armazenamento: Armazenamento = armazenamentoDoNavegador(),
+): AuthApi {
   const wait = () => new Promise((resolve) => setTimeout(resolve, delayMs));
+  const SALT_FALSO = '00'.repeat(16);
+
+  const paraUsuario = (c: Conta): UsuarioResponse => ({
+    id: c.id,
+    nome: c.nome,
+    sobrenome: c.sobrenome,
+    email: c.email,
+  });
 
   return {
     async login(dados) {
       await wait();
-      const email = dados.email.toLowerCase();
-      if (email === 'erro@exemplo.com' || dados.senha === 'errada') {
-        throw new ApiError({
-          status: 401,
-          codigo: 'CREDENCIAIS_INVALIDAS',
-          mensagem: 'E-mail ou senha inválidos.',
-        });
-      }
+      const email = normalizarEmail(dados.email);
       if (email === 'limite@exemplo.com') {
         throw new ApiError({
           status: 429,
@@ -34,19 +53,25 @@ export function createMockAuthApi(delayMs = 1200): AuthApi {
       if (email === 'falha@exemplo.com') {
         throw new ApiError({ status: 500, codigo: 'ERRO_INTERNO', mensagem: 'Erro interno.' });
       }
-      const nome = email.split('@')[0] ?? '';
-      return {
-        id: crypto.randomUUID(),
-        nome: nome.charAt(0).toUpperCase() + nome.slice(1),
-        sobrenome: '',
-        email,
-      };
+
+      const conta = lerContas(armazenamento).find((c) => c.email === email);
+      // Deriva o hash mesmo sem conta, para o tempo de resposta não revelar se o e-mail existe.
+      const hash = await derivarHash(dados.senha, conta?.salt ?? SALT_FALSO);
+      if (!conta || !hashesIguais(hash, conta.hash)) {
+        throw new ApiError({
+          status: 401,
+          codigo: 'CREDENCIAIS_INVALIDAS',
+          mensagem: 'E-mail ou senha inválidos.',
+        });
+      }
+      gravarSessao(armazenamento, conta.id, dados.lembrar);
+      return paraUsuario(conta);
     },
 
     async cadastrar(dados) {
       await wait();
-      const email = dados.email.toLowerCase();
-      if (email === 'ja@exemplo.com') {
+      const email = normalizarEmail(dados.email);
+      if (email === 'ja@exemplo.com' || lerContas(armazenamento).some((c) => c.email === email)) {
         throw new ApiError({
           status: 409,
           codigo: 'EMAIL_JA_CADASTRADO',
@@ -60,7 +85,32 @@ export function createMockAuthApi(delayMs = 1200): AuthApi {
           mensagem: 'Este e-mail ainda não está no beta.',
         });
       }
-      return { id: crypto.randomUUID(), nome: dados.nome, sobrenome: dados.sobrenome, email };
+
+      const salt = novoSalt();
+      const conta: Conta = {
+        id: crypto.randomUUID(),
+        nome: dados.nome,
+        sobrenome: dados.sobrenome,
+        email,
+        salt,
+        hash: await derivarHash(dados.senha, salt),
+      };
+      salvarConta(armazenamento, conta);
+      // Como no backend: quem acabou de se cadastrar já está autenticado (sessão de aba).
+      gravarSessao(armazenamento, conta.id, false);
+      return paraUsuario(conta);
+    },
+
+    async sessaoAtual() {
+      const usuarioId = lerSessao(armazenamento);
+      const conta = usuarioId
+        ? lerContas(armazenamento).find((c) => c.id === usuarioId)
+        : undefined;
+      return conta ? paraUsuario(conta) : null;
+    },
+
+    async sair() {
+      limparSessao(armazenamento);
     },
   };
 }
