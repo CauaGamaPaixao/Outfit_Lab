@@ -125,3 +125,18 @@ O backend deve aplicar as **mesmas regras** do `signupSchema.ts`: nome e sobreno
 | Texto de força fixo ("Senha forte · …") | Nível real (Fraca → Forte) + dica | Spec 4.1 |
 | Cabeçalho mobile claro e card de exemplo no mobile | Igual ao Figma | Figma manda no visual (a spec previa cabeçalho escuro e sem card) |
 | Cor de texto `#D1D1D1` | Não usada (os textos do card vieram da spec) | Fora dos tokens |
+
+### Divergências conhecidas (TELA-01 Login)
+
+| Figma | Implementado | Motivo |
+|---|---|---|
+| Eyebrow "BEM-VINDA DE VOLTA" | "Bem-vindo de volta" | Spec TELA-01 (autor, 13/11/2026) |
+| Sem rodapé de links | "Termos de uso" e "Privacidade" abaixo da frase de privacidade | Spec, seção 3 |
+| Sem jaqueta nem citação no painel | Igual ao Figma | Figma manda no visual |
+| Textos de 10–11 px | Mínimo de 12 px | Legibilidade (E5) |
+| Painel 50/50 em 1440 px | Igual ao Figma | Spec previa 55/45; Figma prevalece |
+| Sem frame mobile | Cabeçalho escuro compacto (logo, selo, tagline), sem painel | Spec, seção 6 |
+| "Esqueci minha senha" sem comportamento | Modal do plano B | Spec, seção 4.3 |
+| Cor do texto "Lembrar de mim" `#0A0A0A` | `--color-text-muted` (componente `Checkbox` compartilhado) | Mantido o componente do cadastro |
+
+Contrato provisório: `POST /api/auth/login` com `{ email, senha, lembrar }` → `200 { id, nome, sobrenome, email }`; erros `401 CREDENCIAIS_INVALIDAS`, `429 MUITAS_TENTATIVAS`, 5xx/rede. A duração da sessão com `lembrar` depende da **[EM ABERTO] EA-13**. No modo simulado: `erro@exemplo.com` (ou senha `errada`) → 401, `limite@exemplo.com` → 429, `falha@exemplo.com` → 500.

@@ -10,6 +10,21 @@
   padding: 28px var(--space-6);
 }
 
+/* Login < 1024 px: cabeçalho escuro compacto e sem painel editorial. */
+.compactHeader {
+  background: var(--color-inverse-bg);
+  color: var(--color-inverse-text);
+  padding: var(--space-6);
+}
+
+.compact .editorial {
+  display: none;
+}
+
+.compact .formSide {
+  padding-top: var(--space-8);
+}
+
 .formSide {
   padding: var(--space-3) var(--space-6) var(--space-8);
 }
@@ -38,8 +53,13 @@
     align-items: stretch;
   }
 
-  .mobileHeader {
+  .mobileHeader,
+  .compactHeader {
     display: none;
+  }
+
+  .compact .editorial {
+    display: block;
   }
 
   .formSide,
@@ -54,6 +74,15 @@
   .formInner {
     max-width: 440px;
     margin: 0;
+  }
+
+  .centered .formSide {
+    display: flex;
+    align-items: center;
+  }
+
+  .compact .formSide {
+    padding-top: var(--space-16);
   }
 
   .editorial {

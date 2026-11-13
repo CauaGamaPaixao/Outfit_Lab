@@ -9,4 +9,4 @@ export const authApi: AuthApi = usarMock
   ? createMockAuthApi(import.meta.env.MODE === 'test' ? 0 : 1200)
   : httpAuthApi;
 
-export type { AuthApi, CadastroRequest, UsuarioResponse } from './types';
+export type { AuthApi, CadastroRequest, LoginRequest, UsuarioResponse } from './types';

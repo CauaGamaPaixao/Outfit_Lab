@@ -1,15 +1,13 @@
 import { Navigate, type RouteObject } from 'react-router';
 import { PlaceholderPage } from '../pages/PlaceholderPage/PlaceholderPage';
+import { LoginPage } from '../pages/LoginPage/LoginPage';
 import { SignupPage } from '../pages/SignupPage/SignupPage';
 
 /** Rotas da aplicação. As telas ainda não implementadas mostram um placeholder. */
 export const routes: RouteObject[] = [
   { path: '/', element: <Navigate to="/cadastro" replace /> },
   { path: '/cadastro', element: <SignupPage /> },
-  {
-    path: '/login',
-    element: <PlaceholderPage title="Entrar" description="TELA-01 Login — próxima tela a ser codificada." />,
-  },
+  { path: '/login', element: <LoginPage /> },
   {
     path: '/guarda-roupa',
     element: <PlaceholderPage title="Guarda-roupa" description="TELA-03 — em construção." />,

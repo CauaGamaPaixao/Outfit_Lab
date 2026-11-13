@@ -1,0 +1,116 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  /* altura total da coluna (o aside tem padding de 64 px em cima e embaixo) */
+  min-height: calc(100vh - 128px);
+}
+
+.manifesto {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.eyebrow,
+.captionEyebrow,
+.footer {
+  margin: 0;
+  font-size: var(--text-overline-size);
+  line-height: var(--text-overline-line);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-overline);
+  text-transform: uppercase;
+  color: var(--color-inverse-muted);
+}
+
+.tagline {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  font-size: var(--text-display-size);
+  line-height: 1.45;
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--color-inverse-text);
+}
+
+.lead {
+  margin: 0;
+  max-width: 28ch;
+  font-size: var(--text-body-size);
+  line-height: 1.45;
+  color: var(--color-inverse-muted);
+}
+
+/* Colagem: Figma 8:131 (card de 592 px com camiseta, calça e sneaker em destaque). */
+.collage {
+  margin: 0;
+  padding: var(--space-6);
+  border-radius: var(--radius-card);
+  background: var(--color-inverse-surface);
+  display: flex;
+  flex-direction: column;
+}
+
+.essentials {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.shirt {
+  width: 45%;
+  height: auto;
+  aspect-ratio: 1;
+}
+
+.pants {
+  width: 38.5%;
+  height: auto;
+  aspect-ratio: 1;
+}
+
+.highlight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.sneaker {
+  width: 40%;
+  height: auto;
+  aspect-ratio: 1;
+}
+
+.caption {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: 250px;
+}
+
+.captionText {
+  font-size: var(--text-h3-size);
+  line-height: 1.45;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-inverse-text);
+}
+
+.footer {
+  margin-top: auto;
+}
+
+/* Cabeçalho compacto (mobile). */
+.compact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.compactTagline {
+  margin: 0;
+  font-size: var(--text-caption-size);
+  line-height: var(--text-caption-line);
+  color: var(--color-inverse-muted);
+}

@@ -17,7 +17,16 @@ export type UsuarioResponse = {
   email: string;
 };
 
+export type LoginRequest = {
+  email: string;
+  senha: string;
+  /** "Lembrar de mim": estende a sessão (duração = EA-13, decidida no backend). */
+  lembrar: boolean;
+};
+
 export interface AuthApi {
+  /** POST /api/auth/login → 200 UsuarioResponse | 401 CREDENCIAIS_INVALIDAS | 429 MUITAS_TENTATIVAS */
+  login(dados: LoginRequest): Promise<UsuarioResponse>;
   /** POST /api/auth/cadastro → 201 UsuarioResponse | 400 VALIDACAO | 403 EMAIL_FORA_DO_BETA | 409 EMAIL_JA_CADASTRADO */
   cadastrar(dados: CadastroRequest): Promise<UsuarioResponse>;
 }
