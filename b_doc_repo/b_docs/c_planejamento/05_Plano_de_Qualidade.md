@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | Plano de Gerenciamento da Qualidade |
-| Versão | 1.1 |
+| Versão | 1.2 |
 | Data | 13/11/2026 |
 | Autor | Cauã Gama Paixão |
 | Gerado por | PROMPT-001 v2.0 |
@@ -16,6 +16,7 @@
 |---|---|---|---|
 | 1.0 | 13/11/2026 | Cauã Gama Paixão | Versão inicial. |
 | 1.1 | 13/11/2026 | Cauã Gama Paixão | Caminhos atualizados para a convenção de pastas D-25 e prompts previstos renumerados (+1) — PROMPT-002. |
+| 1.2 | 13/11/2026 | Cauã Gama Paixão | Prompts previstos renumerados (+1) porque o PROMPT-003 passou a ser o das telas no Figma (D-33). |
 
 ---
 
@@ -116,7 +117,7 @@ flowchart LR
 | SEG-05 | **Autorização por usuário em todos os endpoints** de peça, imagem, look e análise | Testes de isolamento (8.1) | RNF-04, RISK-14 |
 | SEG-06 | HTTPS em produção | Acessar via `http://` redireciona ou falha | RNF-11 |
 | SEG-07 | Mensagens de erro de login genéricas ("E-mail ou senha inválidos") | Teste | — |
-| SEG-08 | Proteção básica contra força bruta no login (limite de tentativas) | **[EM ABERTO]**: Should, ~2 h; decidir no PROMPT-008 | — |
+| SEG-08 | Proteção básica contra força bruta no login (limite de tentativas) | **[EM ABERTO]**: Should, ~2 h; decidir no PROMPT-009 | — |
 | SEG-09 | Dependências sem vulnerabilidades críticas conhecidas (Dependabot) | Alertas do GitHub | — |
 | SEG-10 | Recuperação de senha (se implementada): token aleatório, uso único, expira em 30 min, resposta igual para e-mail existente ou não | Testes | 5.3 |
 

@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | Declaração de Escopo do Projeto |
-| Versão | 1.1 |
+| Versão | 1.2 |
 | Data | 13/11/2026 |
 | Autor | Cauã Gama Paixão |
 | Gerado por | PROMPT-001 v2.0 |
@@ -16,12 +16,13 @@
 |---|---|---|---|
 | 1.0 | 13/11/2026 | Cauã Gama Paixão | Versão inicial. |
 | 1.1 | 13/11/2026 | Cauã Gama Paixão | Caminhos atualizados para a convenção de pastas D-25 e prompts previstos renumerados (+1) — PROMPT-002. |
+| 1.2 | 13/11/2026 | Cauã Gama Paixão | Prompts previstos renumerados (+1) porque o PROMPT-003 passou a ser o das telas no Figma (D-33). |
 
 ---
 
 ## 1. Tailoring
 
-Juntei a Declaração de Escopo e a priorização (MoSCoW) num documento só, e não há um documento separado de "Requisitos do Projeto": os requisitos detalhados virão do PROMPT-003. Critérios de aceite estão no nível de **entrega**; os de **história/issue** ficam no backlog do GitHub. Motivo: evitar duplicação num projeto solo.
+Juntei a Declaração de Escopo e a priorização (MoSCoW) num documento só, e não há um documento separado de "Requisitos do Projeto": os requisitos detalhados virão do PROMPT-004. Critérios de aceite estão no nível de **entrega**; os de **história/issue** ficam no backlog do GitHub. Motivo: evitar duplicação num projeto solo.
 
 ## 2. Escopo do produto
 
@@ -30,7 +31,7 @@ Aplicação web Outfit Lab v1.0, conforme PRD v1.1:
 - **Não funcional:** RNF-01 a RNF-15, incluindo os novos de operação (disponibilidade básica, backup, observabilidade mínima, limites de upload, proteção de dados pessoais).
 - **Telas:** TELA-01 Login, TELA-02 Cadastro, TELA-03 Guarda-roupa, TELA-04 Dashboard, TELA-05 Cadastro/edição de peça, TELA-06 Montador de look, TELA-07 Resultado da análise, TELA-08 Looks salvos, TELA-09 Perfil.
 
-> A numeração TELA-xx segue a ordem de prototipação (PROMPT-001 gera 01–03; PROMPT-004 gera 04–09), não a ordem do PRD 12.4.
+> A numeração TELA-xx segue a ordem de prototipação (PROMPT-001 gera 01–03; PROMPT-005 gera 04–09), não a ordem do PRD 12.4.
 
 ## 3. Escopo do projeto
 
@@ -66,7 +67,7 @@ Além do produto, o projeto entrega:
 | Cadastro com dados mínimos | RF-01 | Must | Nome, sobrenome, e-mail, senha, confirmação, aceite de termos. |
 | Login / logout | RF-02 | Must | |
 | CRUD de peças | RF-03 | Must | |
-| Atributos da peça | RF-04 | Must | Atributos por categoria definidos no PROMPT-003. |
+| Atributos da peça | RF-04 | Must | Atributos por categoria definidos no PROMPT-004. |
 | Upload e exibição de imagem | RF-05 | Must | Peça sem imagem também é aceita (placeholder). |
 | Guarda-roupa em cards | RF-06 | Must | |
 | Busca por nome/marca e filtro por categoria | RF-06 | Must | |
@@ -119,7 +120,7 @@ Além do produto, o projeto entrega:
 - Painel administrativo e papéis de usuário.
 - Internacionalização (só pt-BR).
 - Histórico de versões dos looks.
-- Coleta de dados corporais (altura, tom de pele, sexo, data de nascimento) — **[EM ABERTO]** até o PROMPT-010 confirmar que nenhuma regra precisa deles.
+- Coleta de dados corporais (altura, tom de pele, sexo, data de nascimento) — **[EM ABERTO]** até o PROMPT-011 confirmar que nenhuma regra precisa deles.
 
 ## 8. Restrições e premissas de escopo
 

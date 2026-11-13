@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | Log de decisões (ADR simplificado), pontos em aberto, premissas e lições aprendidas |
-| Versão | 1.2 |
+| Versão | 1.3 |
 | Data | 13/11/2026 |
 | Autor | Cauã Gama Paixão |
 | Gerado por | PROMPT-001 v2.0 |
@@ -16,6 +16,7 @@
 | 1.0 | 13/11/2026 | Cauã Gama Paixão | Versão inicial: D-01 a D-24, EA-01 a EA-28. |
 | 1.1 | 13/11/2026 | Cauã Gama Paixão | Inclui D-25 (convenção de pastas, PROMPT-002); D-16 marcada como complementada por D-25; caminhos atualizados para a convenção de pastas D-25 e prompts previstos renumerados (+1) — PROMPT-002. |
 | 1.2 | 13/11/2026 | Cauã Gama Paixão | Inclui D-26 a D-28, propostas na Parte B do PROMPT-001 (design system e telas 01–03); EA-02 atendido pela spec da TELA-02. |
+| 1.3 | 13/11/2026 | Cauã Gama Paixão | Inclui D-29 a D-33 (Guia de Kickoff Técnico, PROMPT-001 Parte C); EA-07, EA-13, EA-16, EA-17 e EA-22 com proposta de resolução; prompts previstos renumerados (+1) com a criação do PROMPT-003. |
 
 ---
 
@@ -49,7 +50,7 @@ Em vez de um arquivo por ADR (padrão comum em times), todas as decisões ficam 
 | D-11 | ≤ 13/11/2026 | Definição do produto. | Aplicação **web** de guarda-roupa digital, montagem e análise de looks. | App mobile nativo. | Web responsiva cobre desktop e celular. | Aceita |
 | D-12 | ≤ 13/11/2026 | Identidade visual. | Direção **Editorial Minimalista**: paleta neutra + amarelo de destaque, imagens grandes, cards editoriais, tipografia Inter. | — | Base para o design system (Parte B). | Aceita |
 | D-13 | ≤ 13/11/2026 | Visualização do look. | **Cards, sem avatar corporal.** | Avatar/manequim. | Menor complexidade. | Aceita |
-| D-14 | ≤ 13/11/2026 | Natureza da análise. | **Regras próprias, determinísticas e explicáveis**, com pontuação orientativa e justificativas. | IA generativa como fonte da nota. | Testável e previsível; exige especificação das regras (PROMPT-010). | Aceita |
+| D-14 | ≤ 13/11/2026 | Natureza da análise. | **Regras próprias, determinísticas e explicáveis**, com pontuação orientativa e justificativas. | IA generativa como fonte da nota. | Testável e previsível; exige especificação das regras (PROMPT-011). | Aceita |
 | D-15 | ≤ 13/11/2026 | IA no produto. | **Gemini como possibilidade futura**, depois que o núcleo estiver funcional. | Integrar já no MVP. | Fora da v1.0 (D-09). | Aceita |
 
 ### 2.3 Decisões de organização do projeto
@@ -80,7 +81,17 @@ Em vez de um arquivo por ADR (padrão comum em times), todas as decisões ficam 
 | D-27 | 13/11/2026 | Login social está fora do MVP (Won't). | **Remover** os botões Google/Apple, em vez de mostrá-los desabilitados com "em breve". | Botões desabilitados. | Interface mais limpa e honesta; volta como nova decisão se entrar no escopo. | Proposta |
 | D-28 | 13/11/2026 | O cadastro precisa de uma regra de senha única para front e back. | **Senha com 8 a 72 caracteres, com pelo menos 1 letra e 1 número**; indicador de força informativo (não bloqueia além do mínimo). 72 é o limite do BCrypt (SEG-01). | Regras com maiúscula e símbolo obrigatórios; mínimo 6. | Simples para os amigos e suficiente com hash forte + limite de tentativas (EA-27). Spec TELA-02. | Proposta |
 
-> Próximo ID livre: **D-29**.
+### 2.6 Decisões propostas na Parte C (aguardam aprovação do autor)
+
+| ID | Data | Contexto | Decisão proposta | Alternativas | Consequências | Status |
+|---|---|---|---|---|---|---|
+| D-29 | 13/11/2026 | O PROMPT-001 pedia Spring Boot 3.x, mas o suporte open source do 3.5 terminou em 30/06/2026. | **Java 25 (LTS) + Spring Boot 4.x** (última minor estável no setup) + Maven. | Boot 3.5 sem suporte; Gradle. | Linha suportada durante todo o projeto; alguns exemplos antigos da internet (Boot 3) precisam de ajuste. Guia, seção 1.3. | Proposta |
+| D-30 | 13/11/2026 | Hospedagem com custo zero e pouca operação (EA-16, EA-17, EA-22). | **Container único** (Spring Boot serve o build do React) no **Render Free** + **TiDB Cloud Starter** (MySQL-compatível) + **Cloudflare R2** para imagens e backups. Plano B: Aiven MySQL pago (≤ R$ 30/mês). | Render + Aiven pago; VPS gratuita com Compose. | R$ 0; "sono" após inatividade (comunicado aos amigos); risco de incompatibilidade TiDB testado no 1º deploy. Limites [VERIFICAR]. Guia, seção 3. | Proposta |
+| D-31 | 13/11/2026 | Estratégia de autenticação para SPA + API (EA-13). | **Sessão em cookie HttpOnly** na mesma origem, CSRF por cookie + header, **Spring Session JDBC**, remember-me de 30 dias, expiração de 2 h sem ele. | JWT em `localStorage`; JWT em cookie. | Menos exposição a XSS, logout real, nativo no Spring; exige CSRF. Guia, seção 1.4. | Proposta |
+| D-32 | 13/11/2026 | Bibliotecas do frontend precisam ser fixadas para a LLM não variar a cada prompt. | **Vite + TypeScript estrito + React Router + TanStack Query + React Hook Form + Zod + CSS Modules com `tokens.css`**; stylelint proíbe HEX solto. | Tailwind configurado com os tokens. | Tokens usados direto; saída Tailwind do Figma MCP precisa ser traduzida. Guia, seção 1.2. | Proposta |
+| D-33 | 13/11/2026 | O autor quer flexibilidade para alterar as telas e trabalhar com o Figma. | **Figma como fonte visual editável** (`Outfit Lab — UI`, gerado pelo PROMPT-003) e **fluxo Figma MCP → React**: Figma manda no visual, a spec no comportamento e nos textos, os tokens nos valores. Protótipos HTML viram referência v1.0. | Continuar só com protótipos HTML. | +3 h (EAP 3.4, Should); telas 04–09 feitas no Figma (PROMPT-005); exige assento do Figma com acesso ao MCP [VERIFICAR]. Guia, seção 7.2. | Proposta |
+
+> Próximo ID livre: **D-34**.
 
 ## 3. Pontos em aberto
 
@@ -88,30 +99,30 @@ Em vez de um arquivo por ADR (padrão comum em times), todas as decisões ficam 
 |---|---|---|---|---|---|
 | EA-01 | Nome definitivo e branding (incluindo o uso de "™") | PRD 18.2-1 | Manter "Outfit Lab" na v1.0. Evitar "™" na interface até verificar se o nome já tem dono [VERIFICAR busca no INPI]. | 31/01/2027 | Pós-v1.0 |
 | EA-02 | Campos do cadastro de usuário | PRD 18.2-2 | Nome, sobrenome, e-mail, senha, confirmação e aceite de termos. | 16/11/2026 (atendido pela spec da TELA-02 — aguarda aprovação) | PROMPT-001 Parte B |
-| EA-03 | Dados corporais (altura etc.) | PRD 18.2-3 | Fora do cadastro. Revisar só se alguma regra do avaliador provar que precisa deles. | 09/12/2026 | PROMPT-010 |
-| EA-04 | Taxonomia final das categorias | PRD 18.2-4 | Partir das 4 do PRD (partes de cima, partes de baixo, calçados, acessórios) + avaliar "peça única" (vestido/macacão) e "camada externa" como função, não categoria. | 18/11/2026 | PROMPT-003 |
-| EA-05 | Atributos por categoria | PRD 18.2-5 | Matriz categoria × atributo (obrigatório/opcional/não se aplica). | 18/11/2026 | PROMPT-003 |
-| EA-06 | Catálogo de cores | PRD 18.2-6 | Paleta fechada de ~16 cores nomeadas com HEX + 1 cor dominante + até 2 secundárias. Facilita as regras de cor e evita "conta-gotas". | 18/11/2026 | PROMPT-003 |
-| EA-07 | Formatos, tamanho e armazenamento local de imagens | PRD 18.2-7 | JPEG/PNG/WebP, máx. 5 MB, disco local no dev. | 16/11/2026 | PROMPT-001 Parte C |
-| EA-08 | Representação de camadas e funções | PRD 18.2-8 | Função como atributo da peça no look (base, intermediária, externa, inferior, calçado, acessório), com sugestão automática a partir da categoria. | 18/11/2026 | PROMPT-003 |
-| EA-09 | Regras atômicas do avaliador | PRD 18.2-9 | 3–5 regras por dimensão no v1; menos regras, bem explicadas. | 09/12/2026 | PROMPT-010 |
-| EA-10 | Pesos, faixas, dados ausentes e fórmula | PRD 18.2-10 | Média ponderada por dimensão; dado ausente não penaliza, mas a regra é marcada "não avaliada" e aparece na explicação. | 09/12/2026 | PROMPT-010 |
-| EA-11 | Edição/exclusão/duplicação/histórico de looks | PRD 18.2-11 | Salvar, listar e excluir (Must/Should); editar e duplicar (Could); histórico (Won't). | 18/11/2026 | PROMPT-003 |
-| EA-12 | Conteúdo do dashboard | PRD 18.2-12 | Mínimo: saudação, 3 atalhos, contagem de peças e de looks. | 01/12/2026 | PROMPT-004 |
-| EA-13 | Estratégia de autenticação | PRD 18.2-13 | Comparar JWT × sessão em cookie para SPA + API e recomendar a mais simples e segura para o deploy escolhido. | 16/11/2026 | PROMPT-001 Parte C |
+| EA-03 | Dados corporais (altura etc.) | PRD 18.2-3 | Fora do cadastro. Revisar só se alguma regra do avaliador provar que precisa deles. | 09/12/2026 | PROMPT-011 |
+| EA-04 | Taxonomia final das categorias | PRD 18.2-4 | Partir das 4 do PRD (partes de cima, partes de baixo, calçados, acessórios) + avaliar "peça única" (vestido/macacão) e "camada externa" como função, não categoria. | 18/11/2026 | PROMPT-004 |
+| EA-05 | Atributos por categoria | PRD 18.2-5 | Matriz categoria × atributo (obrigatório/opcional/não se aplica). | 18/11/2026 | PROMPT-004 |
+| EA-06 | Catálogo de cores | PRD 18.2-6 | Paleta fechada de ~16 cores nomeadas com HEX + 1 cor dominante + até 2 secundárias. Facilita as regras de cor e evita "conta-gotas". | 18/11/2026 | PROMPT-004 |
+| EA-07 | Formatos, tamanho e armazenamento local de imagens | PRD 18.2-7 | JPEG/PNG/WebP, máx. 5 MB, disco local no dev. | 16/11/2026 (proposta: D-30 / Guia 1.5 — aguarda aprovação) | PROMPT-001 Parte C |
+| EA-08 | Representação de camadas e funções | PRD 18.2-8 | Função como atributo da peça no look (base, intermediária, externa, inferior, calçado, acessório), com sugestão automática a partir da categoria. | 18/11/2026 | PROMPT-004 |
+| EA-09 | Regras atômicas do avaliador | PRD 18.2-9 | 3–5 regras por dimensão no v1; menos regras, bem explicadas. | 09/12/2026 | PROMPT-011 |
+| EA-10 | Pesos, faixas, dados ausentes e fórmula | PRD 18.2-10 | Média ponderada por dimensão; dado ausente não penaliza, mas a regra é marcada "não avaliada" e aparece na explicação. | 09/12/2026 | PROMPT-011 |
+| EA-11 | Edição/exclusão/duplicação/histórico de looks | PRD 18.2-11 | Salvar, listar e excluir (Must/Should); editar e duplicar (Could); histórico (Won't). | 18/11/2026 | PROMPT-004 |
+| EA-12 | Conteúdo do dashboard | PRD 18.2-12 | Mínimo: saudação, 3 atalhos, contagem de peças e de looks. | 01/12/2026 | PROMPT-005 |
+| EA-13 | Estratégia de autenticação | PRD 18.2-13 | Comparar JWT × sessão em cookie para SPA + API e recomendar a mais simples e segura para o deploy escolhido. | 16/11/2026 (proposta: D-31 — aguarda aprovação) | PROMPT-001 Parte C |
 | EA-15 | Métricas de sucesso além dos testes | PRD 18.2-15 | Adotar as metas do beta do TAP (N ativos, nº de feedbacks, NPS simplificado). | 16/11/2026 | Revisão deste documento |
-| EA-16 | Hospedagem (front, API, banco) | PRD 18.2-16 | Comparar 2–3 combinações gratuitas/baratas [VERIFICAR]. | 16/11/2026 | PROMPT-001 Parte C |
-| EA-17 | Armazenamento e backup de imagens em produção | PRD 18.2-17 | Serviço de objetos com plano gratuito [VERIFICAR] ou disco persistente do provedor. | 16/11/2026 | PROMPT-001 Parte C |
-| EA-18 | Domínio | PRD 18.2-18 | Subdomínio gratuito do provedor na v1.0; domínio próprio é Could (custo anual [VERIFICAR]). | 07/12/2026 | PROMPT-011 |
-| EA-19 | Forma de convite dos amigos | PRD 18.2-19 | Allowlist de e-mails via variável de ambiente. | 23/11/2026 | PROMPT-008 |
+| EA-16 | Hospedagem (front, API, banco) | PRD 18.2-16 | Comparar 2–3 combinações gratuitas/baratas [VERIFICAR]. | 16/11/2026 (proposta: D-30 — aguarda aprovação) | PROMPT-001 Parte C |
+| EA-17 | Armazenamento e backup de imagens em produção | PRD 18.2-17 | Serviço de objetos com plano gratuito [VERIFICAR] ou disco persistente do provedor. | 16/11/2026 (proposta: D-30 — aguarda aprovação) | PROMPT-001 Parte C |
+| EA-18 | Domínio | PRD 18.2-18 | Subdomínio gratuito do provedor na v1.0; domínio próprio é Could (custo anual [VERIFICAR]). | 07/12/2026 | PROMPT-012 |
+| EA-19 | Forma de convite dos amigos | PRD 18.2-19 | Allowlist de e-mails via variável de ambiente. | 23/11/2026 | PROMPT-009 |
 | EA-20 | Duração do beta e N de amigos | PRD 18.2-20 | Beta de 10/12/2026 a 31/01/2027; convidar 8, meta N = 5 ativos. | 07/12/2026 | Revisão deste documento |
 | EA-21 | Carga semanal de horas | PRD 18.2-21 | **25 h/semana** (abaixo disso o Must não cabe; ver Cronograma 5.1). | 16/11/2026 | Revisão do Cronograma |
-| EA-22 | Orçamento mensal de hospedagem | TAP | R$ 0, tolerando até R$ 30/mês só se o plano gratuito impedir o beta. | 16/11/2026 | PROMPT-001 Parte C |
+| EA-22 | Orçamento mensal de hospedagem | TAP | R$ 0, tolerando até R$ 30/mês só se o plano gratuito impedir o beta. | 16/11/2026 (proposta: R$ 0; plano B ≤ R$ 30 — D-30) | PROMPT-001 Parte C |
 | EA-23 | Recuperação de senha: e-mail ou manual | Escopo 6.1 | Plano B manual no beta; e-mail na SPR-06 se houver capacidade. | 30/11/2026 | Revisão da SPR-02 |
-| EA-24 | Limites de upload e de peças por usuário | Escopo 6.5 | 5 MB por imagem; 200 peças por usuário. | 23/11/2026 | PROMPT-003 / 009 |
-| EA-25 | Dados ao fim do beta | Plano do beta 3.8 | Manter, com direito de exclusão sob pedido. | 07/12/2026 | Antes do PROMPT-012 (termos) |
-| EA-26 | Ferramenta do formulário de feedback | Plano do beta 3.5 | Google Forms. | 07/12/2026 | PROMPT-011 |
-| EA-27 | Limite de tentativas de login | Qualidade SEG-08 | Should (~2 h); implementar se couber na SPR-02. | 23/11/2026 | PROMPT-008 |
+| EA-24 | Limites de upload e de peças por usuário | Escopo 6.5 | 5 MB por imagem; 200 peças por usuário. | 23/11/2026 | PROMPT-004 / 010 |
+| EA-25 | Dados ao fim do beta | Plano do beta 3.8 | Manter, com direito de exclusão sob pedido. | 07/12/2026 | Antes do PROMPT-013 (termos) |
+| EA-26 | Ferramenta do formulário de feedback | Plano do beta 3.5 | Google Forms. | 07/12/2026 | PROMPT-012 |
+| EA-27 | Limite de tentativas de login | Qualidade SEG-08 | Should (~2 h); implementar se couber na SPR-02. | 23/11/2026 | PROMPT-009 |
 | EA-28 | Calendário de provas finais da faculdade | Cronograma 2 | Verificar e, se cair em SPR-03/04, antecipar trabalho. | 16/11/2026 | Autor |
 
 > O item 14 do PRD v1.0 (ambiente de deploy) foi resolvido por D-07 e desdobrado em EA-16 a EA-18. Próximo ID livre: **EA-29**.

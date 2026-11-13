@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | Plano de Comunicação + Gerenciamento de Configuração e Mudanças + Plano do Beta |
-| Versão | 1.1 |
+| Versão | 1.2 |
 | Data | 13/11/2026 |
 | Autor | Cauã Gama Paixão |
 | Gerado por | PROMPT-001 v2.0 |
@@ -16,6 +16,7 @@
 |---|---|---|---|
 | 1.0 | 13/11/2026 | Cauã Gama Paixão | Versão inicial. |
 | 1.1 | 13/11/2026 | Cauã Gama Paixão | Caminhos atualizados para a convenção de pastas D-25 e prompts previstos renumerados (+1) — PROMPT-002. |
+| 1.2 | 13/11/2026 | Cauã Gama Paixão | Prompts previstos renumerados (+1) porque o PROMPT-003 passou a ser o das telas no Figma (D-33). |
 
 ---
 
@@ -41,7 +42,7 @@ Três planos do PMBOK (comunicação, configuração e mudanças) e o plano do b
 | **Grupo de mensagens do beta** | Beta testers | Convites, novidades, manutenção, incidentes | Sob demanda (máx. 2 msgs/semana) | Autor |
 | **Posts no LinkedIn** (opcional, Could) | Recrutadores, rede | Progresso, aprendizados com vibe coding, lançamento | M4, M6, M7 | Autor |
 
-## 1.2 Templates de issue (criados no PROMPT-007)
+## 1.2 Templates de issue (criados no PROMPT-008)
 
 | Template | Campos | Labels automáticas |
 |---|---|---|
@@ -103,7 +104,7 @@ Exemplo:
 feat(backend): adiciona CRUD de peças com isolamento por usuário
 
 Refs: #12
-Prompt: PROMPT-009 v1.0
+Prompt: PROMPT-010 v1.0
 ```
 
 ## 2.4 Controle de mudanças de escopo

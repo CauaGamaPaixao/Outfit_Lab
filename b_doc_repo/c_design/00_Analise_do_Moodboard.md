@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | Análise do moodboard v0 e enhancements de design |
-| Versão | 1.0 |
+| Versão | 1.1 |
 | Data | 13/11/2026 |
 | Autor | Cauã Gama Paixão |
 | Gerado por | PROMPT-001 v2.1 (Parte B1) |
@@ -14,6 +14,7 @@
 | Versão | Data | Autor | Alteração |
 |---|---|---|---|
 | 1.0 | 13/11/2026 | Cauã Gama Paixão | Versão inicial. |
+| 1.1 | 13/11/2026 | Cauã Gama Paixão | Prompts previstos renumerados (+1) porque o PROMPT-003 passou a ser o das telas no Figma (D-33). |
 
 > **[VERIFICAR] Fonte da análise.** O arquivo `c_design/a_referencias/moodboard_v0.png` ainda não está no repositório. Esta análise foi feita a partir da descrição do moodboard no PROMPT-001 (B1) e da direção visual do PRD v1.1 (seção 12). Quando a imagem for adicionada, confira os itens marcados com 🔍 e registre as diferenças numa v1.1 deste documento.
 
@@ -42,7 +43,7 @@ O moodboard segue a direção **Editorial Minimalista** (D-12): fundo claro, mui
 
 | # | Enhancement | O que muda | Justificativa |
 |---|---|---|---|
-| E1 | **Cadastro com o mínimo de dados** | Só nome, sobrenome, e-mail, senha, confirmação de senha e aceite dos termos e da política de privacidade. Altura, tom de pele, sexo e data de nascimento **saem do formulário**. | LGPD e RNF-15 (coleta mínima). Nenhuma regra do avaliador usa esses dados ainda. **[EM ABERTO] EA-03**: revisar só se uma regra precisar deles (decidir no PROMPT-010, até 09/12/2026). Tom de pele e sexo são dados sensíveis ou quase sensíveis, e pedi-los sem uso real afasta os beta testers. |
+| E1 | **Cadastro com o mínimo de dados** | Só nome, sobrenome, e-mail, senha, confirmação de senha e aceite dos termos e da política de privacidade. Altura, tom de pele, sexo e data de nascimento **saem do formulário**. | LGPD e RNF-15 (coleta mínima). Nenhuma regra do avaliador usa esses dados ainda. **[EM ABERTO] EA-03**: revisar só se uma regra precisar deles (decidir no PROMPT-011, até 09/12/2026). Tom de pele e sexo são dados sensíveis ou quase sensíveis, e pedi-los sem uso real afasta os beta testers. |
 | E2 | **Login social fora do MVP** | Os botões Google/Apple são **removidos**. | Escopo: Won't. Botão desabilitado com "em breve" ocupa espaço e frustra; remover é mais honesto e mais simples. |
 | E3 | **Contraste** | Amarelo `#FACC15` **nunca** como texto sobre fundo claro (1,47:1). Sempre como **preenchimento**, com texto `#0A0A0A` (12,93:1). Sobre fundo escuro, o amarelo pode ser texto ou ícone (12,93:1). | WCAG 2.1 AA (RNF-09). |
 | E4 | **Estados explícitos** (RF-12) | Padrão, hover, foco, validação, erro, carregando (spinner/skeleton), vazio e sucesso em todas as telas, acessíveis pelo painel "Estados" dos protótipos. | Sem estados, a LLM inventa comportamentos na implementação. |
@@ -73,8 +74,8 @@ O moodboard segue a direção **Editorial Minimalista** (D-12): fundo claro, mui
 |---|---|---|---|
 | Decisão proposta | D-26: bordas de input e anel de foco acessíveis (E9, E10) | Adotar | Revisão da Parte B |
 | Decisão proposta | D-27: login social removido (não "em breve") | Adotar | Revisão da Parte B |
-| [EM ABERTO] | EA-03: dados corporais | Fora do cadastro | 09/12/2026 (PROMPT-010) |
-| [EM ABERTO] | EA-04: taxonomia de categorias | Usar as 4 do PRD nos protótipos | 18/11/2026 (PROMPT-003) |
+| [EM ABERTO] | EA-03: dados corporais | Fora do cadastro | 09/12/2026 (PROMPT-011) |
+| [EM ABERTO] | EA-04: taxonomia de categorias | Usar as 4 do PRD nos protótipos | 18/11/2026 (PROMPT-004) |
 | [VERIFICAR] | Conferir esta análise com `moodboard_v0.png` | Adicionar a imagem em `c_design/a_referencias/` | Antes da aprovação |
 
 ---

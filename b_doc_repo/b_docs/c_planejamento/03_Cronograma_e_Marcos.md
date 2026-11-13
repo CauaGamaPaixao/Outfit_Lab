@@ -3,7 +3,7 @@
 | Campo | Valor |
 |---|---|
 | Documento | Cronograma, marcos, capacidade e plano de cortes |
-| Versão | 1.1 |
+| Versão | 1.2 |
 | Data | 13/11/2026 |
 | Autor | Cauã Gama Paixão |
 | Gerado por | PROMPT-001 v2.0 |
@@ -16,6 +16,7 @@
 |---|---|---|---|
 | 1.0 | 13/11/2026 | Cauã Gama Paixão | Versão inicial. |
 | 1.1 | 13/11/2026 | Cauã Gama Paixão | Caminhos atualizados para a convenção de pastas D-25 e prompts previstos renumerados (+1) — PROMPT-002. |
+| 1.2 | 13/11/2026 | Cauã Gama Paixão | Prompts previstos renumerados (+1) porque o PROMPT-003 passou a ser o das telas no Figma (D-33). |
 
 ---
 
@@ -49,11 +50,11 @@
 
 ### 3.1 Ajustes em relação ao esqueleto do PROMPT-001 (e por quê)
 
-1. **Autenticação no backend passou da SPR-01 para a SPR-02.** Em vibe coding, a qualidade do código gerado depende da qualidade da especificação. A SPR-01 fica com requisitos, DER e contratos da API (PROMPT-003, 005, 006), que alimentam todos os prompts seguintes. Gerar a autenticação antes do DER causaria retrabalho.
+1. **Autenticação no backend passou da SPR-01 para a SPR-02.** Em vibe coding, a qualidade do código gerado depende da qualidade da especificação. A SPR-01 fica com requisitos, DER e contratos da API (PROMPT-004, 006, 007), que alimentam todos os prompts seguintes. Gerar a autenticação antes do DER causaria retrabalho.
 2. **Beta em duas ondas.** O esqueleto previa o beta só a partir de 21/12, o que deixaria ~10 dias de uso em pleno período de festas. Agora a **onda 1** (2 a 3 amigos, cadastro + guarda-roupa) começa em **10/12**, logo depois do backup estar pronto, e a **onda 2** (todos os convidados, fluxo completo) começa em **20–21/12**. Assim, bugs de cadastro/upload aparecem cedo.
 3. **Recuperação de senha (Should) foi para a SPR-06.** Durante o beta vale o plano B (reset manual pelo autor). Isso libera a SPR-05, que está no caminho crítico.
 4. **Release planejada para 30/12**, com o dia 31/12 como reserva. **Code freeze em 28/12**: depois disso, só correção de bug e documentação.
-5. **Protótipos 04–09 (PROMPT-004) entram no início da SPR-03**, antes do formulário de peça. Se houver folga na SPR-02, adiantar.
+5. **Protótipos 04–09 (PROMPT-005) entram no início da SPR-03**, antes do formulário de peça. Se houver folga na SPR-02, adiantar.
 
 ## 4. Gantt e caminho crítico
 
