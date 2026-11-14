@@ -76,8 +76,8 @@
     display: none;
   }
 
+  /* Sem largura máxima: o conteúdo ocupa toda a área ao lado da sidebar. */
   .main {
-    max-width: 1200px;
     padding: 36px var(--space-12);
   }
 }
