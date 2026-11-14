@@ -17,6 +17,19 @@
   font-size: 24px;
 }
 
+.nav {
+  align-items: flex-start;
+}
+
+.nav .mark {
+  font-size: 32px;
+  line-height: 1.45;
+}
+
+.inline .mark {
+  flex-direction: row;
+}
+
 .lg .mark {
   font-size: var(--text-display-size);
 }

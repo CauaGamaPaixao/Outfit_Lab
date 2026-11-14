@@ -153,3 +153,20 @@ Com `VITE_API_MOCK` ausente ou diferente de `false`, o front usa `mockAuthApi.ts
 - `/guarda-roupa` exige sessão (`RequireAuth`); `/login` redireciona quem já está autenticado (`RedirectIfAuthenticated`). O cadastro conclui já autenticado.
 - Para zerar tudo: limpe o armazenamento do site nas ferramentas do navegador.
 - **Não é segurança.** Serve só até o Spring Boot existir (D-31: sessão em cookie HttpOnly). Ver PROMPT-007.
+
+### Divergências conhecidas (TELA-03 Guarda-roupa)
+
+| Figma | Implementado | Motivo |
+|---|---|---|
+| Eyebrow "SEU ACERVO PESSOAL" e texto "12 peças. Infinitas possibilidades." no topo | "Coleção pessoal"; texto do topo omitido (repetia a contagem) | Spec, seção 3.1 |
+| Subtítulo fixo "12 peças · …" | "{n} peças" / "{m} de {n} peças" + "Um universo de combinações." | Spec |
+| Chips sem contagem | Chips com contagem | Spec, seção 3.2 |
+| Textos de 9–10 px (categoria, cor, marca) | 12 px | Legibilidade (E5) |
+| Cinza `#D1D1D1` dos itens da Sidebar | `--color-inverse-muted` | Fora dos tokens |
+| Rodapé "Conta pessoal · Sair ↗" | Nome, e-mail e "Sair ↗" | Spec (mostra o usuário da sessão) |
+| Mobile: chips em 3 linhas | Uma linha com rolagem horizontal | Spec, seção 5 |
+| Mobile sem "Sair" | "Sair" ao lado de "Olá, {nome}" | Provisório até existir o Perfil |
+| Filtro de cor com bolinhas | `<select>` nativo, sem bolinhas | Decisão do autor (14/11/2026) |
+| "+ Adicionar peça" | Presente, sem ação | Decisão do autor; cadastro de peça é a TELA-05 |
+
+Sem backend, as peças vêm de `features/pecas/dados/pecasIniciais.ts` (as 12 do Figma; a modelagem e as cores secundárias são dados de teste). O filtro e a busca (debounce de 200 ms) funcionam sobre esse catálogo; categoria, modelagem, cor e busca ficam na URL (`?cat=&fit=&cor=&q=`). A seleção do look fica no `sessionStorage` (`outfitlab.look`).

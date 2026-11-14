@@ -46,7 +46,7 @@ describe('Sessão simulada (rotas protegidas)', () => {
     await user.click(screen.getByRole('button', { name: 'Entrar' }));
     expect(await screen.findByRole('heading', { name: 'Guarda-roupa' })).toBeInTheDocument();
     expect(router.state.location.pathname).toBe('/guarda-roupa');
-    expect(await screen.findByText('Olá, Ana.')).toBeInTheDocument();
+    expect(await screen.findByText('Olá, Ana')).toBeInTheDocument();
   });
 
   it('com sessão, /login redireciona para o guarda-roupa', async () => {
@@ -82,7 +82,7 @@ describe('Sessão simulada (rotas protegidas)', () => {
     await user.click(screen.getByRole('button', { name: 'Criar conta' }));
     await user.click(await screen.findByRole('button', { name: 'Ir para o guarda-roupa' }));
     expect(router.state.location.pathname).toBe('/guarda-roupa');
-    expect(await screen.findByText('Olá, Bia.')).toBeInTheDocument();
+    expect(await screen.findByText('Olá, Bia')).toBeInTheDocument();
   });
 });
 

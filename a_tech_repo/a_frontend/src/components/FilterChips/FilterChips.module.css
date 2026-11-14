@@ -1,0 +1,57 @@
+/* Mobile: uma linha com rolagem horizontal (spec 5). Desktop: quebra linha. */
+.root {
+  display: flex;
+  gap: var(--space-2);
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin: 0 calc(var(--space-6) * -1);
+  padding: 0 var(--space-6);
+}
+
+.root::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  flex: none;
+  height: 40px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-input);
+  background: var(--color-surface);
+  font-size: var(--text-caption-size);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color var(--duration-fast) var(--easing-standard);
+}
+
+.chip:hover:not(.active) {
+  background: var(--color-image);
+}
+
+.chip:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.active {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-on-accent);
+}
+
+.count {
+  font-weight: var(--font-weight-regular);
+}
+
+@media (min-width: 1024px) {
+  .root {
+    flex-wrap: wrap;
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+  }
+}

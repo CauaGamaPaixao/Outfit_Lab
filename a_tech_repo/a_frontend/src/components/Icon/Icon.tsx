@@ -21,6 +21,21 @@ const SHAPES = {
       <path d="M4 34h42v2c0 1.5-1 3-3 3H6c-1.2 0-2-1-2-2.5z" />
     </>
   ),
+  jaqueta: (
+    <>
+      <path d="M16 6 8 10 3 22.5l6.5 3L12 22V42h11V17.5Z" />
+      <path d="m32 6 8 4 5 12.5-6.5 3L36 22V42H25V17.5Z" />
+    </>
+  ),
+  vestido: (
+    <path d="M17 4h3.5l.5 7h6l.5-7H31l1 12c.3 2 1.5 3.5 3 5L42 44H6l7-23c1.5-1.5 2.7-3 3-5Z" />
+  ),
+  bolsa: (
+    <>
+      <path d="M9 20h30l3 22H6Z" />
+      <path d="M16 20v-4a8 8 0 0 1 16 0v4" fill="none" className={styles.line} />
+    </>
+  ),
 } as const;
 
 export type IconName = keyof typeof SHAPES;

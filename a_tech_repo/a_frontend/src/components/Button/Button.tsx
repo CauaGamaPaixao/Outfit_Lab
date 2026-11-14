@@ -2,7 +2,7 @@ import type { ComponentPropsWithRef } from 'react';
 import styles from './Button.module.css';
 
 type ButtonProps = ComponentPropsWithRef<'button'> & {
-  variant?: 'primary' | 'secondary' | 'dark';
+  variant?: 'primary' | 'secondary' | 'dark' | 'ghost';
   loading?: boolean;
   fullWidth?: boolean;
 };

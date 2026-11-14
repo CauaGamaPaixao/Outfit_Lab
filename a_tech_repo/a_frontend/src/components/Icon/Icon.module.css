@@ -6,3 +6,9 @@
   stroke-width: 1.5;
   stroke-linejoin: round;
 }
+
+/* Alça: só contorno. */
+.line {
+  stroke-width: 3;
+  stroke-linecap: round;
+}

@@ -1,28 +1,51 @@
-import { Navigate, type RouteObject } from 'react-router';
+import type { RouteObject } from 'react-router';
 import { PlaceholderPage } from '../pages/PlaceholderPage/PlaceholderPage';
 import {
   RedirectIfAuthenticated,
   RequireAuth,
 } from '../features/auth/components/AuthGuards/AuthGuards';
-import { LogoutButton } from '../features/auth/components/LogoutButton/LogoutButton';
+import { EmConstrucaoPage } from '../pages/EmConstrucaoPage/EmConstrucaoPage';
+import { GuardaRoupaPage } from '../pages/GuardaRoupaPage/GuardaRoupaPage';
 import { LoginPage } from '../pages/LoginPage/LoginPage';
 import { SignupPage } from '../pages/SignupPage/SignupPage';
 
 /** Rotas da aplicação. As telas ainda não implementadas mostram um placeholder. */
 export const routes: RouteObject[] = [
-  { path: '/', element: <Navigate to="/guarda-roupa" replace /> },
   { path: '/cadastro', element: <SignupPage /> },
   { element: <RedirectIfAuthenticated />, children: [{ path: '/login', element: <LoginPage /> }] },
   {
     element: <RequireAuth />,
     children: [
       {
-        path: '/guarda-roupa',
+        path: '/',
+        element: <EmConstrucaoPage active="inicio" title="Início" description="Em construção." />,
+      },
+      { path: '/guarda-roupa', element: <GuardaRoupaPage /> },
+      {
+        path: '/pecas/nova',
         element: (
-          <PlaceholderPage title="Guarda-roupa" description="TELA-03 — em construção.">
-            <LogoutButton />
-          </PlaceholderPage>
+          <EmConstrucaoPage
+            active="guarda-roupa"
+            title="Adicionar peça"
+            description="TELA-05 — em construção."
+          />
         ),
+      },
+      {
+        path: '/looks/novo',
+        element: (
+          <EmConstrucaoPage active="montar-look" title="Montar look" description="Em construção." />
+        ),
+      },
+      {
+        path: '/looks',
+        element: (
+          <EmConstrucaoPage active="looks" title="Looks salvos" description="Em construção." />
+        ),
+      },
+      {
+        path: '/perfil',
+        element: <EmConstrucaoPage active="perfil" title="Perfil" description="Em construção." />,
       },
     ],
   },

@@ -47,6 +47,15 @@
   background: var(--color-inverse-surface);
 }
 
+.ghost {
+  background: transparent;
+  color: inherit;
+}
+
+.ghost:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.12);
+}
+
 .fullWidth {
   width: 100%;
 }

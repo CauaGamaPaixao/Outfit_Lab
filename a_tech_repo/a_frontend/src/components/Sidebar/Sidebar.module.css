@@ -1,0 +1,115 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  width: 240px;
+  height: 100%;
+  padding: var(--space-6);
+  background: var(--color-inverse-bg);
+  color: var(--color-inverse-text);
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Cinza claro do Figma (#D1D1D1) não existe nos tokens: usa o cinza claro mais próximo. */
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 48px;
+  padding: 14px;
+  border-radius: var(--radius-input);
+  font-size: var(--text-caption-size);
+  line-height: var(--text-caption-line);
+  color: var(--color-inverse-muted);
+  text-decoration: none;
+  transition: background-color var(--duration-fast) var(--easing-standard);
+}
+
+.item:hover:not(.active) {
+  background: var(--color-inverse-surface);
+  color: var(--color-inverse-text);
+}
+
+.item:focus-visible,
+.logout:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.active {
+  background: var(--color-accent);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-on-accent);
+}
+
+.account {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  min-height: 0;
+}
+
+.tagline {
+  margin: 0;
+  font-size: var(--text-overline-size);
+  line-height: var(--text-overline-line);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-overline);
+  text-transform: uppercase;
+  color: var(--color-inverse-muted);
+}
+
+.separator {
+  width: 100%;
+  height: 1px;
+  margin: var(--space-2) 0;
+  border: 0;
+  background: var(--color-inverse-surface);
+}
+
+.name {
+  margin: 0;
+  font-size: var(--text-caption-size);
+  line-height: var(--text-caption-line);
+  font-weight: var(--font-weight-medium);
+  overflow-wrap: anywhere;
+}
+
+.email {
+  margin: 0;
+  font-size: var(--text-overline-size);
+  line-height: var(--text-overline-line);
+  color: var(--color-inverse-muted);
+  overflow-wrap: anywhere;
+}
+
+.logout {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  align-self: flex-start;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  font: inherit;
+  font-size: var(--text-overline-size);
+  color: var(--color-inverse-muted);
+  cursor: pointer;
+}
+
+.logout:hover {
+  color: var(--color-inverse-text);
+  text-decoration: underline;
+}

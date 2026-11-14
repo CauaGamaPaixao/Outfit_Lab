@@ -1,0 +1,28 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-12) var(--space-4);
+  text-align: center;
+}
+
+.illustration {
+  color: var(--color-border-strong);
+  margin-bottom: var(--space-2);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--text-h2-size);
+  line-height: var(--text-h2-line);
+  font-weight: var(--font-weight-bold);
+}
+
+.text {
+  max-width: 44ch;
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-body-size);
+  line-height: 1.45;
+  color: var(--color-text-muted);
+}
